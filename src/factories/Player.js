@@ -1,4 +1,4 @@
-import coordinatesExist from "../helpers/coordinatesExist";
+const coordinatesExist = require("../helpers/coordinatesExist");
 
 function Player(name, isComputer) {
   const hitShots = []
@@ -65,4 +65,4 @@ function Player(name, isComputer) {
   return {isMoveLegal, getComputerMove, receiveReport, getMissedShots, getHitShots, isComputer}
 }
 
-export default Player;
+module.exports = Player;

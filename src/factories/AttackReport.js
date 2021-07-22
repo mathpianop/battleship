@@ -16,4 +16,4 @@ function AttackReport(coors, hitShip) {
   }
 }
 
-export default AttackReport;
+module.exports = AttackReport;

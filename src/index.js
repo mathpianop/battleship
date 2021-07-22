@@ -6,4 +6,5 @@ import * as manageDOM from "./interface/manageDOM.js";
 
 manageDOM.createPositionButtons();
 
-Game();
+const game = Game();
+

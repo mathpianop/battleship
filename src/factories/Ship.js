@@ -12,4 +12,4 @@ function Ship(length, name) {
   return {hit, isSunk, length, name}
 }
 
-export default Ship;
+module.exports = Ship;

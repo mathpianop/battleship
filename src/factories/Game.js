@@ -1,5 +1,5 @@
-import Player from "./Player";
-import Gameboard from "./Gameboard";
+const Player = require("./Player");
+const Gameboard = require("./Gameboard");
 
 function Game() {
   const humanPlayer = Player("placeholder");
@@ -32,14 +32,18 @@ function Game() {
   humanGameboard.placeShip([[10,9], [9,9], [8,9], [7,9], [6,9]], "Carrier")
 
   const takeHumanTurn = function(coors) {
-    //Check for the legality of the move
-    try {
-      humanPlayer.isMoveLegal(coors)
-    } catch (error) {
-      console.log(error)
-      //This needs to show up in the UI somehow
+    //If the game is not over, try the move
+    if (!victor) {
+      //Check for the legality of the move
+      try {
+        humanPlayer.isMoveLegal(coors)
+        takeTurn(humanPlayer, computerGameboard, coors)
+      } catch (error) {
+        console.log(error)
+        //This needs to show up in the UI somehow
+      }
     }
-    takeTurn(humanPlayer, computerGameboard, coors)
+    
     //If the move is not decisive, have the computer go
     if (!victor) {
       takeComputerTurn();
@@ -78,4 +82,4 @@ function Game() {
   return {takeHumanTurn, getVictor}
 }
 
-export default Game;
+module.exports = Game;

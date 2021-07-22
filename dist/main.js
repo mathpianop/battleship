@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/css-loader/dist/cjs.js!./src/style/style.css":
@@ -8,6 +7,7 @@
   \*******************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -34,6 +34,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, "html, body, div, span, applet, object,
   \*****************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /*
@@ -109,6 +110,7 @@ module.exports = function (cssWithMappingToString) {
   \************************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -154,6 +156,7 @@ module.exports = function cssWithMappingToString(item) {
   \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -208,6 +211,7 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
   \****************************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 var stylesInDom = [];
@@ -314,6 +318,7 @@ module.exports = function (list, options) {
   \********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 var memo = {};
@@ -362,6 +367,7 @@ module.exports = insertBySelector;
   \**********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -382,6 +388,7 @@ module.exports = insertStyleElement;
   \**********************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -403,6 +410,7 @@ module.exports = setAttributesWithoutAttributes;
   \***************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -460,6 +468,7 @@ module.exports = domAPI;
   \*********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -483,12 +492,8 @@ module.exports = styleTagTransform;
 /*!***************************************!*\
   !*** ./src/factories/AttackReport.js ***!
   \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
 function AttackReport(coors, hitShip) {
   if (hitShip) {
     //If the attack shot hits, report hit details
@@ -507,7 +512,7 @@ function AttackReport(coors, hitShip) {
   }
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AttackReport);
+module.exports = AttackReport;
 
 
 /***/ }),
@@ -516,22 +521,16 @@ function AttackReport(coors, hitShip) {
 /*!*******************************!*\
   !*** ./src/factories/Game.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _Player__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Player */ "./src/factories/Player.js");
-/* harmony import */ var _Gameboard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Gameboard */ "./src/factories/Gameboard.js");
-
-
+const Player = __webpack_require__(/*! ./Player */ "./src/factories/Player.js");
+const Gameboard = __webpack_require__(/*! ./Gameboard */ "./src/factories/Gameboard.js");
 
 function Game() {
-  const humanPlayer = (0,_Player__WEBPACK_IMPORTED_MODULE_0__.default)("placeholder");
-  const computerPlayer = (0,_Player__WEBPACK_IMPORTED_MODULE_0__.default)("computer", true);
-  const humanGameboard = (0,_Gameboard__WEBPACK_IMPORTED_MODULE_1__.default)();
-  const computerGameboard = (0,_Gameboard__WEBPACK_IMPORTED_MODULE_1__.default)();
+  const humanPlayer = Player("placeholder");
+  const computerPlayer = Player("computer", true);
+  const humanGameboard = Gameboard();
+  const computerGameboard = Gameboard();
   let victor = null;
 
   //Place ships arbitrarily for now
@@ -558,14 +557,18 @@ function Game() {
   humanGameboard.placeShip([[10,9], [9,9], [8,9], [7,9], [6,9]], "Carrier")
 
   const takeHumanTurn = function(coors) {
-    //Check for the legality of the move
-    try {
-      humanPlayer.isMoveLegal(coors)
-    } catch (error) {
-      console.log(error)
-      //This needs to show up in the UI somehow
+    //If the game is not over, try the move
+    if (!victor) {
+      //Check for the legality of the move
+      try {
+        humanPlayer.isMoveLegal(coors)
+        takeTurn(humanPlayer, computerGameboard, coors)
+      } catch (error) {
+        console.log(error)
+        //This needs to show up in the UI somehow
+      }
     }
-    takeTurn(humanPlayer, computerGameboard, coors)
+    
     //If the move is not decisive, have the computer go
     if (!victor) {
       takeComputerTurn();
@@ -604,7 +607,7 @@ function Game() {
   return {takeHumanTurn, getVictor}
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Game);
+module.exports = Game;
 
 /***/ }),
 
@@ -612,18 +615,11 @@ function Game() {
 /*!************************************!*\
   !*** ./src/factories/Gameboard.js ***!
   \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _Ship__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Ship */ "./src/factories/Ship.js");
-/* harmony import */ var _helpers_coordinatesExist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/coordinatesExist */ "./src/helpers/coordinatesExist.js");
-/* harmony import */ var _AttackReport__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AttackReport */ "./src/factories/AttackReport.js");
-
-
-
+const Ship = __webpack_require__(/*! ./Ship */ "./src/factories/Ship.js");
+const coordinatesExist = __webpack_require__(/*! ../helpers/coordinatesExist */ "./src/helpers/coordinatesExist.js");
+const AttackReport = __webpack_require__(/*! ./AttackReport */ "./src/factories/AttackReport.js");
 
 
 function Gameboard() {
@@ -636,7 +632,7 @@ function Gameboard() {
     const error = illegalPlacementError(positions);
     if (!error) {
       ships.push({
-        ship: (0,_Ship__WEBPACK_IMPORTED_MODULE_0__.default)(positions.length, name),
+        ship: Ship(positions.length, name),
         positions: positions
       })
     } else {
@@ -660,7 +656,7 @@ function Gameboard() {
   //Check that all positions fall within Gameboard boundaries
   const positionsAreLegal = function(positions) {
     return positions.every(position => {
-      return (0,_helpers_coordinatesExist__WEBPACK_IMPORTED_MODULE_1__.default)(position)
+      return coordinatesExist(position)
     })
   }
 
@@ -698,7 +694,7 @@ function Gameboard() {
 
   const setAttackReport = function(coors, hitShipInfo) {
     attackReport = (
-      hitShipInfo ? (0,_AttackReport__WEBPACK_IMPORTED_MODULE_2__.default)(coors, hitShipInfo.ship) : (0,_AttackReport__WEBPACK_IMPORTED_MODULE_2__.default)(coors)
+      hitShipInfo ? AttackReport(coors, hitShipInfo.ship) : AttackReport(coors)
     )
   }
 
@@ -717,7 +713,7 @@ function Gameboard() {
   return {placeShip, receiveAttack, getAttackReport, allSunk}
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Gameboard);
+module.exports = Gameboard;
 
 /***/ }),
 
@@ -725,14 +721,9 @@ function Gameboard() {
 /*!*********************************!*\
   !*** ./src/factories/Player.js ***!
   \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _helpers_coordinatesExist__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/coordinatesExist */ "./src/helpers/coordinatesExist.js");
-
+const coordinatesExist = __webpack_require__(/*! ../helpers/coordinatesExist */ "./src/helpers/coordinatesExist.js");
 
 function Player(name, isComputer) {
   const hitShots = []
@@ -748,7 +739,7 @@ function Player(name, isComputer) {
   }
 
   const illegalMoveError = function(coors) {
-    if (!(0,_helpers_coordinatesExist__WEBPACK_IMPORTED_MODULE_0__.default)(coors)) {
+    if (!coordinatesExist(coors)) {
       return new Error("Those coordinates are nonexistant")
     } else if (includesCoordinates(hitShots, coors)) {
       return new Error("Those coordinates have already been hit")
@@ -799,7 +790,7 @@ function Player(name, isComputer) {
   return {isMoveLegal, getComputerMove, receiveReport, getMissedShots, getHitShots, isComputer}
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Player);
+module.exports = Player;
 
 
 /***/ }),
@@ -808,12 +799,8 @@ function Player(name, isComputer) {
 /*!*******************************!*\
   !*** ./src/factories/Ship.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
 function Ship(length, name) {
   //Initialize an array as long as the ship, 
   //with each position starting out as false (not hit)
@@ -828,7 +815,7 @@ function Ship(length, name) {
   return {hit, isSunk, length, name}
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Ship);
+module.exports = Ship;
 
 /***/ }),
 
@@ -836,13 +823,9 @@ function Ship(length, name) {
 /*!*****************************************!*\
   !*** ./src/helpers/coordinatesExist.js ***!
   \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module) => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ coordinatesExist)
-/* harmony export */ });
-function coordinatesExist(coors) {
+module.exports = function coordinatesExist(coors) {
   return (
     coors[0] <= 10 &&       
     coors[0] >= 1 &&
@@ -861,25 +844,32 @@ function coordinatesExist(coors) {
   \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createPositionButtons": () => (/* binding */ createPositionButtons)
 /* harmony export */ });
 const createPositionButtons = function() {
-  const createPositionDiv = function() {
+  const createPositionDiv = function(coordinates) {
     const positionDiv = document.createElement("DIV");
     positionDiv.className = "position";
+    positionDiv.dataset.xCoor = coordinates[0];
+    positionDiv.dataset.yCoor = coordinates[1]
     return positionDiv
   }
   
   const humanGameboard = document.getElementById("human-gameboard")
   const computerGameboard = document.getElementById("computer-gameboard")
   
-  for (let i = 0; i < 100; i++) {
-    humanGameboard.appendChild(createPositionDiv())
-    computerGameboard.appendChild(createPositionDiv());
+  for (let i = 1; i <= 10; i++) {
+    for (let j = 1; j <= 10; j++ ) {
+      humanGameboard.appendChild(createPositionDiv([i, j]))
+      computerGameboard.appendChild(createPositionDiv([i, j]));
+    }
   }
 }
+
+
 
 
 
@@ -954,14 +944,16 @@ const createPositionButtons = function() {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
+"use strict";
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/style.css */ "./src/style/style.css");
 /* harmony import */ var _factories_Game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./factories/Game */ "./src/factories/Game.js");
+/* harmony import */ var _factories_Game__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_factories_Game__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interface/manageDOM.js */ "./src/interface/manageDOM.js");
 
 
@@ -971,7 +963,9 @@ __webpack_require__.r(__webpack_exports__);
 
 _interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2__.createPositionButtons();
 
-(0,_factories_Game__WEBPACK_IMPORTED_MODULE_1__.default)();
+const game = _factories_Game__WEBPACK_IMPORTED_MODULE_1___default()();
+
+
 })();
 
 /******/ })()

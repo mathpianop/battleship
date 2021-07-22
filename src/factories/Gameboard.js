@@ -1,6 +1,6 @@
-import Ship from "./Ship";
-import coordinatesExist from "../helpers/coordinatesExist";
-import AttackReport from "./AttackReport";
+const Ship = require("./Ship");
+const coordinatesExist = require("../helpers/coordinatesExist");
+const AttackReport = require("./AttackReport");
 
 
 function Gameboard() {
@@ -94,4 +94,4 @@ function Gameboard() {
   return {placeShip, receiveAttack, getAttackReport, allSunk}
 }
 
-export default Gameboard;
+module.exports = Gameboard;
