@@ -25,7 +25,7 @@ function Game() {
 
   //Place Battleships
   computerGameboard.placeShip([[8,3], [8,4], [8,5], [8,6]], "Battleship")
-  humanGameboard.placeShip([[4,5], [4,6], [4,7], [4,8]], "Battleship")
+  humanGameboard.placeShip([[6,5], [6,6], [6,7], [6,8]], "Battleship")
 
   //Place Carriers
   computerGameboard.placeShip([[2,10], [3,10], [4,10], [5,10], [6,10]], "Carrier")

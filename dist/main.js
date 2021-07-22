@@ -551,7 +551,7 @@ function Game() {
 
   //Place Battleships
   computerGameboard.placeShip([[8,3], [8,4], [8,5], [8,6]], "Battleship")
-  humanGameboard.placeShip([[4,5], [4,6], [4,7], [4,8]], "Battleship")
+  humanGameboard.placeShip([[6,5], [6,6], [6,7], [6,8]], "Battleship")
 
   //Place Carriers
   computerGameboard.placeShip([[2,10], [3,10], [4,10], [5,10], [6,10]], "Carrier")
@@ -853,6 +853,36 @@ function coordinatesExist(coors) {
   )
 }
 
+/***/ }),
+
+/***/ "./src/interface/manageDOM.js":
+/*!************************************!*\
+  !*** ./src/interface/manageDOM.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createPositionButtons": () => (/* binding */ createPositionButtons)
+/* harmony export */ });
+const createPositionButtons = function() {
+  const createPositionDiv = function() {
+    const positionDiv = document.createElement("DIV");
+    positionDiv.className = "position";
+    return positionDiv
+  }
+  
+  const humanGameboard = document.getElementById("human-gameboard")
+  const computerGameboard = document.getElementById("computer-gameboard")
+  
+  for (let i = 0; i < 100; i++) {
+    humanGameboard.appendChild(createPositionDiv())
+    computerGameboard.appendChild(createPositionDiv());
+  }
+}
+
+
+
 /***/ })
 
 /******/ 	});
@@ -932,23 +962,14 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/style.css */ "./src/style/style.css");
 /* harmony import */ var _factories_Game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./factories/Game */ "./src/factories/Game.js");
+/* harmony import */ var _interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interface/manageDOM.js */ "./src/interface/manageDOM.js");
 
 
 
 
-const createPositionDiv = function() {
-  const positionDiv = document.createElement("DIV");
-  positionDiv.className = "position";
-  return positionDiv
-}
 
-const humanGameboard = document.getElementById("human-gameboard")
-const computerGameboard = document.getElementById("computer-gameboard")
 
-for (let i = 0; i < 100; i++) {
-  humanGameboard.appendChild(createPositionDiv())
-  computerGameboard.appendChild(createPositionDiv());
-}
+_interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2__.createPositionButtons();
 
 (0,_factories_Game__WEBPACK_IMPORTED_MODULE_1__.default)();
 })();
