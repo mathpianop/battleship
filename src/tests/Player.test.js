@@ -27,33 +27,28 @@ describe("Player", () => {
     })
   })
 
-  describe("isMoveLegal", () => {
-    it("returns true if coordinates are in bounds", () => {
+  describe("illegalMoveMessage", () => {
+    it("returns nothing if coordinates are in bounds", () => {
       const player = Player("Paul");
-      expect(player.isMoveLegal([1,2])).toEqual(true)
+      expect(player.illegalMoveMessage([1,2])).toEqual(undefined)
     })
 
-    it("throws an error if coordinates do not exist", () => {
-      const player = Player("Paul")
-      expect(() => player.isMoveLegal([4,11])).toThrow("Those coordinates are nonexistant")
-    })
-
-    it("throws an error if coordinates are of a previous hit shot", () =>  {
+    it("returns a message if coordinates are of a previous hit shot", () =>  {
       const player = Player("Paul")
       const mockHitShip = {
         shipLength: 4,
         isSunk: () => false
       }
       player.receiveReport(AttackReport([1,2], mockHitShip))
-      expect(() => player.isMoveLegal([1,2])).toThrow(
+      expect(player.illegalMoveMessage([1,2])).toBe(
         "Those coordinates have already been hit"
       )
     })
 
-    it("throws an error if coordinates are of previous missed shot", () =>  {
+    it("returns a message if coordinates are of previous missed shot", () =>  {
       const player = Player("Paul")
       player.receiveReport(AttackReport([1,2]))
-      expect(() => player.isMoveLegal([1,2])).toThrow(
+      expect(player.illegalMoveMessage([1,2])).toBe(
         "Those coordinates have already been shot at and missed"
       )
     })

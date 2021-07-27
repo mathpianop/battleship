@@ -1,10 +1,9 @@
 import "./style/style.css"
 import Game from "./factories/Game";
-import * as manageDOM from "./interface/manageDOM.js";
+import * as initializeBoards from "./interface/initializeBoards.js";
 
 
 
-manageDOM.createPositionButtons();
 
 const game = Game();
 

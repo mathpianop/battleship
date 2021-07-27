@@ -19,6 +19,32 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+#game-container {
+  width: 740px
+}
+
+
+
+#gameboards {
+  display: flex;
+  justify-content: space-between;
+  width: 100%
+}
+
+.gameboard {
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+}
+
+
+#board-divider {
+  border-right: 2px solid black;
+}
+
+
 
 .position {
   height: 20px;
@@ -28,21 +54,10 @@ time, mark, audio, video {
   background-color: lightgray;
 }
 
-#gameboards {
+#computer-response-wrapper {
   display: flex;
   justify-content: center;
-}
-
-.gameboard {
-  width: 300px;
-  height: 300px;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-}
-
-#human-gameboard {
-  border-right: 2px solid black;
+  width: 100%;
 }
 
 

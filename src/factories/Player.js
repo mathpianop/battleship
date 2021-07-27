@@ -4,22 +4,15 @@ function Player(name, isComputer) {
   const hitShots = []
   const missedShots = []
 
-  const isMoveLegal = function(coors) {
-    const error = illegalMoveError(coors);
-    if (error) {
-      throw error
-    } else {
-      return true
-    }
-  }
+  
 
-  const illegalMoveError = function(coors) {
+  const illegalMoveMessage = function(coors) {
     if (!coordinatesExist(coors)) {
-      return new Error("Those coordinates are nonexistant")
+      return "Those coordinates are nonexistant"
     } else if (includesCoordinates(hitShots, coors)) {
-      return new Error("Those coordinates have already been hit")
+      return "Those coordinates have already been hit"
     } else if (includesCoordinates(missedShots, coors)) {
-      return new Error("Those coordinates have already been shot at and missed")
+      return "Those coordinates have already been shot at and missed"
     } 
   }
 
@@ -62,7 +55,7 @@ function Player(name, isComputer) {
     return hitShots
   }
 
-  return {isMoveLegal, getComputerMove, receiveReport, getMissedShots, getHitShots, isComputer}
+  return {illegalMoveMessage, getComputerMove, receiveReport, getMissedShots, getHitShots, isComputer}
 }
 
 module.exports = Player;

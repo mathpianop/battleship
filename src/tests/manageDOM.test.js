@@ -1,1 +1,0 @@
-const manageDOM = require("../interface/manageDOM")

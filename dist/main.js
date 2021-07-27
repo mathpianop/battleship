@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#gameboards {\n  display: flex;\n  justify-content: center;\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(10, 1fr);\n}\n\n#human-gameboard {\n  border-right: 2px solid black;\n}\n\n\n\n", "",{"version":3,"sources":["webpack://./src/style/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;CAaC,SAAS;CACT,UAAU;CACV,SAAS;CACT,eAAe;CACf,aAAa;CACb,wBAAwB;AACzB;;;AAGA;EACE,YAAY;EACZ,WAAW;EACX,uBAAuB;EACvB,0DAA0D;EAC1D,2BAA2B;AAC7B;;AAEA;EACE,aAAa;EACb,uBAAuB;AACzB;;AAEA;EACE,YAAY;EACZ,aAAa;EACb,aAAa;EACb,aAAa;EACb,sCAAsC;AACxC;;AAEA;EACE,6BAA6B;AAC/B","sourcesContent":["html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#gameboards {\n  display: flex;\n  justify-content: center;\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(10, 1fr);\n}\n\n#human-gameboard {\n  border-right: 2px solid black;\n}\n\n\n\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\n#game-container {\n  width: 740px\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n\n\n", "",{"version":3,"sources":["webpack://./src/style/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;CAaC,SAAS;CACT,UAAU;CACV,SAAS;CACT,eAAe;CACf,aAAa;CACb,wBAAwB;AACzB;;AAEA;EACE;AACF;;;;AAIA;EACE,aAAa;EACb,8BAA8B;EAC9B;AACF;;AAEA;EACE,YAAY;EACZ,aAAa;EACb,aAAa;EACb,aAAa;EACb,sCAAsC;AACxC;;;AAGA;EACE,6BAA6B;AAC/B;;;;AAIA;EACE,YAAY;EACZ,WAAW;EACX,uBAAuB;EACvB,0DAA0D;EAC1D,2BAA2B;AAC7B;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,WAAW;AACb","sourcesContent":["html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\n#game-container {\n  width: 740px\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n\n\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -531,7 +531,8 @@ function Game() {
   const computerPlayer = Player("computer", true);
   const humanGameboard = Gameboard();
   const computerGameboard = Gameboard();
-  let victor = null;
+  let victor;
+  let illegalMoveMessage;
 
   //Place ships arbitrarily for now
 
@@ -557,22 +558,13 @@ function Game() {
   humanGameboard.placeShip([[10,9], [9,9], [8,9], [7,9], [6,9]], "Carrier")
 
   const takeHumanTurn = function(coors) {
-    //If the game is not over, try the move
-    if (!victor) {
-      //Check for the legality of the move
-      try {
-        humanPlayer.isMoveLegal(coors)
-        takeTurn(humanPlayer, computerGameboard, coors)
-      } catch (error) {
-        console.log(error)
-        //This needs to show up in the UI somehow
-      }
-    }
-    
-    //If the move is not decisive, have the computer go
-    if (!victor) {
-      takeComputerTurn();
-    }
+    //Check to see if move is illegal
+    const errorMessage = humanPlayer.illegalMoveMessage(coors)
+    if (!errorMessage) {
+      takeTurn(humanPlayer, computerGameboard, coors)
+    } else {
+      illegalMoveMessage = errorMessage
+    } 
   }
   
   const takeTurn = function(offensivePlayer, defensiveGameboard, coors) {
@@ -585,8 +577,6 @@ function Game() {
     //call allSunk on defensive Gameboard to check for victory
     if (defensiveGameboard.allSunk()) {
       declareVictory()
-    } else {
-      //update DOM
     }
   }
 
@@ -604,7 +594,11 @@ function Game() {
     return victor;
   }
 
-  return {takeHumanTurn, getVictor}
+  const getIllegalMoveMessage = function() {
+    return illegalMoveMessage;
+  }
+
+  return {takeHumanTurn, getVictor, getIllegalMoveMessage}
 }
 
 module.exports = Game;
@@ -729,22 +723,15 @@ function Player(name, isComputer) {
   const hitShots = []
   const missedShots = []
 
-  const isMoveLegal = function(coors) {
-    const error = illegalMoveError(coors);
-    if (error) {
-      throw error
-    } else {
-      return true
-    }
-  }
+  
 
-  const illegalMoveError = function(coors) {
+  const illegalMoveMessage = function(coors) {
     if (!coordinatesExist(coors)) {
-      return new Error("Those coordinates are nonexistant")
+      return "Those coordinates are nonexistant"
     } else if (includesCoordinates(hitShots, coors)) {
-      return new Error("Those coordinates have already been hit")
+      return "Those coordinates have already been hit"
     } else if (includesCoordinates(missedShots, coors)) {
-      return new Error("Those coordinates have already been shot at and missed")
+      return "Those coordinates have already been shot at and missed"
     } 
   }
 
@@ -787,7 +774,7 @@ function Player(name, isComputer) {
     return hitShots
   }
 
-  return {isMoveLegal, getComputerMove, receiveReport, getMissedShots, getHitShots, isComputer}
+  return {illegalMoveMessage, getComputerMove, receiveReport, getMissedShots, getHitShots, isComputer}
 }
 
 module.exports = Player;
@@ -842,36 +829,78 @@ module.exports = function coordinatesExist(coors) {
 /*!************************************!*\
   !*** ./src/interface/manageDOM.js ***!
   \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((module) => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createPositionButtons": () => (/* binding */ createPositionButtons)
-/* harmony export */ });
-const createPositionButtons = function() {
-  const createPositionDiv = function(coordinates) {
-    const positionDiv = document.createElement("DIV");
-    positionDiv.className = "position";
-    positionDiv.dataset.xCoor = coordinates[0];
-    positionDiv.dataset.yCoor = coordinates[1]
-    return positionDiv
-  }
-  
+const createCustomElement = function(type, className, text) {
+  const el = document.createElement(type);
+  el.className = className;
+  if (text) {el.textContent = text;}
+  return el;
+}
+
+const fillGameboard = function() {
+  const rowIndices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   const humanGameboard = document.getElementById("human-gameboard")
   const computerGameboard = document.getElementById("computer-gameboard")
+
+  const createPositionEl = function(coordinates) {
+    const positionEl = createCustomElement("DIV", "position")
+    positionEl.dataset.xCoor = coordinates[0];
+    positionEl.dataset.yCoor = coordinates[1];
+    return positionEl
+  }
+
+  const createRowIndexDiv = function(index) {
+    return createCustomElement("DIV", "row-index", rowIndices[index]);
+  }
+
+  const createColumnIndex = function(index) {
+    return createCustomElement("DIV", "column-index", index + 1);
+  }
   
-  for (let i = 1; i <= 10; i++) {
-    for (let j = 1; j <= 10; j++ ) {
-      humanGameboard.appendChild(createPositionDiv([i, j]))
-      computerGameboard.appendChild(createPositionDiv([i, j]));
+  const createEmptyCorner = function() {
+    return createCustomElement("DIV", "empty-corner")
+  }
+
+  //Create the column index row
+  humanGameboard.appendChild(createEmptyCorner())
+  computerGameboard.appendChild(createEmptyCorner())
+  for (let i = 0; i < 10; i++) {
+    //Add the column index
+    humanGameboard.appendChild(createColumnIndex(i))
+    computerGameboard.appendChild(createColumnIndex(i))
+  }
+
+  //Create the main rows
+  for (let i = 0; i < 10; i++) {
+    // Add the row index to both gameboards
+    humanGameboard.appendChild(createRowIndexDiv(i))
+    computerGameboard.appendChild(createRowIndexDiv(i));
+    //Add a row of position divs to both gameboards
+    for (let j = 0; j < 10; j++ ) {
+      humanGameboard.appendChild(createPositionEl([i + 1, j + 1]))
+      computerGameboard.appendChild(createPositionEl([i + 1, j + 1]));
     }
+  }
+}
+
+const handlePositionClick = function(e) {
+
+}
+
+
+const attachPositionListeners = function(takeHumanTurn) {
+  const positionEls = document.getElementsByClassName("PositionEls");
+  for (i = 0; i < PositionEls; i++) {
+    positionEls[i].addEventListener("click", () => {
+      takeHumanTurn(e.target.dataset.xCoor, e.target.dataset.yCoor)
+    })
   }
 }
 
 
 
-
+module.exports = {fillGameboard, attachPositionListeners}
 
 /***/ })
 
@@ -955,16 +984,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _factories_Game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./factories/Game */ "./src/factories/Game.js");
 /* harmony import */ var _factories_Game__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_factories_Game__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interface/manageDOM.js */ "./src/interface/manageDOM.js");
+/* harmony import */ var _interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
 
 
 
-_interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2__.createPositionButtons();
+_interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2__.fillGameboard();
 
 const game = _factories_Game__WEBPACK_IMPORTED_MODULE_1___default()();
-
 
 })();
 

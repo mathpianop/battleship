@@ -1,12 +1,61 @@
 const Player = require("./Player");
 const Gameboard = require("./Gameboard");
+const initializeBoards = require("../interface/initializeBoards")
 
 function Game() {
   const humanPlayer = Player("placeholder");
   const computerPlayer = Player("computer", true);
   const humanGameboard = Gameboard();
   const computerGameboard = Gameboard();
-  let victor = null;
+  let victor;
+  let illegalMoveMessage;
+
+
+  const takeHumanTurn = function(coors) {
+    //Check to see if move is illegal
+    const errorMessage = humanPlayer.illegalMoveMessage(coors)
+    if (!errorMessage) {
+      takeTurn(humanPlayer, computerGameboard, coors)
+    } else {
+      illegalMoveMessage = errorMessage
+    } 
+  }
+  
+  const takeTurn = function(offensivePlayer, defensiveGameboard, coors) {
+    //call receiveAttack on defensive Gameboard
+    defensiveGameboard.receiveAttack(coors);
+    //call getAttackReport on defensive Gameboard
+    const attackReport = defensiveGameboard.getAttackReport();
+    //call receiveReport on offensive Player
+    offensivePlayer.receiveReport(attackReport);
+    //call allSunk on defensive Gameboard to check for victory
+    if (defensiveGameboard.allSunk()) {
+      declareVictory()
+    }
+  }
+
+  const takeComputerTurn = function() {
+    const coors = computerPlayer.getComputerMove();
+    takeTurn(computerPlayer, humanGameboard, coors);
+  }
+
+  const declareVictory = function(player) {
+    //update DOM
+    victor = player;
+  }
+
+  const getVictor = function() {
+    return victor;
+  }
+
+  const getIllegalMoveMessage = function() {
+    return illegalMoveMessage;
+  }
+
+  //Set up DOM boards
+  initializeBoards.fillGameboard();
+  initializeBoards.attachPositionListeners(takeHumanTurn); 
+
 
   //Place ships arbitrarily for now
 
@@ -31,55 +80,7 @@ function Game() {
   computerGameboard.placeShip([[2,10], [3,10], [4,10], [5,10], [6,10]], "Carrier")
   humanGameboard.placeShip([[10,9], [9,9], [8,9], [7,9], [6,9]], "Carrier")
 
-  const takeHumanTurn = function(coors) {
-    //If the game is not over, try the move
-    if (!victor) {
-      //Check for the legality of the move
-      try {
-        humanPlayer.isMoveLegal(coors)
-        takeTurn(humanPlayer, computerGameboard, coors)
-      } catch (error) {
-        console.log(error)
-        //This needs to show up in the UI somehow
-      }
-    }
-    
-    //If the move is not decisive, have the computer go
-    if (!victor) {
-      takeComputerTurn();
-    }
-  }
-  
-  const takeTurn = function(offensivePlayer, defensiveGameboard, coors) {
-    //call receiveAttack on defensive Gameboard
-    defensiveGameboard.receiveAttack(coors);
-    //call getAttackReport on defensive Gameboard
-    const attackReport = defensiveGameboard.getAttackReport();
-    //call receiveReport on offensive Player
-    offensivePlayer.receiveReport(attackReport);
-    //call allSunk on defensive Gameboard to check for victory
-    if (defensiveGameboard.allSunk()) {
-      declareVictory()
-    } else {
-      //update DOM
-    }
-  }
-
-  const takeComputerTurn = function() {
-    const coors = computerPlayer.getComputerMove();
-    takeTurn(computerPlayer, humanGameboard, coors);
-  }
-
-  const declareVictory = function(player) {
-    //update DOM
-    victor = player;
-  }
-
-  const getVictor = function() {
-    return victor;
-  }
-
-  return {takeHumanTurn, getVictor}
+  return {takeHumanTurn, getVictor, getIllegalMoveMessage}
 }
 
 module.exports = Game;
