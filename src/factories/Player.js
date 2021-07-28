@@ -18,7 +18,7 @@ function Player(name, isComputer) {
 
 
   const includesCoordinates = function(array, coors) {
-    return !!array.find(coordinates => {
+    return !!array.map(shots => shots.coors).find(coordinates => {
       return (
         coors[0] === coordinates[0] &&
         coors[1] === coordinates[1]
@@ -41,9 +41,18 @@ function Player(name, isComputer) {
 
   const receiveReport = function(attackReport) {
     if (attackReport.hit) {
-      hitShots.push(attackReport.coors)
+      hitShots.push(
+        {
+          coors: attackReport.coors,
+          shipName: attackReport.shipName
+        } 
+      )
     } else {
-      missedShots.push(attackReport.coors)
+      missedShots.push(
+        {
+          coors: attackReport.coors
+        }
+      )
     }
   }
 

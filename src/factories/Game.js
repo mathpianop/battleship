@@ -44,7 +44,7 @@ function Game() {
     //call receiveReport on offensive Player
     offensivePlayer.receiveReport(attackReport);
     //Update the board in the UI
-    gameplayDisplay.updateBoard(offensivePlayer);
+    gameplayDisplay.updateBoard(offensivePlayer, defensiveGameboard);
     //call allSunk on defensive Gameboard to check for victory
     if (defensiveGameboard.allSunk()) {
       declareVictory()

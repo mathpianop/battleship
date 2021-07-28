@@ -10,19 +10,29 @@ describe("Player", () => {
       const player = Player("Paul")
       player.receiveReport(AttackReport([1,2]))
       expect(player.getMissedShots()).toEqual(
-        expect.arrayContaining([[1,2]])
+        expect.arrayContaining([
+          {
+            coors: [1,2]
+          }
+        ])
       )
     })
   
     it("adds the position of a hit shot to the hitShots", () => {
       const player = Player("Paul")
       const mockHitShip = {
+        name: "Battleship",
         shipLength: 4,
         isSunk: () => false
       }
       player.receiveReport(AttackReport([1,2], mockHitShip))
       expect(player.getHitShots()).toEqual(
-        expect.arrayContaining([[1,2]])
+        expect.arrayContaining([
+          {
+            coors: [1,2],
+            shipName: "Battleship"
+          }
+        ])
       )
     })
   })
