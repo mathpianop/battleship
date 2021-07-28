@@ -61,13 +61,14 @@ const fillGameboard = function() {
 
 
 
-const attachPositionListeners = function(takeHumanTurn) {
-  const positionEls = document.getElementsByClassName("position");
+const attachPositionListeners = function(takeRound) {
+  const positionEls = document.getElementById("computer-gameboard")
+                              .getElementsByClassName("position");
   for (i = 0; i < positionEls.length; i++) {
     positionEls[i].addEventListener("click", (e) => {
       const xCoordinate = parseInt(e.target.dataset.xCoor);
       const yCoordinate = parseInt(e.target.dataset.yCoor);
-      takeHumanTurn(xCoordinate, yCoordinate)
+      takeRound([xCoordinate, yCoordinate])
     })
   }
 }

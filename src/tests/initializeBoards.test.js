@@ -46,7 +46,7 @@ describe("fillGameboard", () => {
 describe("attachPositionListeners", () => {
     initializeBoards.fillGameboard();
     const samplePosition = document
-                            .getElementById("human-gameboard")
+                            .getElementById("computer-gameboard")
                             .getElementsByClassName("position")[37]
     const callback = jest.fn();
     initializeBoards.attachPositionListeners(callback);
@@ -57,8 +57,7 @@ describe("attachPositionListeners", () => {
   })
 
   it("calls the callback with the correct coordinates", () => {
-    expect(callback.mock.calls[0][0]).toBe(4)
-    expect(callback.mock.calls[0][1]).toBe(8)
+    expect(callback).toHaveBeenCalledWith([4,8]);
   })
 })
 
