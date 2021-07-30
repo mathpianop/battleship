@@ -1,37 +1,4 @@
-Test gameplayDisplay
-# gameplayDisplay
+Add gameplayDisplay.computerComment
 
-
-
-- updateBoard
-
-
-
-- displayVictoryMessage
-
-
-- displayIllegalMessage
-
-
-
-# Game
-
-- takeHumanTurn
-  0. If victory has been declared, do nothing
-  1. If move is illegal, call manageDOM.displayIllegalMessage
-  2. Call takeTurn
-
-  3. If move is decisive, call declareVictory
-  4. If move is not decisive, call takeComputerTurn
-
-- takeComputerTurn
-  1. call getComputerMove
-  2. call takeTurn
-
-- takeTurn
-  1. Call manageDOM.updateBoard (plus everything else)
-
-
-- declareVictory
-  1. call manageDOM.displayVictoryMessage (Integrationish test)
+Add event listener to new game button
 

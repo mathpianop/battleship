@@ -1,3 +1,5 @@
+const createCustomElement = require("./createCustomElement.js")
+
 const getPositionDivFromCoors = function(coors, gameboardPositions) {
   return gameboardPositions[((coors[0] - 1) * 10 + coors[1] - 1)];
 }
@@ -45,18 +47,43 @@ const updateBoard = function(offensivePlayer) {
   applyToPositions(sunkCoors, gameboardPositions, addClassToPosition, ["sunk"])
 }
 
-const displayIllegalMessage = function(message) {
+const displayMessage = function(wrapperId, messageId, message) {
   //Insert message into message element
-  const messageEl = document.getElementById("error-message");
-  messageEl.textContent = message;
+  const wrapperEl = document.getElementById(wrapperId);
+  wrapperEl.textContent = "";
+  const messageEl = createCustomElement("DIV", "message", message);
+  messageEl.id = messageId;
+  wrapperEl.appendChild(messageEl)
   //disappear message after 3s
   setTimeout(() => {
-    messageEl.textContent = "";
+    messageEl.remove();
   }, 3000)
 }
 
-const displayVictory = function() {
+const displayIllegalMessage = function(message) {
+  displayMessage("error-message-wrapper", "error-message", message)
+}
 
+const addNewGameBtn = function() {
+  const newGameBtn = createCustomElement("BTN", "", "New Game?");
+  newGameBtn.id = "new-game-btn";
+  const victoryDisplay = document.getElementById("victory-display");
+  victoryDisplay.appendChild(newGameBtn);
+}
+
+const displayVictory = function(victor) {
+  let message;
+  if (victor.isComputer) {
+    message = "Rats! Computer wins..."
+  } else if (victor.name) {
+    message = `Congratulations, ${victor.name}, you win!`
+  } else {
+    message = "Congratulations, you win!"
+  }
+  //Display the victory message
+  displayMessage("victory-message-wrapper", "victory-message", message)
+
+  addNewGameBtn();
 }
 
 module.exports = {displayIllegalMessage, updateBoard, displayVictory}

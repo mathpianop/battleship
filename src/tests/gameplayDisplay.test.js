@@ -8,8 +8,9 @@
 
  const gameplayDisplay = require("../interface/gameplayDisplay")
  const Game = require("../factories/Game");
+ const Player = require("../factories/Player");
 
-
+ 
  
 
 
@@ -140,24 +141,59 @@ describe("updateBoard", () => {
 })
 
 describe("displayIllegalMessage", () => {
-  it("inserts the message into the message element", () => {
-    const messageEl = document.getElementById("error-message");
-    expect(messageEl.textContent).toBe("");
+  const wrapperEl = document.getElementById("error-message-wrapper");
+  
+  it("creates and inserts a message element into the message wrapper element", () => {
+    expect(wrapperEl.firstChild).not.toBeTruthy();
     gameplayDisplay.displayIllegalMessage("Hello World");
-    expect(messageEl.textContent).toBe("Hello World");
+    expect(wrapperEl.firstChild.id).toBe("error-message");
+  })
+  
+  it("inserts the message into the message element", () => {
+    gameplayDisplay.displayIllegalMessage("foo");
+    const messageEl = document.getElementById("error-message");
+    expect(messageEl.textContent).toBe("foo");
   })
 
-  it("disappears the message after 3 seconds", () => {
+  it("disappears the message element after 3 seconds", () => {
     jest.useFakeTimers();
-    const messageEl = document.getElementById("error-message");
     gameplayDisplay.displayIllegalMessage("Hello World");
+    expect(wrapperEl.firstChild.id).toBe("error-message");
     jest.advanceTimersByTime(3000);
-    expect(messageEl.textContent).toBe("");
+    expect(wrapperEl.firstChild).toBe(null);
   })
 })
 
 describe("displayVictory", () => {
-  xit("", () => {
-    
+  const wrapperEl = document.getElementById("victory-message-wrapper");
+  const humanVictor = Player("Paul")
+  const humanAnonymousVictor = Player();
+  const computerVictor = Player("computer", true);
+
+  it("creates and inserts a message element into the message wrapper element", () => { 
+    expect(wrapperEl.firstChild).not.toBeTruthy();
+    gameplayDisplay.displayVictory(humanVictor);
+    expect(wrapperEl.firstChild.id).toBe("victory-message");
+  })
+
+  it("inserts a disappointed message if the computer wins", () => {
+    gameplayDisplay.displayVictory(computerVictor);
+    expect(wrapperEl.firstChild.textContent).toBe("Rats! Computer wins...");
+  })
+
+  it("inserts a generic message if an anonymous human wins", () => {
+    gameplayDisplay.displayVictory(humanAnonymousVictor);
+    expect(wrapperEl.firstChild.textContent).toBe("Congratulations, you win!");
+  })
+
+  it("inserts a custom message if a named human wins", () => {
+    gameplayDisplay.displayVictory(humanVictor);
+    expect(wrapperEl.firstChild.textContent).toBe("Congratulations, Paul, you win!");
+  })
+
+  it("adds a new game button", () => {
+    gameplayDisplay.displayVictory(humanVictor);
+    const newGameBtn = document.getElementById("new-game-btn")
+    expect(newGameBtn).toBeTruthy();
   })
 })

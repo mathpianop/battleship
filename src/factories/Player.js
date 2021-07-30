@@ -84,7 +84,7 @@ function Player(name, isComputer) {
     return shots;
   }
 
-  return {illegalMoveMessage, getComputerMove, receiveReport, getShots, isComputer}
+  return {illegalMoveMessage, getComputerMove, receiveReport, getShots, isComputer, name}
   
 }
 

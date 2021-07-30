@@ -47,7 +47,7 @@ function Game() {
     gameplayDisplay.updateBoard(offensivePlayer, defensiveGameboard);
     //call allSunk on defensive Gameboard to check for victory
     if (defensiveGameboard.allSunk()) {
-      declareVictory()
+      declareVictory(offensivePlayer)
     }
   }
 
@@ -56,9 +56,9 @@ function Game() {
     takeTurn(computerPlayer, humanGameboard, coors);
   }
 
-  const declareVictory = function() {
+  const declareVictory = function(victor) {
     victory = true
-    gameplayDisplay.displayVictory();
+    gameplayDisplay.displayVictory(victor);
   }
 
   //Set up DOM boards

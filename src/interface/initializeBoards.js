@@ -1,9 +1,4 @@
-const createCustomElement = function(type, className, text) {
-  const el = document.createElement(type);
-  el.className = className;
-  if (text) {el.textContent = text;}
-  return el;
-}
+const createCustomElement = require("./createCustomElement.js");
 
 const fillGameboard = function() {
   const rowIndices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
