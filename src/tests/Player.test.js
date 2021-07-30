@@ -9,8 +9,8 @@ describe("Player", () => {
     it("adds the position of a missed shot to missedShots", () => {
       const player = Player("Paul")
       player.receiveReport(AttackReport([1,2]))
-      expect(player.getMissedShots()).toEqual(
-        expect.arrayContaining([
+      expect(player.getShots().missed).toEqual(
+        expect.objectContaining([
           {
             coors: [1,2]
           }
@@ -26,10 +26,36 @@ describe("Player", () => {
         isSunk: () => false
       }
       player.receiveReport(AttackReport([1,2], mockHitShip))
-      expect(player.getHitShots()).toEqual(
+      expect(player.getShots().hit).toEqual(
         expect.arrayContaining([
           {
             coors: [1,2],
+            shipName: "Battleship"
+          }
+        ])
+      )
+    })
+
+    it("adds the positions of a sunk ship to the sunkPositions", () => {
+      const player = Player("Paul")
+      const mockHitShip = {
+        name: "Battleship",
+        shipLength: 4,
+        isSunk: () => false
+      }
+      const mockSunkShip = {
+        name: "Battleship",
+        shipLength: 4,
+        isSunk: () => true
+      }
+      player.receiveReport(AttackReport([1,2], mockHitShip))
+      player.receiveReport(AttackReport([1,3], mockHitShip))
+      player.receiveReport(AttackReport([1,4], mockHitShip))
+      player.receiveReport(AttackReport([1,5], mockSunkShip))
+      expect(player.getShots().sunk).toEqual(
+        expect.arrayContaining([
+          {
+            coorsSet: [[1,2],[1,3],[1,4],[1,5]],
             shipName: "Battleship"
           }
         ])

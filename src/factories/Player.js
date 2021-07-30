@@ -3,15 +3,21 @@ const coordinatesExist = require("../helpers/coordinatesExist");
 function Player(name, isComputer) {
   const hitShots = []
   const missedShots = []
+  const sunkPositions = []
+  const shots = {
+    hit: [],
+    missed: [],
+    sunk: []
+  }
 
   
 
   const illegalMoveMessage = function(coors) {
     if (!coordinatesExist(coors)) {
       return "Those coordinates are nonexistant"
-    } else if (includesCoordinates(hitShots, coors)) {
+    } else if (includesCoordinates(shots.hit, coors)) {
       return "Those coordinates have already been hit"
-    } else if (includesCoordinates(missedShots, coors)) {
+    } else if (includesCoordinates(shots.missed, coors)) {
       return "Those coordinates have already been shot at and missed"
     } 
   }
@@ -35,36 +41,51 @@ function Player(name, isComputer) {
         Math.floor(Math.random() * 10 + 1),
         Math.floor(Math.random() * 10 + 1)
       ]
-    } while (includesCoordinates(hitShots.concat(missedShots), computerMove))   
+    } while (includesCoordinates(shots.hit.concat(shots.missed), computerMove))   
     return computerMove;
   }
 
+  const getShipCoordinates = function(shipName) {
+    return shots.hit.filter(shots => {
+      return shots.shipName === shipName
+    }).map(shots => shots.coors)
+  }
+
   const receiveReport = function(attackReport) {
+    //Add shot to either shots.hit or shots.missed
     if (attackReport.hit) {
-      hitShots.push(
+      shots.hit.push(
         {
           coors: attackReport.coors,
           shipName: attackReport.shipName
         } 
       )
     } else {
-      missedShots.push(
+      shots.missed.push(
         {
           coors: attackReport.coors
         }
       )
     }
+
+    //If the shot has sunk target, add shot to shots.sunk
+    if(attackReport.sunk) {
+      shots.sunk.push(
+        {
+          coorsSet: getShipCoordinates(attackReport.shipName),
+          shipName: attackReport.shipName
+        }
+      )
+    }
+
   }
 
-  const getMissedShots = function() {
-    return missedShots
+  const getShots = function() {
+    return shots;
   }
 
-  const getHitShots = function() {
-    return hitShots
-  }
-
-  return {illegalMoveMessage, getComputerMove, receiveReport, getMissedShots, getHitShots, isComputer}
+  return {illegalMoveMessage, getComputerMove, receiveReport, getShots, isComputer}
+  
 }
 
 module.exports = Player;

@@ -61,9 +61,3 @@ describe("attachPositionListeners", () => {
   })
 })
 
-// describe("handlePositionClick", () => {
-
-//   const takeHumanTurn = jest.fn();
-//   samplePosition.
-// })
-
