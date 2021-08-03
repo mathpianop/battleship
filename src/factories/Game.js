@@ -45,6 +45,10 @@ function Game() {
     offensivePlayer.receiveReport(attackReport);
     //Update the board in the UI
     gameplayDisplay.updateBoard(offensivePlayer, defensiveGameboard);
+    //Display attackReportMessage if this is the human's turn
+    if (!offensivePlayer.isComputer) {
+      gameplayDisplay.displayComputerResponse(attackReport.message)
+    }
     //call allSunk on defensive Gameboard to check for victory
     if (defensiveGameboard.allSunk()) {
       declareVictory(offensivePlayer)

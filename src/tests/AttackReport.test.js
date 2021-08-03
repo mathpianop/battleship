@@ -36,4 +36,31 @@ describe("AttackReport", () => {
       })
     )
   })
+
+  it("returns a summary message for a miss", () => {
+    expect(AttackReport([1,2])).toEqual(
+      expect.objectContaining({message: "Missed!"})
+    )
+  })
+
+  it("returns a summary message for a hit", () => {
+    const hitShip = Ship(2, "Patrol Boat");
+    hitShip.hit(0);
+    expect(AttackReport([1,2], hitShip)).toEqual(
+      expect.objectContaining({
+        message: "Patrol Boat hit!"
+      })
+    )
+  })
+
+  it("returns a summary message for a sink", () => {
+    const hitShip = Ship(2, "Patrol Boat");
+    hitShip.hit(0);
+    hitShip.hit(1); 
+    expect(AttackReport([1,2], hitShip)).toEqual(
+      expect.objectContaining({
+        message: "Patrol Boat hit and sunk!"
+      })
+    )
+  })
 })

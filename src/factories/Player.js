@@ -80,11 +80,18 @@ function Player(name, isComputer) {
 
   }
 
-  const getShots = function() {
-    return shots;
-  }
+  
 
-  return {illegalMoveMessage, getComputerMove, receiveReport, getShots, isComputer, name}
+  return {
+    illegalMoveMessage, 
+    getComputerMove, 
+    receiveReport, 
+    get shots() {
+      return shots
+    }, 
+    isComputer, 
+    name
+  }
   
 }
 

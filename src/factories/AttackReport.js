@@ -1,17 +1,27 @@
 function AttackReport(coors, hitShip) {
-  if (hitShip) {
+  if (hitShip && hitShip.isSunk()) {
     //If the attack shot hits, report hit details
     return {
       hit: true,
-      sunk: hitShip.isSunk(),
+      sunk: true,
       shipName: hitShip.name,
-      coors: coors
+      coors: coors,
+      message: `${hitShip.name} hit and sunk!`
+    }
+  } else if (hitShip) {
+    return {
+      hit: true,
+      sunk: false,
+      shipName: hitShip.name,
+      coors: coors,
+      message: `${hitShip.name} hit!`
     }
   } else {
     //If the shot misses, report hit as false
     return {
       hit: false,
-      coors: coors
+      coors: coors,
+      message: "Missed!"
     }
   }
 }

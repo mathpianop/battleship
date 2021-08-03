@@ -19,17 +19,16 @@ describe("updateBoard", () => {
   it("assigns a class of 'missed' to missed positions of the defensive gameboard", () => {
     const game = Game();
     const mockPlayer = {
-      getShots: () => {
-        return {
+      shots: {
         hit: [],
         missed: [
           {coors: [1,2]},
           {coors: [4,5]}
         ],
         sunk: []
-        }
       }
     }
+
     gameplayDisplay.updateBoard(mockPlayer);
     const computerGameboard = document.getElementById("computer-gameboard");
     const pos1 = computerGameboard.getElementsByClassName("position")[1];
@@ -41,15 +40,13 @@ describe("updateBoard", () => {
   it("works for the human gameboard", () => {
     const game = Game();
     const mockPlayer = {
-      getShots: () => {
-        return {
+      shots: {
         hit: [],
         missed: [
           {coors: [1,2]},
           {coors: [4,5]}
         ],
         sunk: []
-        }
       },
       isComputer: true
     }
@@ -64,17 +61,16 @@ describe("updateBoard", () => {
   it("assigns a class of 'hit' to the hit positions of the defensive gameboard", () => {
     const game = Game();
     const mockPlayer = {
-      getShots: () => {
-        return {
+      shots: {
         hit: [
           {coors: [1,2], shipName: "Battleship"},
           {coors: [4,5], shipName: "Battleship"}
         ],
         missed: [],
         sunk: []
-        }
       }
     }
+    
     gameplayDisplay.updateBoard(mockPlayer);
     const computerGameboard = document.getElementById("computer-gameboard");
     const pos1 = computerGameboard.getElementsByClassName("position")[1];
@@ -86,15 +82,13 @@ describe("updateBoard", () => {
   it("inserts the initial of the hit ship into the position div of a hit position ", () => {
     const game = Game();
     const mockPlayer = {
-      getShots: () => {
-        return {
+      shots: {
         hit: [
           {coors: [1,2], shipName: "Battleship"},
           {coors: [4,5], shipName: "Battleship"}
         ],
         missed: [],
         sunk: []
-        }
       }
     }
     gameplayDisplay.updateBoard(mockPlayer);
@@ -108,8 +102,7 @@ describe("updateBoard", () => {
   it("assigns a class of 'sunk' to all positions of a sunk ship", () => {
     const game = Game();
     const mockPlayer = {
-      getShots: () => {
-        return {
+      shots: {
         hit: [
           {coors: [1,2], shipName: "Battleship"},
           {coors: [1,3], shipName: "Battleship"},
@@ -123,7 +116,6 @@ describe("updateBoard", () => {
               shipName: "Battleship"
             }
           ]
-        }
       }
     }
     gameplayDisplay.updateBoard(mockPlayer);
@@ -195,5 +187,22 @@ describe("displayVictory", () => {
     gameplayDisplay.displayVictory(humanVictor);
     const newGameBtn = document.getElementById("new-game-btn")
     expect(newGameBtn).toBeTruthy();
+  })
+})
+
+describe("displayComputerResponse", () => {
+  it("adds the message to the response element", () => {
+    gameplayDisplay.displayComputerResponse("Hello World")
+    const responseEl = document.getElementById("computer-response")
+    expect(responseEl.textContent).toBe("Hello World")
+  })
+
+  it("disappears the response element after 3 seconds", () => {
+    const wrapperEl = document.getElementById("computer-response-wrapper")
+    jest.useFakeTimers();
+    gameplayDisplay.displayComputerResponse("Hello World")
+    expect(wrapperEl.firstChild.id).toBe("computer-response");
+    jest.advanceTimersByTime(3000);
+    expect(wrapperEl.firstChild).toBe(null);
   })
 })

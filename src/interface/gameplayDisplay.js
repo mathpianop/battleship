@@ -20,48 +20,50 @@ const addClassToPosition = (position, className) => position.classList.add(class
 
 const addInitialToHitPosition = (position, initial) => position.textContent = initial;
 
-
-
-
 const updateBoard = function(offensivePlayer) {
   //Get the gameboard positions DOMCollection of the defensive player
   const defensiveName = offensivePlayer.isComputer ? "human" : "computer"
   const defensiveGameboard = document.getElementById(`${defensiveName}-gameboard`)
   const gameboardPositions = defensiveGameboard.getElementsByClassName("position")
 
-  const shots = offensivePlayer.getShots()
-
   //Add the appropriate class to new "missed" positions
-  const missedCoors = shots.missed.map(shot => shot.coors)
+  const missedCoors = offensivePlayer.shots.missed.map(shot => shot.coors)
   applyToPositions(missedCoors, gameboardPositions, addClassToPosition, ["missed"])
 
   //Add the appropriate class to new "hit" positions
   //Insert the initial of the hit ship into the "hit" positions
-  const hitCoors = shots.hit.map(shot => shot.coors);
-  const hitShipsInitials = shots.hit.map(shots => shots.shipName[0]);
+  const hitCoors = offensivePlayer.shots.hit.map(shot => shot.coors);
+  const hitShipsInitials = offensivePlayer.shots.hit.map(shots => shots.shipName[0]);
   applyToPositions(hitCoors, gameboardPositions, addClassToPosition, ["hit"])
   applyArrayToPositions(hitCoors, gameboardPositions, addInitialToHitPosition, hitShipsInitials)
   
   //Add the appropriate class to new "sunk" positions
-  const sunkCoors = shots.sunk.map(shot => shot.coorsSet).flat();
+  const sunkCoors = offensivePlayer.shots.sunk.map(shot => shot.coorsSet).flat();
   applyToPositions(sunkCoors, gameboardPositions, addClassToPosition, ["sunk"])
 }
 
-const displayMessage = function(wrapperId, messageId, message) {
+const displayMessage = function(wrapperId, messageId, message, timeout) {
   //Insert message into message element
   const wrapperEl = document.getElementById(wrapperId);
   wrapperEl.textContent = "";
   const messageEl = createCustomElement("DIV", "message", message);
   messageEl.id = messageId;
   wrapperEl.appendChild(messageEl)
-  //disappear message after 3s
-  setTimeout(() => {
-    messageEl.remove();
-  }, 3000)
+
+  if (timeout) {
+    //disappear message after 3s
+    setTimeout(() => {
+      messageEl.remove();
+    }, 3000)
+  }
 }
 
 const displayIllegalMessage = function(message) {
-  displayMessage("error-message-wrapper", "error-message", message)
+  displayMessage("error-message-wrapper", "error-message", message, true)
+}
+
+const displayComputerResponse = function(message) {
+  displayMessage("computer-response-wrapper", "computer-response", message, true)
 }
 
 const addNewGameBtn = function() {
@@ -71,7 +73,7 @@ const addNewGameBtn = function() {
   victoryDisplay.appendChild(newGameBtn);
 }
 
-const displayVictory = function(victor) {
+const displayVictory = function(victor, startNewGame) {
   let message;
   if (victor.isComputer) {
     message = "Rats! Computer wins..."
@@ -83,7 +85,7 @@ const displayVictory = function(victor) {
   //Display the victory message
   displayMessage("victory-message-wrapper", "victory-message", message)
 
-  addNewGameBtn();
+  addNewGameBtn(startNewGame);
 }
 
-module.exports = {displayIllegalMessage, updateBoard, displayVictory}
+module.exports = {displayIllegalMessage, updateBoard, displayVictory, displayComputerResponse}
