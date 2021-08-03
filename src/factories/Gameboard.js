@@ -7,19 +7,7 @@ function Gameboard() {
   const ships = [];
   let attackReport = {};
 
-  // Add create new Ship object and add to ships unless
-  // out of bounds
-  const placeShip = function(positions, name) {
-    const error = illegalPlacementError(positions);
-    if (!error) {
-      ships.push({
-        ship: Ship(positions.length, name),
-        positions: positions
-      })
-    } else {
-      throw error
-    }
-  }
+  
 
   const illegalPlacementError = function(positions) {
     if (!positionsAreLegal(positions)) {
@@ -90,8 +78,26 @@ function Gameboard() {
       return ships.every(shipInfo => shipInfo.ship.isSunk())
     }
   }
+
+  // Create new Ship object and add to ships unless
+  // out of bounds
+  const placeShip = function(positions, name) {
+    const error = illegalPlacementError(positions);
+    if (!error) {
+      ships.push({
+        ship: Ship(positions.length, name),
+        positions: positions
+      })
+    } else {
+      throw error
+    }
+  }
+
+  const placeComputerShips = function() {
+
+  }
   
-  return {placeShip, receiveAttack, getAttackReport, allSunk}
+  return {placeShip, receiveAttack, getAttackReport, allSunk, placeComputerShips}
 }
 
 module.exports = Gameboard;

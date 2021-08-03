@@ -66,7 +66,7 @@ function Game() {
   }
 
   //Set up DOM boards
-  initializeBoards.fillGameboard();
+  initializeBoards.fillGameboards();
   initializeBoards.attachPositionListeners(takeRound);
 
   //Place ships arbitrarily for now

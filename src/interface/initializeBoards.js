@@ -1,6 +1,6 @@
 const createCustomElement = require("./createCustomElement.js");
 
-const fillGameboard = function() {
+const fillGameboards = function() {
   const rowIndices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   const humanGameboard = document.getElementById("human-gameboard")
   const computerGameboard = document.getElementById("computer-gameboard")
@@ -70,4 +70,4 @@ const attachPositionListeners = function(takeRound) {
 
 
 
-module.exports = {fillGameboard, attachPositionListeners}
+module.exports = {fillGameboards, attachPositionListeners}
