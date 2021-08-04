@@ -495,19 +495,29 @@ module.exports = styleTagTransform;
 /***/ ((module) => {
 
 function AttackReport(coors, hitShip) {
-  if (hitShip) {
+  if (hitShip && hitShip.isSunk()) {
     //If the attack shot hits, report hit details
     return {
       hit: true,
-      sunk: hitShip.isSunk(),
+      sunk: true,
       shipName: hitShip.name,
-      coors: coors
+      coors: coors,
+      message: `${hitShip.name} hit and sunk!`
+    }
+  } else if (hitShip) {
+    return {
+      hit: true,
+      sunk: false,
+      shipName: hitShip.name,
+      coors: coors,
+      message: `${hitShip.name} hit!`
     }
   } else {
     //If the shot misses, report hit as false
     return {
       hit: false,
-      coors: coors
+      coors: coors,
+      message: "Missed!"
     }
   }
 }
@@ -525,6 +535,9 @@ module.exports = AttackReport;
 
 const Player = __webpack_require__(/*! ./Player */ "./src/factories/Player.js");
 const Gameboard = __webpack_require__(/*! ./Gameboard */ "./src/factories/Gameboard.js");
+const Ship = __webpack_require__(/*! ./Ship */ "./src/factories/Ship.js")
+const initializeBoards = __webpack_require__(/*! ../interface/initializeBoards */ "./src/interface/initializeBoards.js");
+const gameplayDisplay = __webpack_require__(/*! ../interface/gameplayDisplay */ "./src/interface/gameplayDisplay.js");
 
 function Game() {
   const humanPlayer = Player("placeholder");
@@ -532,73 +545,97 @@ function Game() {
   const humanGameboard = Gameboard();
   const computerGameboard = Gameboard();
   let victor;
-  let illegalMoveMessage;
+  let attackReportMessage;
 
-  //Place ships arbitrarily for now
-
-  //Place Patrol Boats
-  computerGameboard.placeShip([[9,7], [9,6]], "Patrol Boat")
-  humanGameboard.placeShip([[1,2], [2,2]], "Patrol Boat")
-
-
-  //Place Destroyers
-  computerGameboard.placeShip([[1,2], [2,2], [3,2]], "Destroyer")
-  humanGameboard.placeShip([[5,6], [4,6], [3,6]], "Destroyer")
-
-  //Place Submarines
-  computerGameboard.placeShip([[4,5], [5,5], [5,6]], "Submarine")
-  humanGameboard.placeShip([[3,1], [3,2], [3,3]], "Submarine")
-
-  //Place Battleships
-  computerGameboard.placeShip([[8,3], [8,4], [8,5], [8,6]], "Battleship")
-  humanGameboard.placeShip([[6,5], [6,6], [6,7], [6,8]], "Battleship")
-
-  //Place Carriers
-  computerGameboard.placeShip([[2,10], [3,10], [4,10], [5,10], [6,10]], "Carrier")
-  humanGameboard.placeShip([[10,9], [9,9], [8,9], [7,9], [6,9]], "Carrier")
-
-  const takeHumanTurn = function(coors) {
-    //Check to see if move is illegal
-    const errorMessage = humanPlayer.illegalMoveMessage(coors)
-    if (!errorMessage) {
-      takeTurn(humanPlayer, computerGameboard, coors)
-    } else {
-      illegalMoveMessage = errorMessage
-    } 
+  const illegalHumanMoveMessage = function(humanCoors) {
+    return humanPlayer.illegalMoveMessage(humanCoors)
   }
-  
-  const takeTurn = function(offensivePlayer, defensiveGameboard, coors) {
+
+  const takeShot = function(coors, playerIsComputer) {
+    let offensivePlayer
+    let defensiveGameboard;
+
+    if (playerIsComputer) {
+      offensivePlayer = computerPlayer;
+      defensiveGameboard = humanGameboard;
+    } else {
+      offensivePlayer = humanPlayer;
+      defensiveGameboard = computerGameboard;
+    }
+
     //call receiveAttack on defensive Gameboard
     defensiveGameboard.receiveAttack(coors);
     //call getAttackReport on defensive Gameboard
     const attackReport = defensiveGameboard.getAttackReport();
     //call receiveReport on offensive Player
     offensivePlayer.receiveReport(attackReport);
+    //Set the current attackReportMessage
+    attackReportMessage = attackReport.message
     //call allSunk on defensive Gameboard to check for victory
     if (defensiveGameboard.allSunk()) {
-      declareVictory()
+      victor = offensivePlayer
     }
   }
 
-  const takeComputerTurn = function() {
-    const coors = computerPlayer.getComputerMove();
-    takeTurn(computerPlayer, humanGameboard, coors);
-  }
+ 
+  
 
-  const declareVictory = function(player) {
-    //update DOM
-    victor = player;
-  }
+ 
+  
 
-  const getVictor = function() {
-    return victor;
-  }
+  //Place ships arbitrarily for now
 
-  const getIllegalMoveMessage = function() {
-    return illegalMoveMessage;
-  }
+  //Place Patrol Boats
+  const computerPatrol = Ship(2, "Patrol Boat")
+  const humanPatrol = Ship(2, "Patrol Boat")
+  computerGameboard.placeShip([[9,7], [9,6]], computerPatrol)
+  humanGameboard.placeShip([[1,2], [2,2]], humanPatrol)
 
-  return {takeHumanTurn, getVictor, getIllegalMoveMessage}
+
+  //Place Destroyers
+  const computerDestroyer = Ship(3, "Destroyer")
+  const humanDestroyer = Ship(3, "Destroyer")
+  computerGameboard.placeShip([[1,2], [2,2], [3,2]], computerDestroyer)
+  humanGameboard.placeShip([[5,6], [4,6], [3,6]], humanDestroyer)
+
+  //Place Submarines
+  const computerSubmarine = Ship(3, "Submarine")
+  const humanSubmarine = Ship(3, "Submarine")
+  computerGameboard.placeShip([[4,5], [5,5], [5,6]], computerSubmarine)
+  humanGameboard.placeShip([[3,1], [3,2], [3,3]], humanSubmarine)
+
+  //Place Battleships
+  const computerBattleship = Ship(4, "Battleship")
+  const humanBattleship = Ship(4, "Battleship")
+  computerGameboard.placeShip([[8,3], [8,4], [8,5], [8,6]], computerBattleship)
+  humanGameboard.placeShip([[6,5], [6,6], [6,7], [6,8]], humanBattleship)
+
+  //Place Carriers
+  const computerCarrier = Ship(5, "Carrier")
+  const humanCarrier = Ship(5, "Carrier")
+  computerGameboard.placeShip([[2,10], [3,10], [4,10], [5,10], [6,10]], computerCarrier)
+  humanGameboard.placeShip([[10,9], [9,9], [8,9], [7,9], [6,9]], humanCarrier)
+
+
+  return {
+    get victor() {
+      return victor
+    },
+    get computerMove() {
+      return computerPlayer.getComputerMove()
+    },
+    get allShots() {
+      return {
+        human: humanPlayer.shots,
+        computer: computerPlayer.shots
+      }
+    },
+    get attackReportMessage() {
+      return attackReportMessage
+    },
+    illegalHumanMoveMessage,
+    takeShot
+  }
 }
 
 module.exports = Game;
@@ -612,47 +649,24 @@ module.exports = Game;
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const Ship = __webpack_require__(/*! ./Ship */ "./src/factories/Ship.js");
-const coordinatesExist = __webpack_require__(/*! ../helpers/coordinatesExist */ "./src/helpers/coordinatesExist.js");
 const AttackReport = __webpack_require__(/*! ./AttackReport */ "./src/factories/AttackReport.js");
+const legalPlacement = __webpack_require__(/*! ../helpers/legalPlacement */ "./src/helpers/legalPlacement.js")
 
 
 function Gameboard() {
   const ships = [];
   let attackReport = {};
 
-  // Add create new Ship object and add to ships unless
-  // out of bounds
-  const placeShip = function(positions, name) {
-    const error = illegalPlacementError(positions);
-    if (!error) {
-      ships.push({
-        ship: Ship(positions.length, name),
-        positions: positions
-      })
-    } else {
-      throw error
-    }
-  }
+  
 
   const illegalPlacementError = function(positions) {
-    if (!positionsAreLegal(positions)) {
-      return new Error("One or more positions are out of bounds")
-    } else if (overlapsWithPreviousPlacement(positions)) {
-      return new Error("A ship already occupies one or more of those coordinates")
+    const message = legalPlacement.illegalPlacementMessage(ships, positions);
+    if (message) {
+      throw new Error(message)
     }
   }
 
-  const overlapsWithPreviousPlacement = function(positions) {
-    return ships.some(ship => {
-      return positions.some(iteratedPos => getMatchedPosition(ship, iteratedPos))
-    })
-  }
-  //Check that all positions fall within Gameboard boundaries
-  const positionsAreLegal = function(positions) {
-    return positions.every(position => {
-      return coordinatesExist(position)
-    })
-  }
+  
 
   const getMatchedPosition = function(ship, position) {
     return ship.positions.some(iteratedPos => positionsAreEqual(iteratedPos, position))
@@ -703,8 +717,26 @@ function Gameboard() {
       return ships.every(shipInfo => shipInfo.ship.isSunk())
     }
   }
+
+  // Create new Ship object and add to ships unless
+  // out of bounds
+  const placeShip = function(positions, ship) {
+    const error = illegalPlacementError(positions);
+    if (!error) {
+      ships.push({
+        ship: Ship(positions.length, ship.name),
+        positions: positions
+      })
+    } else {
+      throw error
+    }
+  }
+
+  const placeComputerShips = function() {
+
+  }
   
-  return {placeShip, receiveAttack, getAttackReport, allSunk}
+  return {placeShip, receiveAttack, getAttackReport, allSunk, placeComputerShips}
 }
 
 module.exports = Gameboard;
@@ -720,24 +752,27 @@ module.exports = Gameboard;
 const coordinatesExist = __webpack_require__(/*! ../helpers/coordinatesExist */ "./src/helpers/coordinatesExist.js");
 
 function Player(name, isComputer) {
-  const hitShots = []
-  const missedShots = []
+  const shots = {
+    hit: [],
+    missed: [],
+    sunk: []
+  }
 
   
 
   const illegalMoveMessage = function(coors) {
     if (!coordinatesExist(coors)) {
       return "Those coordinates are nonexistant"
-    } else if (includesCoordinates(hitShots, coors)) {
+    } else if (includesCoordinates(shots.hit, coors)) {
       return "Those coordinates have already been hit"
-    } else if (includesCoordinates(missedShots, coors)) {
+    } else if (includesCoordinates(shots.missed, coors)) {
       return "Those coordinates have already been shot at and missed"
     } 
   }
 
 
   const includesCoordinates = function(array, coors) {
-    return !!array.find(coordinates => {
+    return !!array.map(shots => shots.coors).find(coordinates => {
       return (
         coors[0] === coordinates[0] &&
         coors[1] === coordinates[1]
@@ -754,27 +789,58 @@ function Player(name, isComputer) {
         Math.floor(Math.random() * 10 + 1),
         Math.floor(Math.random() * 10 + 1)
       ]
-    } while (includesCoordinates(hitShots.concat(missedShots), computerMove))   
+    } while (includesCoordinates(shots.hit.concat(shots.missed), computerMove))   
     return computerMove;
   }
 
+  const getShipCoordinates = function(shipName) {
+    return shots.hit.filter(shots => {
+      return shots.shipName === shipName
+    }).map(shots => shots.coors)
+  }
+
   const receiveReport = function(attackReport) {
+    //Add shot to either shots.hit or shots.missed
     if (attackReport.hit) {
-      hitShots.push(attackReport.coors)
+      shots.hit.push(
+        {
+          coors: attackReport.coors,
+          shipName: attackReport.shipName
+        } 
+      )
     } else {
-      missedShots.push(attackReport.coors)
+      shots.missed.push(
+        {
+          coors: attackReport.coors
+        }
+      )
     }
+
+    //If the shot has sunk target, add shot to shots.sunk
+    if(attackReport.sunk) {
+      shots.sunk.push(
+        {
+          coorsSet: getShipCoordinates(attackReport.shipName),
+          shipName: attackReport.shipName
+        }
+      )
+    }
+
   }
 
-  const getMissedShots = function() {
-    return missedShots
-  }
+  
 
-  const getHitShots = function() {
-    return hitShots
+  return {
+    illegalMoveMessage, 
+    getComputerMove, 
+    receiveReport, 
+    get shots() {
+      return shots
+    }, 
+    isComputer, 
+    name
   }
-
-  return {illegalMoveMessage, getComputerMove, receiveReport, getMissedShots, getHitShots, isComputer}
+  
 }
 
 module.exports = Player;
@@ -825,42 +891,214 @@ module.exports = function coordinatesExist(coors) {
 
 /***/ }),
 
-/***/ "./src/interface/manageDOM.js":
-/*!************************************!*\
-  !*** ./src/interface/manageDOM.js ***!
-  \************************************/
+/***/ "./src/helpers/legalPlacement.js":
+/*!***************************************!*\
+  !*** ./src/helpers/legalPlacement.js ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+
+const coordinatesExist = __webpack_require__(/*! ../helpers/coordinatesExist */ "./src/helpers/coordinatesExist.js");
+
+const positionsAreEqual = function(pos1, pos2) {
+  return (pos1[0] === pos2[0] && pos1[1] === pos2[1])
+}
+
+const getMatchedPosition = function(shipDetails, position) {
+  return shipDetails.positions.some(iteratedPos => positionsAreEqual(iteratedPos, position))
+}
+
+const overlapsWithPreviousPlacement = function(shipsDetails, positions) {
+  return shipsDetails.some(shipDetails => {
+    return positions.some(iteratedPos => getMatchedPosition(shipDetails, iteratedPos))
+  })
+}
+
+//Check that all positions fall within Gameboard boundaries
+const positionsAreLegal = function(positions) {
+  return positions.every(position => {
+    return coordinatesExist(position)
+  })
+}
+
+const illegalPlacementMessage = function(shipsDetails, positions) {
+  if (!positionsAreLegal(positions)) {
+    return "One or more positions are out of bounds"
+  } else if (overlapsWithPreviousPlacement(shipsDetails, positions)) {
+    return "A ship already occupies one or more of those coordinates"
+  }
+}
+
+module.exports = {illegalPlacementMessage}
+
+/***/ }),
+
+/***/ "./src/interface/createCustomElement.js":
+/*!**********************************************!*\
+  !*** ./src/interface/createCustomElement.js ***!
+  \**********************************************/
 /***/ ((module) => {
 
-const createCustomElement = function(type, className, text) {
+module.exports = function(type, className, text) {
   const el = document.createElement(type);
   el.className = className;
   if (text) {el.textContent = text;}
   return el;
 }
 
-const fillGameboard = function() {
-  const rowIndices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+/***/ }),
+
+/***/ "./src/interface/gameplayDisplay.js":
+/*!******************************************!*\
+  !*** ./src/interface/gameplayDisplay.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const createCustomElement = __webpack_require__(/*! ./createCustomElement.js */ "./src/interface/createCustomElement.js")
+
+const getPositionDivFromCoors = function(coors, gameboardPositions) {
+  return gameboardPositions[((coors[0] - 1) * 10 + coors[1] - 1)];
+}
+
+const applyToPositions = function(coors, gameboardPositions, callback, callbackArgs) {
+  coors.forEach(coors => {
+    callback(getPositionDivFromCoors(coors, gameboardPositions), ...callbackArgs);
+  });
+}
+
+const applyArrayToPositions = function(coors, gameboardPositions, callback, array) {
+  coors.forEach((coors, idx) => {
+    callback(getPositionDivFromCoors(coors, gameboardPositions), array[idx]);
+  });
+}
+
+const addClassToPosition = (position, className) => position.classList.add(className);
+
+const addInitialToHitPosition = (position, initial) => position.textContent = initial;
+
+
+
+const updateBoard = function(allShots, playerIsComputer) {
+  
+  const offensiveName = (playerIsComputer ? "computer" : "human")
+  const defensiveName = (playerIsComputer ? "human" : "computer")
+
+  //Get the gameboard positions DOMCollection of the defensive player
+  const defensiveGameboard = document.getElementById(`${defensiveName}-gameboard`)
+  const gameboardPositions = defensiveGameboard.getElementsByClassName("position")
+
+  //Add the appropriate class to "missed" positions
+  const missedCoors = allShots[offensiveName].missed.map(shot => shot.coors)
+  applyToPositions(missedCoors, gameboardPositions, addClassToPosition, ["missed"])
+
+  //Add the appropriate class to "hit" positions
+  //Insert the initial of the hit ship into the "hit" positions
+  const hitCoors = allShots[offensiveName].hit.map(shot => shot.coors);
+  const hitShipsInitials = allShots[offensiveName].hit.map(shots => shots.shipName[0]);
+  console.log(hitShipsInitials)
+  applyToPositions(hitCoors, gameboardPositions, addClassToPosition, ["hit"])
+  applyArrayToPositions(hitCoors, gameboardPositions, addInitialToHitPosition, hitShipsInitials)
+  
+  //Add the appropriate class to "sunk" positions
+  const sunkCoors = allShots[offensiveName].sunk.map(shot => shot.coorsSet).flat();
+  applyToPositions(sunkCoors, gameboardPositions, addClassToPosition, ["sunk"])
+}
+
+
+
+const displayMessage = function(wrapperId, messageId, message, timeout) {
+  //Insert message into message element
+  const wrapperEl = document.getElementById(wrapperId);
+  wrapperEl.textContent = "";
+  const messageEl = createCustomElement("DIV", "message", message);
+  messageEl.id = messageId;
+  wrapperEl.appendChild(messageEl)
+
+  if (timeout) {
+    //disappear message after 3s
+    setTimeout(() => {
+      messageEl.remove();
+    }, 3000)
+  }
+}
+
+const displayIllegalMessage = function(message) {
+  displayMessage("error-message-wrapper", "error-message", message, true)
+}
+
+const displayComputerResponse = function(message) {
+  displayMessage("computer-response-wrapper", "computer-response", message, true)
+}
+
+const addNewGameBtn = function() {
+  const newGameBtn = createCustomElement("BTN", "", "New Game?");
+  newGameBtn.id = "new-game-btn";
+  const victoryDisplay = document.getElementById("victory-display");
+  victoryDisplay.appendChild(newGameBtn);
+}
+
+const displayVictory = function(victor/*, startNewGame*/) {
+  let message;
+  if (victor.isComputer) {
+    message = "Rats! Computer wins..."
+  } else if (victor.name) {
+    message = `Congratulations, ${victor.name}, you win!`
+  } else {
+    message = "Congratulations, you win!"
+  }
+  //Display the victory message
+  displayMessage("victory-message-wrapper", "victory-message", message)
+
+  //addNewGameBtn(startNewGame);
+}
+
+module.exports = {displayIllegalMessage, updateBoard, displayVictory, displayComputerResponse}
+
+/***/ }),
+
+/***/ "./src/interface/initializeBoards.js":
+/*!*******************************************!*\
+  !*** ./src/interface/initializeBoards.js ***!
+  \*******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const createCustomElement = __webpack_require__(/*! ./createCustomElement.js */ "./src/interface/createCustomElement.js");
+
+const ROWINDICES = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+
+const wipeBoard = function(board) {
+  board.textContent = "";
+}
+
+const createPositionEl = function(coordinates) {
+  const positionEl = createCustomElement("DIV", "position")
+  positionEl.dataset.xCoor = coordinates[0];
+  positionEl.dataset.yCoor = coordinates[1];
+  return positionEl
+}
+
+const createRowIndexDiv = function(index) {
+  return createCustomElement("DIV", "row-index", ROWINDICES[index]);
+}
+
+const createColumnIndex = function(index) {
+  return createCustomElement("DIV", "column-index", index + 1);
+}
+
+const createEmptyCorner = function() {
+  return createCustomElement("DIV", "empty-corner")
+}
+
+
+const fillGameboards = function() {
+  
   const humanGameboard = document.getElementById("human-gameboard")
   const computerGameboard = document.getElementById("computer-gameboard")
 
-  const createPositionEl = function(coordinates) {
-    const positionEl = createCustomElement("DIV", "position")
-    positionEl.dataset.xCoor = coordinates[0];
-    positionEl.dataset.yCoor = coordinates[1];
-    return positionEl
-  }
 
-  const createRowIndexDiv = function(index) {
-    return createCustomElement("DIV", "row-index", rowIndices[index]);
-  }
-
-  const createColumnIndex = function(index) {
-    return createCustomElement("DIV", "column-index", index + 1);
-  }
-  
-  const createEmptyCorner = function() {
-    return createCustomElement("DIV", "empty-corner")
-  }
+  //Begin by wiping both boards
+  wipeBoard(humanGameboard);
+  wipeBoard(computerGameboard);
 
   //Create the column index row
   humanGameboard.appendChild(createEmptyCorner())
@@ -884,23 +1122,23 @@ const fillGameboard = function() {
   }
 }
 
-const handlePositionClick = function(e) {
-
-}
 
 
-const attachPositionListeners = function(takeHumanTurn) {
-  const positionEls = document.getElementsByClassName("PositionEls");
-  for (i = 0; i < PositionEls; i++) {
-    positionEls[i].addEventListener("click", () => {
-      takeHumanTurn(e.target.dataset.xCoor, e.target.dataset.yCoor)
+const attachPositionListeners = function(takeRound) {
+  const positionEls = document.getElementById("computer-gameboard")
+                              .getElementsByClassName("position");
+  for (i = 0; i < positionEls.length; i++) {
+    positionEls[i].addEventListener("click", (e) => {
+      const xCoordinate = parseInt(e.target.dataset.xCoor);
+      const yCoordinate = parseInt(e.target.dataset.yCoor);
+      takeRound([xCoordinate, yCoordinate])
     })
   }
 }
 
 
 
-module.exports = {fillGameboard, attachPositionListeners}
+module.exports = {fillGameboards, attachPositionListeners}
 
 /***/ })
 
@@ -973,28 +1211,72 @@ module.exports = {fillGameboard, attachPositionListeners}
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-"use strict";
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _style_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style/style.css */ "./src/style/style.css");
-/* harmony import */ var _factories_Game__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./factories/Game */ "./src/factories/Game.js");
-/* harmony import */ var _factories_Game__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_factories_Game__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interface/manageDOM.js */ "./src/interface/manageDOM.js");
-/* harmony import */ var _interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2__);
+__webpack_require__(/*! ./style/style.css */ "./src/style/style.css")
+const Game = __webpack_require__(/*! ./factories/Game */ "./src/factories/Game.js");
+const initializeBoards = __webpack_require__(/*! ./interface/initializeBoards */ "./src/interface/initializeBoards.js")
+const gameplayDisplay = __webpack_require__(/*! ./interface/gameplayDisplay */ "./src/interface/gameplayDisplay.js")
+
+
+let currentGame = Game();
+let nextGame;
+
+const takeTurn = function(coors, playerIsComputer) {
+  //Record the shot in the game object
+  currentGame.takeShot(coors, playerIsComputer)
+  
+  //Update the board in the UI
+  gameplayDisplay.updateBoard(currentGame.allShots, playerIsComputer);
+
+  //Display attackReportMessage if this is the human's turn
+  if (!playerIsComputer) {
+    gameplayDisplay.displayComputerResponse(currentGame.attackReportMessage)
+  }
+}
+
+const takeComputerTurn = function() {
+  const computerCoors = currentGame.computerMove;
+  takeTurn(computerCoors, true);
+}
+
+
+const takeRound = function(humanCoors) {
+  //If victory has already been declared, do not execute the round
+  if (currentGame.victor) {
+    return
+  }
+
+  //If move is illegal, display the illegal move message in the UI
+  const errorMessage = currentGame.illegalHumanMoveMessage(humanCoors)
+  if (errorMessage) {
+    return gameplayDisplay.displayIllegalMessage(errorMessage)
+  }
+  
+  //If move is legal, take the turn
+  takeTurn(humanCoors, false)
+
+  //If human turn is decisive, short-circuit the round
+  if (currentGame.victor) {
+    //FIX THIS (add display and new game stuff)
+    nextGame = Game();
+    return gameplayDisplay.displayVictory(currentGame.victor/*, nextGame.setup*/)
+  }
+
+  //If the human turn is not decisive, let the computer go
+  takeComputerTurn()
+}
 
 
 
 
 
-
-_interface_manageDOM_js__WEBPACK_IMPORTED_MODULE_2__.fillGameboard();
-
-const game = _factories_Game__WEBPACK_IMPORTED_MODULE_1___default()();
-
+//Set up DOM boards
+initializeBoards.fillGameboards();
+initializeBoards.attachPositionListeners(takeRound);
 })();
 
 /******/ })()
