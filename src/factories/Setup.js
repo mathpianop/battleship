@@ -15,7 +15,7 @@ function Setup(setGameObjects) {
       computerGameboard.placeComputerShips();
       return {
         human: humanGameboard,
-        computer: computer
+        computer: computerGameboard
       }
     })
   }

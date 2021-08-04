@@ -12,7 +12,7 @@ const initializeBoards = require("../interface/initializeBoards")
 
   
 describe("fillGameboard", () => {
-  initializeBoards.fillGameboard();
+  initializeBoards.fillGameboards();
   const samplePosition = document
                             .getElementById("human-gameboard")
                             .getElementsByClassName("position")[37]
@@ -38,13 +38,13 @@ describe("fillGameboard", () => {
                             .getElementById("human-gameboard")
                             .getElementsByClassName("position")[37]
     expect(document.contains(samplePosition)).toBe(true);
-    initializeBoards.fillGameboard();
+    initializeBoards.fillGameboards();
     expect(document.contains(samplePosition)).toBe(false)
   })
 })
 
 describe("attachPositionListeners", () => {
-    initializeBoards.fillGameboard();
+    initializeBoards.fillGameboards();
     const samplePosition = document
                             .getElementById("computer-gameboard")
                             .getElementsByClassName("position")[37]

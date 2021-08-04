@@ -1,9 +1,6 @@
 const coordinatesExist = require("../helpers/coordinatesExist");
 
 function Player(name, isComputer) {
-  const hitShots = []
-  const missedShots = []
-  const sunkPositions = []
   const shots = {
     hit: [],
     missed: [],

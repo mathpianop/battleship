@@ -1,6 +1,6 @@
 const Ship = require("./Ship");
-const coordinatesExist = require("../helpers/coordinatesExist");
 const AttackReport = require("./AttackReport");
+const legalPlacement = require("../helpers/legalPlacement")
 
 
 function Gameboard() {
@@ -10,24 +10,13 @@ function Gameboard() {
   
 
   const illegalPlacementError = function(positions) {
-    if (!positionsAreLegal(positions)) {
-      return new Error("One or more positions are out of bounds")
-    } else if (overlapsWithPreviousPlacement(positions)) {
-      return new Error("A ship already occupies one or more of those coordinates")
+    const message = legalPlacement.illegalPlacementMessage(ships, positions);
+    if (message) {
+      throw new Error(message)
     }
   }
 
-  const overlapsWithPreviousPlacement = function(positions) {
-    return ships.some(ship => {
-      return positions.some(iteratedPos => getMatchedPosition(ship, iteratedPos))
-    })
-  }
-  //Check that all positions fall within Gameboard boundaries
-  const positionsAreLegal = function(positions) {
-    return positions.every(position => {
-      return coordinatesExist(position)
-    })
-  }
+  
 
   const getMatchedPosition = function(ship, position) {
     return ship.positions.some(iteratedPos => positionsAreEqual(iteratedPos, position))
@@ -81,11 +70,11 @@ function Gameboard() {
 
   // Create new Ship object and add to ships unless
   // out of bounds
-  const placeShip = function(positions, name) {
+  const placeShip = function(positions, ship) {
     const error = illegalPlacementError(positions);
     if (!error) {
       ships.push({
-        ship: Ship(positions.length, name),
+        ship: Ship(positions.length, ship.name),
         positions: positions
       })
     } else {

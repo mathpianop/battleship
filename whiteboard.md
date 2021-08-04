@@ -1,11 +1,4 @@
-
-1. Make it so you have to inject a ship object into the Gameboard object
-
-1. Extract the Gameboard illegal placement logic into helper module
-
-2. Figure out getShipPlacements loop
-
-3. Separate Game functionality
+fix tests
 
 4. Remove the setGameObjects callback in the Setup object and replace it with a Promise
   in index.js
