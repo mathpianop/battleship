@@ -1,9 +1,5 @@
-fix tests
-
 4. Remove the setGameObjects callback in the Setup object and replace it with a Promise
   in index.js
-
-5. Move all the function definitions out of fillGameboard
 
 6. Refactor fillGameboards to display where ships are
 

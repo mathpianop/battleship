@@ -1,32 +1,36 @@
 const createCustomElement = require("./createCustomElement.js");
 
+const ROWINDICES = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+
+const wipeBoard = function(board) {
+  board.textContent = "";
+}
+
+const createPositionEl = function(coordinates) {
+  const positionEl = createCustomElement("DIV", "position")
+  positionEl.dataset.xCoor = coordinates[0];
+  positionEl.dataset.yCoor = coordinates[1];
+  return positionEl
+}
+
+const createRowIndexDiv = function(index) {
+  return createCustomElement("DIV", "row-index", ROWINDICES[index]);
+}
+
+const createColumnIndex = function(index) {
+  return createCustomElement("DIV", "column-index", index + 1);
+}
+
+const createEmptyCorner = function() {
+  return createCustomElement("DIV", "empty-corner")
+}
+
+
 const fillGameboards = function() {
-  const rowIndices = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+  
   const humanGameboard = document.getElementById("human-gameboard")
   const computerGameboard = document.getElementById("computer-gameboard")
 
-  const wipeBoard = function(board) {
-    board.textContent = "";
-  }
-
-  const createPositionEl = function(coordinates) {
-    const positionEl = createCustomElement("DIV", "position")
-    positionEl.dataset.xCoor = coordinates[0];
-    positionEl.dataset.yCoor = coordinates[1];
-    return positionEl
-  }
-
-  const createRowIndexDiv = function(index) {
-    return createCustomElement("DIV", "row-index", rowIndices[index]);
-  }
-
-  const createColumnIndex = function(index) {
-    return createCustomElement("DIV", "column-index", index + 1);
-  }
-  
-  const createEmptyCorner = function() {
-    return createCustomElement("DIV", "empty-corner")
-  }
 
   //Begin by wiping both boards
   wipeBoard(humanGameboard);
