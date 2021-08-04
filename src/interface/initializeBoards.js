@@ -56,6 +56,8 @@ const fillGameboards = function() {
       computerGameboard.appendChild(createPositionEl([i + 1, j + 1]));
     }
   }
+
+  
 }
 
 
@@ -64,11 +66,14 @@ const attachPositionListeners = function(takeRound) {
   const positionEls = document.getElementById("computer-gameboard")
                               .getElementsByClassName("position");
   for (i = 0; i < positionEls.length; i++) {
+    //Attach the listener
     positionEls[i].addEventListener("click", (e) => {
       const xCoordinate = parseInt(e.target.dataset.xCoor);
       const yCoordinate = parseInt(e.target.dataset.yCoor);
       takeRound([xCoordinate, yCoordinate])
     })
+
+    positionEls[i].classList.add("active")
   }
 }
 

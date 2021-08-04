@@ -60,5 +60,24 @@ time, mark, audio, video {
   width: 100%;
 }
 
+.hit {
+  background-color: red;
+  background-image: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.missed {
+  background-color: white;
+  background-image: none;
+}
+
+.sunk {
+  box-shadow: inset 0 0 5px black;
+}
+
+.active {
+  cursor: pointer;
+}
 
 
