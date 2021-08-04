@@ -3,6 +3,6 @@
 
 6. Refactor fillGameboards to display where ships are
 
-7. Add shipsDetails getter to Gameboard
+7. Add shipsDetails getter to Gameboard????
 
 8. Refactor gameboard from ships to shipsDetails????

@@ -11,8 +11,8 @@ const applyToPositions = function(coors, gameboardPositions, callback, callbackA
 }
 
 const applyArrayToPositions = function(coors, gameboardPositions, callback, array) {
-  coors.forEach(coors => {
-    callback(getPositionDivFromCoors(coors, gameboardPositions), array[0]);
+  coors.forEach((coors, idx) => {
+    callback(getPositionDivFromCoors(coors, gameboardPositions), array[idx]);
   });
 }
 
@@ -39,6 +39,7 @@ const updateBoard = function(allShots, playerIsComputer) {
   //Insert the initial of the hit ship into the "hit" positions
   const hitCoors = allShots[offensiveName].hit.map(shot => shot.coors);
   const hitShipsInitials = allShots[offensiveName].hit.map(shots => shots.shipName[0]);
+  console.log(hitShipsInitials)
   applyToPositions(hitCoors, gameboardPositions, addClassToPosition, ["hit"])
   applyArrayToPositions(hitCoors, gameboardPositions, addInitialToHitPosition, hitShipsInitials)
   

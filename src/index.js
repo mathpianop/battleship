@@ -1,5 +1,7 @@
-import "./style/style.css"
-import Game from "./factories/Game";
+require("./style/style.css")
+const Game = require("./factories/Game");
+const initializeBoards = require("./interface/initializeBoards")
+const gameplayDisplay = require("./interface/gameplayDisplay")
 
 
 let currentGame = Game();
@@ -31,7 +33,7 @@ const takeRound = function(humanCoors) {
   }
 
   //If move is illegal, display the illegal move message in the UI
-  const errorMessage = current.illegalHumanMoveMessage(humanCoors)
+  const errorMessage = currentGame.illegalHumanMoveMessage(humanCoors)
   if (errorMessage) {
     return gameplayDisplay.displayIllegalMessage(errorMessage)
   }
