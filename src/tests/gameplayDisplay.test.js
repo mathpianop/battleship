@@ -7,6 +7,7 @@
  window.document.body.innerHTML = fs.readFileSync("./dist/index.html");
 
  const gameplayDisplay = require("../interface/gameplayDisplay")
+ const initializeBoards = require("../interface/initializeBoards")
  const Game = require("../factories/Game");
  const Player = require("../factories/Player");
 
@@ -17,9 +18,10 @@
 describe("updateBoard", () => {
   
   it("assigns a class of 'missed' to missed positions of the defensive gameboard", () => {
-    const game = Game();
-    const mockPlayer = {
-      shots: {
+    initializeBoards.fillGameboards();
+    //Set up a record of shots made by the human
+    const mockShots = {
+      human: {
         hit: [],
         missed: [
           {coors: [1,2]},
@@ -29,7 +31,7 @@ describe("updateBoard", () => {
       }
     }
 
-    gameplayDisplay.updateBoard(mockPlayer);
+    gameplayDisplay.updateBoard(mockShots, false);
     const computerGameboard = document.getElementById("computer-gameboard");
     const pos1 = computerGameboard.getElementsByClassName("position")[1];
     const pos2 = computerGameboard.getElementsByClassName("position")[34];
@@ -38,19 +40,20 @@ describe("updateBoard", () => {
   })
 
   it("works for the human gameboard", () => {
-    const game = Game();
-    const mockPlayer = {
-      shots: {
+    initializeBoards.fillGameboards();
+    //Set up a record of shots made by the computer
+    const mockShots = {
+      computer: {
         hit: [],
         missed: [
           {coors: [1,2]},
           {coors: [4,5]}
         ],
         sunk: []
-      },
-      isComputer: true
+      }
     }
-    gameplayDisplay.updateBoard(mockPlayer);
+
+    gameplayDisplay.updateBoard(mockShots, true);
     const humanGameboard = document.getElementById("human-gameboard");
     const pos1 = humanGameboard.getElementsByClassName("position")[1];
     const pos2 = humanGameboard.getElementsByClassName("position")[34];
@@ -70,8 +73,18 @@ describe("updateBoard", () => {
         sunk: []
       }
     }
+    const mockShots = {
+      human: {
+        hit: [
+          {coors: [1,2], shipName: "Battleship"},
+          {coors: [4,5], shipName: "Battleship"}
+        ],
+        missed: [],
+        sunk: []
+      }
+    }
     
-    gameplayDisplay.updateBoard(mockPlayer);
+    gameplayDisplay.updateBoard(mockShots, false);
     const computerGameboard = document.getElementById("computer-gameboard");
     const pos1 = computerGameboard.getElementsByClassName("position")[1];
     const pos2 = computerGameboard.getElementsByClassName("position")[34];
@@ -81,8 +94,8 @@ describe("updateBoard", () => {
 
   it("inserts the initial of the hit ship into the position div of a hit position ", () => {
     const game = Game();
-    const mockPlayer = {
-      shots: {
+    const mockShots = {
+      human: {
         hit: [
           {coors: [1,2], shipName: "Battleship"},
           {coors: [4,5], shipName: "Battleship"}
@@ -91,7 +104,7 @@ describe("updateBoard", () => {
         sunk: []
       }
     }
-    gameplayDisplay.updateBoard(mockPlayer);
+    gameplayDisplay.updateBoard(mockShots, false);
     const computerGameboard = document.getElementById("computer-gameboard");
     const pos1 = computerGameboard.getElementsByClassName("position")[1];
     const pos2 = computerGameboard.getElementsByClassName("position")[34];
@@ -101,8 +114,8 @@ describe("updateBoard", () => {
 
   it("assigns a class of 'sunk' to all positions of a sunk ship", () => {
     const game = Game();
-    const mockPlayer = {
-      shots: {
+    const mockShots = {
+      human: {
         hit: [
           {coors: [1,2], shipName: "Battleship"},
           {coors: [1,3], shipName: "Battleship"},
@@ -118,7 +131,7 @@ describe("updateBoard", () => {
           ]
       }
     }
-    gameplayDisplay.updateBoard(mockPlayer);
+    gameplayDisplay.updateBoard(mockShots, false);
     const computerGameboard = document.getElementById("computer-gameboard");
     const pos1 = computerGameboard.getElementsByClassName("position")[1];
     const pos2 = computerGameboard.getElementsByClassName("position")[2];
@@ -183,7 +196,7 @@ describe("displayVictory", () => {
     expect(wrapperEl.firstChild.textContent).toBe("Congratulations, Paul, you win!");
   })
 
-  it("adds a new game button", () => {
+  xit("adds a new game button", () => {
     gameplayDisplay.displayVictory(humanVictor);
     const newGameBtn = document.getElementById("new-game-btn")
     expect(newGameBtn).toBeTruthy();

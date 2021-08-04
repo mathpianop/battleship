@@ -7,7 +7,7 @@ let nextGame;
 
 const takeTurn = function(coors, playerIsComputer) {
   //Record the shot in the game object
-  currentGame.takeShot(playerIsComputer, coors)
+  currentGame.takeShot(coors, playerIsComputer)
   
   //Update the board in the UI
   gameplayDisplay.updateBoard(currentGame.allShots, playerIsComputer);

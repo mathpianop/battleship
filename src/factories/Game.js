@@ -16,7 +16,7 @@ function Game() {
     return humanPlayer.illegalMoveMessage(humanCoors)
   }
 
-  const takeShot = function(playerIsComputer, coors) {
+  const takeShot = function(coors, playerIsComputer) {
     let offensivePlayer
     let defensiveGameboard;
 
