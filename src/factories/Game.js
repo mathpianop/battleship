@@ -98,6 +98,9 @@ function Game() {
     get attackReportMessage() {
       return attackReportMessage
     },
+    get humanShipDetailsArray() {
+      return humanGameboard.shipDetailsArray;
+    },
     illegalHumanMoveMessage,
     takeShot
   }

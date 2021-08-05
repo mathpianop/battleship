@@ -69,6 +69,9 @@ function Gameboard() {
   }
   
   return {
+    get shipDetailsArray() {
+      return shipDetailsArray;
+    },
     placeShip, 
     receiveAttack, 
     getAttackReport, /* Refactor */

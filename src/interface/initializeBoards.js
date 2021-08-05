@@ -63,16 +63,24 @@ const fillGameboards = function(shipDetailsArray) {
     }
   }
 
-  //Add the ships initials to occupied positions if there are any ships
+  
   const humanPositions = humanGameboard.getElementsByClassName("position");
   if (shipDetailsArray.length > 0) {
     shipDetailsArray.forEach(shipDetails => {
+      //Add the ships initials to occupied positions if there are any ships
       applyToPositions(
         shipDetails.positions,
         humanPositions, 
         addInitialToPosition, 
-        shipDetails.ship.name[0]
-        )
+        [shipDetails.ship.name[0]]
+      )
+
+      applyToPositions(
+        shipDetails.positions,
+        humanPositions,
+        addClassToPosition,
+        ["occupied"]
+      )
     })
   }
 }

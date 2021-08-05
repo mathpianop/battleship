@@ -62,6 +62,19 @@ describe("fillGameboard", () => {
     const samplePosition = getSamplePosition();
     expect(samplePosition.textContent).toBe("D")
   })
+
+  it("adds an 'occupied' class to positions occupied by a ship", () => {
+    const shipDetailsArray = [
+      ShipDetails(
+        [[4,6], [4,7], [4,8]],
+        Ship(3, "Destroyer")
+      )
+    ];
+
+    initializeBoards.fillGameboards(shipDetailsArray);
+    const samplePosition = getSamplePosition();
+    expect(samplePosition.classList.contains("occupied")).toBeTruthy();
+  })  
 })
 
 describe("attachPositionListeners", () => {

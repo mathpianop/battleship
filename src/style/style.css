@@ -20,7 +20,8 @@ time, mark, audio, video {
 }
 
 #game-container {
-  width: 740px
+  width: 740px;
+  margin: auto
 }
 
 
@@ -67,17 +68,26 @@ time, mark, audio, video {
   text-align: center;
 }
 
-.missed {
+.missed{
   background-color: white;
   background-image: none;
 }
 
-.sunk {
-  box-shadow: inset 0 0 5px black;
-}
 
+
+
+.sunk {
+  background-color: black;
+  color: white;
+}
 .active {
   cursor: pointer;
+}
+
+.occupied {
+  background-image: none;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 

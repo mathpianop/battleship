@@ -57,5 +57,5 @@ const takeRound = function(humanCoors) {
 
 
 //Set up DOM boards
-initializeBoards.fillGameboards();
+initializeBoards.fillGameboards(currentGame.humanShipDetailsArray);
 initializeBoards.attachPositionListeners(takeRound);
