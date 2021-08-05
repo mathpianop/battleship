@@ -51,9 +51,7 @@ const displayMessage = function(wrapperId, messageId, message, timeout) {
   }
 }
 
-const displayIllegalMessage = function(message) {
-  displayMessage("error-message-wrapper", "error-message", message, true)
-}
+
 
 const displayComputerResponse = function(message) {
   displayMessage("computer-response-wrapper", "computer-response", message, true)
@@ -82,4 +80,4 @@ const displayVictory = function(victor/*, startNewGame*/) {
   //addNewGameBtn(startNewGame);
 }
 
-module.exports = {displayIllegalMessage, updateBoard, displayVictory, displayComputerResponse}
+module.exports = {updateBoard, displayVictory, displayComputerResponse}

@@ -1,5 +1,3 @@
-
-
 4. Remove the setGameObjects callback in the Setup object and replace it with a Promise in index.js
 
 7. Add shipsDetails getter to Gameboard????

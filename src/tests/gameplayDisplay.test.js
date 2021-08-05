@@ -137,29 +137,6 @@ describe("updateBoard", () => {
   })
 })
 
-describe("displayIllegalMessage", () => {
-  const wrapperEl = document.getElementById("error-message-wrapper");
-  
-  it("creates and inserts a message element into the message wrapper element", () => {
-    expect(wrapperEl.firstChild).not.toBeTruthy();
-    gameplayDisplay.displayIllegalMessage("Hello World");
-    expect(wrapperEl.firstChild.id).toBe("error-message");
-  })
-  
-  it("inserts the message into the message element", () => {
-    gameplayDisplay.displayIllegalMessage("foo");
-    const messageEl = document.getElementById("error-message");
-    expect(messageEl.textContent).toBe("foo");
-  })
-
-  it("disappears the message element after 3 seconds", () => {
-    jest.useFakeTimers();
-    gameplayDisplay.displayIllegalMessage("Hello World");
-    expect(wrapperEl.firstChild.id).toBe("error-message");
-    jest.advanceTimersByTime(3000);
-    expect(wrapperEl.firstChild).toBe(null);
-  })
-})
 
 describe("displayVictory", () => {
   const wrapperEl = document.getElementById("victory-message-wrapper");

@@ -1046,9 +1046,7 @@ const displayMessage = function(wrapperId, messageId, message, timeout) {
   }
 }
 
-const displayIllegalMessage = function(message) {
-  displayMessage("error-message-wrapper", "error-message", message, true)
-}
+
 
 const displayComputerResponse = function(message) {
   displayMessage("computer-response-wrapper", "computer-response", message, true)
@@ -1077,7 +1075,7 @@ const displayVictory = function(victor/*, startNewGame*/) {
   //addNewGameBtn(startNewGame);
 }
 
-module.exports = {displayIllegalMessage, updateBoard, displayVictory, displayComputerResponse}
+module.exports = {updateBoard, displayVictory, displayComputerResponse}
 
 /***/ }),
 
@@ -1304,10 +1302,10 @@ const takeRound = function(humanCoors) {
     return
   }
 
-  //If move is illegal, display the illegal move message in the UI
+  //If move is illegal, do not execute the round
   const errorMessage = currentGame.illegalHumanMoveMessage(humanCoors)
   if (errorMessage) {
-    return gameplayDisplay.displayIllegalMessage(errorMessage)
+    return
   }
   
   //If move is legal, take the turn
@@ -1315,7 +1313,6 @@ const takeRound = function(humanCoors) {
 
   //If human turn is decisive, short-circuit the round
   if (currentGame.victor) {
-    //FIX THIS (add display and new game stuff)
     nextGame = Game();
     return gameplayDisplay.displayVictory(currentGame.victor/*, nextGame.setup*/)
   }
