@@ -95,6 +95,4 @@ const attachPositionListeners = function(takeRound) {
   }
 }
 
-
-
 module.exports = {fillGameboards, attachPositionListeners}

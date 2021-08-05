@@ -16,6 +16,12 @@ const getSamplePosition = function() {
           .getElementsByClassName("position")[37]
 }
 
+const getSampleComputerPosition = function() {
+  return document
+          .getElementById("computer-gameboard")
+          .getElementsByClassName("position")[37]
+}
+
   
 describe("fillGameboard", () => {
   const emptyShipDetailsArray = [];
@@ -61,7 +67,7 @@ describe("fillGameboard", () => {
 describe("attachPositionListeners", () => {
     const emptyShipDetailsArray = [];
     initializeBoards.fillGameboards(emptyShipDetailsArray);
-    const samplePosition = getSamplePosition();
+    const samplePosition = getSampleComputerPosition();
     const callback = jest.fn();
     initializeBoards.attachPositionListeners(callback);
     samplePosition.click()
