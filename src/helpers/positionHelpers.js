@@ -2,8 +2,8 @@ const getPositionDivFromCoors = function(coors, gameboardPositions) {
   return gameboardPositions[((coors[0] - 1) * 10 + coors[1] - 1)];
 }
 
-const applyToPositions = function(coors, gameboardPositions, callback, callbackArgs) {
-  coors.forEach(coors => {
+const applyToPositions = function(coorsSet, gameboardPositions, callback, callbackArgs) {
+  coorsSet.forEach(coors => {
     callback(getPositionDivFromCoors(coors, gameboardPositions), ...callbackArgs);
   });
 }

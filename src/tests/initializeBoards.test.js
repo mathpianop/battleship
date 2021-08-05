@@ -6,48 +6,62 @@
 const fs = require("fs");
 window.document.body.innerHTML = fs.readFileSync("./dist/index.html");
 
-const initializeBoards = require("../interface/initializeBoards")
+const initializeBoards = require("../interface/initializeBoards");
+const ShipDetails = require("../factories/ShipDetails");
+const Ship = require("../factories/Ship");
 
-
+const getSamplePosition = function() {
+  return document
+          .getElementById("human-gameboard")
+          .getElementsByClassName("position")[37]
+}
 
   
 describe("fillGameboard", () => {
-  initializeBoards.fillGameboards();
-  const samplePosition = document
-                            .getElementById("human-gameboard")
-                            .getElementsByClassName("position")[37]
+  const emptyShipDetailsArray = [];
+
+  const samplePosition = getSamplePosition();
 
   it("creates data-xCoor and data-yCoor attributes on human-gameboard", () => {
-    const samplePosition = document
-                            .getElementById("human-gameboard")
-                            .getElementsByClassName("position")[37]
+    initializeBoards.fillGameboards(emptyShipDetailsArray);
+    const samplePosition = getSamplePosition();
     expect(samplePosition.dataset.xCoor).toBe("4");
     expect(samplePosition.dataset.yCoor).toBe("8")
   })
 
   it("creates data-xCoor and data-yCoor attributes on computer-gameboard", () => {
-    const samplePosition = document
-                            .getElementById("human-gameboard")
-                            .getElementsByClassName("position")[37]
+    initializeBoards.fillGameboards(emptyShipDetailsArray);
+    const samplePosition = getSamplePosition();
     expect(samplePosition.dataset.xCoor).toBe("4");
     expect(samplePosition.dataset.yCoor).toBe("8")
   })
 
   it("wipes previous gameboard", () => {
-    const samplePosition = document
-                            .getElementById("human-gameboard")
-                            .getElementsByClassName("position")[37]
+    initializeBoards.fillGameboards(emptyShipDetailsArray);
+    const samplePosition = getSamplePosition();
     expect(document.contains(samplePosition)).toBe(true);
-    initializeBoards.fillGameboards();
+    initializeBoards.fillGameboards(emptyShipDetailsArray);
     expect(document.contains(samplePosition)).toBe(false)
+  })
+
+  it("inserts ship initial into positions occupied by a ship", () => {
+    const shipDetailsArray = [
+      ShipDetails(
+        [[4,6], [4,7], [4,8]],
+        Ship(3, "Destroyer")
+      )
+    ];
+
+    initializeBoards.fillGameboards(shipDetailsArray);
+    const samplePosition = getSamplePosition();
+    expect(samplePosition.textContent).toBe("D")
   })
 })
 
 describe("attachPositionListeners", () => {
-    initializeBoards.fillGameboards();
-    const samplePosition = document
-                            .getElementById("computer-gameboard")
-                            .getElementsByClassName("position")[37]
+    const emptyShipDetailsArray = [];
+    initializeBoards.fillGameboards(emptyShipDetailsArray);
+    const samplePosition = getSamplePosition();
     const callback = jest.fn();
     initializeBoards.attachPositionListeners(callback);
     samplePosition.click()

@@ -13,12 +13,12 @@
  const AttackReport = require("../factories/AttackReport")
  
  
-
+//The mockShots may need 
 
 describe("updateBoard", () => {
   
   it("assigns a class of 'missed' to missed positions of the defensive gameboard", () => {
-    initializeBoards.fillGameboards();
+    initializeBoards.fillGameboards([]);
     //Set up a record of shots made by the human
     const mockShots = {
       human: {
@@ -40,7 +40,7 @@ describe("updateBoard", () => {
   })
 
   it("works for the human gameboard", () => {
-    initializeBoards.fillGameboards();
+    initializeBoards.fillGameboards([]);
     //Set up a record of shots made by the computer
     const mockShots = {
       computer: {

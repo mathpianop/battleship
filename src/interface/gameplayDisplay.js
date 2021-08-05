@@ -10,7 +10,6 @@ const {
 
 
 const updateBoard = function(allShots, playerIsComputer) {
-  
   const offensiveName = (playerIsComputer ? "computer" : "human")
   const defensiveName = (playerIsComputer ? "human" : "computer")
 
@@ -30,7 +29,6 @@ const updateBoard = function(allShots, playerIsComputer) {
   applyArrayToPositions(hitCoors, gameboardPositions, addInitialToPosition, hitShipsInitials)
   
   //Add the appropriate class to "sunk" positions
-  console.log(allShots.human)
   const sunkCoors = allShots[offensiveName].sunk.map(shot => shot.shipCoors).flat();
   applyToPositions(sunkCoors, gameboardPositions, addClassToPosition, ["sunk"])
 }
@@ -61,6 +59,7 @@ const displayComputerResponse = function(message) {
   displayMessage("computer-response-wrapper", "computer-response", message, true)
 }
 
+//Refactor
 const addNewGameBtn = function() {
   const newGameBtn = createCustomElement("BTN", "", "New Game?");
   newGameBtn.id = "new-game-btn";

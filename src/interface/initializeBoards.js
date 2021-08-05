@@ -32,7 +32,7 @@ const createEmptyCorner = function() {
 }
 
 
-const fillGameboards = function() {
+const fillGameboards = function(shipDetailsArray) {
   
   const humanGameboard = document.getElementById("human-gameboard")
   const computerGameboard = document.getElementById("computer-gameboard")
@@ -62,7 +62,19 @@ const fillGameboards = function() {
       computerGameboard.appendChild(createPositionEl([i + 1, j + 1]));
     }
   }
-  
+
+  //Add the ships initials to occupied positions if there are any ships
+  const humanPositions = humanGameboard.getElementsByClassName("position");
+  if (shipDetailsArray.length > 0) {
+    shipDetailsArray.forEach(shipDetails => {
+      applyToPositions(
+        shipDetails.positions,
+        humanPositions, 
+        addInitialToPosition, 
+        shipDetails.ship.name[0]
+        )
+    })
+  }
 }
 
 
@@ -70,6 +82,7 @@ const fillGameboards = function() {
 const attachPositionListeners = function(takeRound) {
   const positionEls = document.getElementById("computer-gameboard")
                               .getElementsByClassName("position");
+                              
   for (i = 0; i < positionEls.length; i++) {
     //Attach the listener
     positionEls[i].addEventListener("click", (e) => {
