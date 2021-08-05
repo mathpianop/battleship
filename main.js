@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\n#game-container {\n  width: 740px\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed {\n  background-color: white;\n  background-image: none;\n}\n\n.sunk {\n  box-shadow: inset 0 0 5px black;\n}\n\n.active {\n  cursor: pointer;\n}\n\n\n", "",{"version":3,"sources":["webpack://./src/style/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;CAaC,SAAS;CACT,UAAU;CACV,SAAS;CACT,eAAe;CACf,aAAa;CACb,wBAAwB;AACzB;;AAEA;EACE;AACF;;;;AAIA;EACE,aAAa;EACb,8BAA8B;EAC9B;AACF;;AAEA;EACE,YAAY;EACZ,aAAa;EACb,aAAa;EACb,aAAa;EACb,sCAAsC;AACxC;;;AAGA;EACE,6BAA6B;AAC/B;;;;AAIA;EACE,YAAY;EACZ,WAAW;EACX,uBAAuB;EACvB,0DAA0D;EAC1D,2BAA2B;AAC7B;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,WAAW;AACb;;AAEA;EACE,qBAAqB;EACrB,sBAAsB;EACtB,gDAAgD;EAChD,kBAAkB;AACpB;;AAEA;EACE,uBAAuB;EACvB,sBAAsB;AACxB;;AAEA;EACE,+BAA+B;AACjC;;AAEA;EACE,eAAe;AACjB","sourcesContent":["html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\n#game-container {\n  width: 740px\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed {\n  background-color: white;\n  background-image: none;\n}\n\n.sunk {\n  box-shadow: inset 0 0 5px black;\n}\n\n.active {\n  cursor: pointer;\n}\n\n\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\n#game-container {\n  width: 740px;\n  margin: auto\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed{\n  background-color: white;\n  background-image: none;\n}\n\n\n\n\n.sunk {\n  background-color: black;\n  color: white;\n}\n.active {\n  cursor: pointer;\n}\n\n.occupied {\n  background-image: none;\n  text-align: center;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n}\n\n\n", "",{"version":3,"sources":["webpack://./src/style/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;CAaC,SAAS;CACT,UAAU;CACV,SAAS;CACT,eAAe;CACf,aAAa;CACb,wBAAwB;AACzB;;AAEA;EACE,YAAY;EACZ;AACF;;;;AAIA;EACE,aAAa;EACb,8BAA8B;EAC9B;AACF;;AAEA;EACE,YAAY;EACZ,aAAa;EACb,aAAa;EACb,aAAa;EACb,sCAAsC;AACxC;;;AAGA;EACE,6BAA6B;AAC/B;;;;AAIA;EACE,YAAY;EACZ,WAAW;EACX,uBAAuB;EACvB,0DAA0D;EAC1D,2BAA2B;AAC7B;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,WAAW;AACb;;AAEA;EACE,qBAAqB;EACrB,sBAAsB;EACtB,gDAAgD;EAChD,kBAAkB;AACpB;;AAEA;EACE,uBAAuB;EACvB,sBAAsB;AACxB;;;;;AAKA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,eAAe;AACjB;;AAEA;EACE,sBAAsB;EACtB,kBAAkB;EAClB,gDAAgD;AAClD","sourcesContent":["html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\n#game-container {\n  width: 740px;\n  margin: auto\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed{\n  background-color: white;\n  background-image: none;\n}\n\n\n\n\n.sunk {\n  background-color: black;\n  color: white;\n}\n.active {\n  cursor: pointer;\n}\n\n.occupied {\n  background-image: none;\n  text-align: center;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n}\n\n\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -633,6 +633,9 @@ function Game() {
     get attackReportMessage() {
       return attackReportMessage
     },
+    get humanShipDetailsArray() {
+      return humanGameboard.shipDetailsArray;
+    },
     illegalHumanMoveMessage,
     takeShot
   }
@@ -649,18 +652,19 @@ module.exports = Game;
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const Ship = __webpack_require__(/*! ./Ship */ "./src/factories/Ship.js");
+const ShipDetails = __webpack_require__(/*! ./ShipDetails */ "./src/factories/ShipDetails.js")
 const AttackReport = __webpack_require__(/*! ./AttackReport */ "./src/factories/AttackReport.js");
 const legalPlacement = __webpack_require__(/*! ../helpers/legalPlacement */ "./src/helpers/legalPlacement.js")
 
 
 function Gameboard() {
-  const ships = [];
+  const shipDetailsArray = [];
   let attackReport = {};
 
   
 
   const illegalPlacementError = function(positions) {
-    const message = legalPlacement.illegalPlacementMessage(ships, positions);
+    const message = legalPlacement.illegalPlacementMessage(shipDetailsArray, positions);
     if (message) {
       throw new Error(message)
     }
@@ -668,41 +672,24 @@ function Gameboard() {
 
   
 
-  const getMatchedPosition = function(ship, position) {
-    return ship.positions.some(iteratedPos => positionsAreEqual(iteratedPos, position))
+  const getHitShipDetails = function(targetCoors) {
+    return shipDetailsArray.find(shipDetails => shipDetails.matches(targetCoors))
   }
 
-  const getHitShipInfo = function(targetCoors) {
-    return ships.find(ship => getMatchedPosition(ship, targetCoors))
-  }
-
-  const getHitPositionIndex = function(hitShipInfo, targetCoors) {
-    return hitShipInfo.positions.findIndex(pos => positionsAreEqual(pos, targetCoors))
-  }
-
-  const markPositionHit = function(hitShipInfo, targetCoors) {
-    const positionIndex = getHitPositionIndex(hitShipInfo, targetCoors);
-    hitShipInfo.ship.hit(positionIndex)
-  }
-
-  const positionsAreEqual = function(pos1, pos2) {
-    return (pos1[0] === pos2[0] && pos1[1] === pos2[1])
-  }
-
-
+  
   const receiveAttack = function(targetCoors) {
-    const hitShipInfo = getHitShipInfo(targetCoors);
-    if (hitShipInfo) {
+    const hitShipDetails = getHitShipDetails(targetCoors);
+    if (hitShipDetails) {
       //If a ship is hit, call the hit method on the hitShip
-      markPositionHit(hitShipInfo, targetCoors);
+      hitShipDetails.markPositionHit(targetCoors);
     } 
     //Update the attackReport
-    setAttackReport(targetCoors, hitShipInfo);
+    setAttackReport(targetCoors, hitShipDetails);
   }
 
-  const setAttackReport = function(coors, hitShipInfo) {
+  const setAttackReport = function(coors, hitShipDetails) {
     attackReport = (
-      hitShipInfo ? AttackReport(coors, hitShipInfo.ship) : AttackReport(coors)
+      hitShipDetails ? AttackReport(coors, hitShipDetails.ship) : AttackReport(coors)
     )
   }
 
@@ -711,10 +698,10 @@ function Gameboard() {
   }
 
   const allSunk = function() {
-    if (ships.length === 0) {
+    if (shipDetailsArray.length === 0) {
       return false
     } else {
-      return ships.every(shipInfo => shipInfo.ship.isSunk())
+      return shipDetailsArray.every(shipDetails => shipDetails.ship.isSunk())
     }
   }
 
@@ -723,10 +710,8 @@ function Gameboard() {
   const placeShip = function(positions, ship) {
     const error = illegalPlacementError(positions);
     if (!error) {
-      ships.push({
-        ship: Ship(positions.length, ship.name),
-        positions: positions
-      })
+      const newShip = Ship(positions.length, ship.name)
+      shipDetailsArray.push(ShipDetails(positions, newShip))
     } else {
       throw error
     }
@@ -736,7 +721,16 @@ function Gameboard() {
 
   }
   
-  return {placeShip, receiveAttack, getAttackReport, allSunk, placeComputerShips}
+  return {
+    get shipDetailsArray() {
+      return shipDetailsArray;
+    },
+    placeShip, 
+    receiveAttack, 
+    getAttackReport, /* Refactor */
+    allSunk, 
+    placeComputerShips
+  }
 }
 
 module.exports = Gameboard;
@@ -771,11 +765,11 @@ function Player(name, isComputer) {
   }
 
 
-  const includesCoordinates = function(array, coors) {
-    return !!array.map(shots => shots.coors).find(coordinates => {
+  const includesCoordinates = function(shotsArray, testCoors) {
+    return !!shotsArray.map(shot => shot.coors).find(coordinates => {
       return (
-        coors[0] === coordinates[0] &&
-        coors[1] === coordinates[1]
+        testCoors[0] === coordinates[0] &&
+        testCoors[1] === coordinates[1]
       )
     })
   }
@@ -794,38 +788,25 @@ function Player(name, isComputer) {
   }
 
   const getShipCoordinates = function(shipName) {
-    return shots.hit.filter(shots => {
-      return shots.shipName === shipName
-    }).map(shots => shots.coors)
+    return shots.hit.filter(shot => {
+      return shot.shipName === shipName
+    }).map(shot => shot.coors)
   }
 
   const receiveReport = function(attackReport) {
     //Add shot to either shots.hit or shots.missed
     if (attackReport.hit) {
-      shots.hit.push(
-        {
-          coors: attackReport.coors,
-          shipName: attackReport.shipName
-        } 
-      )
-    } else {
-      shots.missed.push(
-        {
-          coors: attackReport.coors
-        }
-      )
+      shots.hit.push(attackReport)
+    } else  {
+      shots.missed.push(attackReport)
     }
 
     //If the shot has sunk target, add shot to shots.sunk
     if(attackReport.sunk) {
-      shots.sunk.push(
-        {
-          coorsSet: getShipCoordinates(attackReport.shipName),
-          shipName: attackReport.shipName
-        }
-      )
+      //Add shipCoors property
+      attackReport.shipCoors = getShipCoordinates(attackReport.shipName)
+      shots.sunk.push(attackReport)
     }
-
   }
 
   
@@ -872,6 +853,36 @@ module.exports = Ship;
 
 /***/ }),
 
+/***/ "./src/factories/ShipDetails.js":
+/*!**************************************!*\
+  !*** ./src/factories/ShipDetails.js ***!
+  \**************************************/
+/***/ ((module) => {
+
+module.exports = function ShipDetails(positions, ship) {
+  const matches = function(testPosition) {
+    return positions.some(iteratedPos => positionsAreEqual(iteratedPos, testPosition))
+  }
+
+  const positionsAreEqual = function(pos1, pos2) {
+    return (pos1[0] === pos2[0] && pos1[1] === pos2[1])
+  }
+
+  const getPositionIndex = function(testPosition) {
+    return positions.findIndex(pos => positionsAreEqual(pos, testPosition))
+  }
+
+  const markPositionHit = function(targetPosition) {
+    const positionIndex = getPositionIndex(targetPosition);
+    ship.hit(positionIndex)
+  }
+
+
+  return {ship, positions, matches, markPositionHit}
+}
+
+/***/ }),
+
 /***/ "./src/helpers/coordinatesExist.js":
 /*!*****************************************!*\
   !*** ./src/helpers/coordinatesExist.js ***!
@@ -900,17 +911,10 @@ module.exports = function coordinatesExist(coors) {
 
 const coordinatesExist = __webpack_require__(/*! ../helpers/coordinatesExist */ "./src/helpers/coordinatesExist.js");
 
-const positionsAreEqual = function(pos1, pos2) {
-  return (pos1[0] === pos2[0] && pos1[1] === pos2[1])
-}
 
-const getMatchedPosition = function(shipDetails, position) {
-  return shipDetails.positions.some(iteratedPos => positionsAreEqual(iteratedPos, position))
-}
-
-const overlapsWithPreviousPlacement = function(shipsDetails, positions) {
-  return shipsDetails.some(shipDetails => {
-    return positions.some(iteratedPos => getMatchedPosition(shipDetails, iteratedPos))
+const overlapsWithPreviousPlacement = function(shipDetailsCollection, positions) {
+  return shipDetailsCollection.some(shipDetails => {
+    return positions.some(position => shipDetails.matches(position))
   })
 }
 
@@ -921,10 +925,10 @@ const positionsAreLegal = function(positions) {
   })
 }
 
-const illegalPlacementMessage = function(shipsDetails, positions) {
+const illegalPlacementMessage = function(shipDetailsCollection, positions) {
   if (!positionsAreLegal(positions)) {
     return "One or more positions are out of bounds"
-  } else if (overlapsWithPreviousPlacement(shipsDetails, positions)) {
+  } else if (overlapsWithPreviousPlacement(shipDetailsCollection, positions)) {
     return "A ship already occupies one or more of those coordinates"
   }
 }
@@ -943,8 +947,8 @@ const getPositionDivFromCoors = function(coors, gameboardPositions) {
   return gameboardPositions[((coors[0] - 1) * 10 + coors[1] - 1)];
 }
 
-const applyToPositions = function(coors, gameboardPositions, callback, callbackArgs) {
-  coors.forEach(coors => {
+const applyToPositions = function(coorsSet, gameboardPositions, callback, callbackArgs) {
+  coorsSet.forEach(coors => {
     callback(getPositionDivFromCoors(coors, gameboardPositions), ...callbackArgs);
   });
 }
@@ -1001,7 +1005,6 @@ const {
 
 
 const updateBoard = function(allShots, playerIsComputer) {
-  
   const offensiveName = (playerIsComputer ? "computer" : "human")
   const defensiveName = (playerIsComputer ? "human" : "computer")
 
@@ -1017,12 +1020,11 @@ const updateBoard = function(allShots, playerIsComputer) {
   //Insert the initial of the hit ship into the "hit" positions
   const hitCoors = allShots[offensiveName].hit.map(shot => shot.coors);
   const hitShipsInitials = allShots[offensiveName].hit.map(shots => shots.shipName[0]);
-  console.log(hitShipsInitials)
   applyToPositions(hitCoors, gameboardPositions, addClassToPosition, ["hit"])
   applyArrayToPositions(hitCoors, gameboardPositions, addInitialToPosition, hitShipsInitials)
   
   //Add the appropriate class to "sunk" positions
-  const sunkCoors = allShots[offensiveName].sunk.map(shot => shot.coorsSet).flat();
+  const sunkCoors = allShots[offensiveName].sunk.map(shot => shot.shipCoors).flat();
   applyToPositions(sunkCoors, gameboardPositions, addClassToPosition, ["sunk"])
 }
 
@@ -1052,6 +1054,7 @@ const displayComputerResponse = function(message) {
   displayMessage("computer-response-wrapper", "computer-response", message, true)
 }
 
+//Refactor
 const addNewGameBtn = function() {
   const newGameBtn = createCustomElement("BTN", "", "New Game?");
   newGameBtn.id = "new-game-btn";
@@ -1082,9 +1085,114 @@ module.exports = {displayIllegalMessage, updateBoard, displayVictory, displayCom
 /*!*******************************************!*\
   !*** ./src/interface/initializeBoards.js ***!
   \*******************************************/
-/***/ (() => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-throw new Error("Module parse failed: Identifier 'createCustomElement' has already been declared (2:6)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n| const createCustomElement = require(\"./createCustomElement.js\");\n> const createCustomElement = require(\"./createCustomElement.js\")\n| const {\n|   applyToPositions, ");
+const createCustomElement = __webpack_require__(/*! ./createCustomElement.js */ "./src/interface/createCustomElement.js");
+const {
+  applyToPositions, 
+  applyArrayToPositions, 
+  addClassToPosition, 
+  addInitialToPosition
+} = __webpack_require__(/*! ../helpers/positionHelpers */ "./src/helpers/positionHelpers.js")
+
+const ROWINDICES = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+
+const wipeBoard = function(board) {
+  board.textContent = "";
+}
+
+const createPositionEl = function(coordinates) {
+  const positionEl = createCustomElement("DIV", "position")
+  positionEl.dataset.xCoor = coordinates[0];
+  positionEl.dataset.yCoor = coordinates[1];
+  return positionEl
+}
+
+const createRowIndexDiv = function(index) {
+  return createCustomElement("DIV", "row-index", ROWINDICES[index]);
+}
+
+const createColumnIndex = function(index) {
+  return createCustomElement("DIV", "column-index", index + 1);
+}
+
+const createEmptyCorner = function() {
+  return createCustomElement("DIV", "empty-corner")
+}
+
+
+const fillGameboards = function(shipDetailsArray) {
+  
+  const humanGameboard = document.getElementById("human-gameboard")
+  const computerGameboard = document.getElementById("computer-gameboard")
+
+
+  //Begin by wiping both boards
+  wipeBoard(humanGameboard);
+  wipeBoard(computerGameboard);
+
+  //Create the column index row
+  humanGameboard.appendChild(createEmptyCorner())
+  computerGameboard.appendChild(createEmptyCorner())
+  for (let i = 0; i < 10; i++) {
+    //Add the column index
+    humanGameboard.appendChild(createColumnIndex(i))
+    computerGameboard.appendChild(createColumnIndex(i))
+  }
+
+  //Create the main rows
+  for (let i = 0; i < 10; i++) {
+    // Add the row index to both gameboards
+    humanGameboard.appendChild(createRowIndexDiv(i))
+    computerGameboard.appendChild(createRowIndexDiv(i));
+    //Add a row of position divs to both gameboards
+    for (let j = 0; j < 10; j++ ) {
+      humanGameboard.appendChild(createPositionEl([i + 1, j + 1]))
+      computerGameboard.appendChild(createPositionEl([i + 1, j + 1]));
+    }
+  }
+
+  
+  const humanPositions = humanGameboard.getElementsByClassName("position");
+  if (shipDetailsArray.length > 0) {
+    shipDetailsArray.forEach(shipDetails => {
+      //Add the ships initials to occupied positions if there are any ships
+      applyToPositions(
+        shipDetails.positions,
+        humanPositions, 
+        addInitialToPosition, 
+        [shipDetails.ship.name[0]]
+      )
+
+      applyToPositions(
+        shipDetails.positions,
+        humanPositions,
+        addClassToPosition,
+        ["occupied"]
+      )
+    })
+  }
+}
+
+
+
+const attachPositionListeners = function(takeRound) {
+  const positionEls = document.getElementById("computer-gameboard")
+                              .getElementsByClassName("position");
+                              
+  for (i = 0; i < positionEls.length; i++) {
+    //Attach the listener
+    positionEls[i].addEventListener("click", (e) => {
+      const xCoordinate = parseInt(e.target.dataset.xCoor);
+      const yCoordinate = parseInt(e.target.dataset.yCoor);
+      takeRound([xCoordinate, yCoordinate])
+    })
+
+    positionEls[i].classList.add("active")
+  }
+}
+
+module.exports = {fillGameboards, attachPositionListeners}
 
 /***/ })
 
@@ -1221,7 +1329,7 @@ const takeRound = function(humanCoors) {
 
 
 //Set up DOM boards
-initializeBoards.fillGameboards();
+initializeBoards.fillGameboards(currentGame.humanShipDetailsArray);
 initializeBoards.attachPositionListeners(takeRound);
 })();
 
