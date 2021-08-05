@@ -933,6 +933,41 @@ module.exports = {illegalPlacementMessage}
 
 /***/ }),
 
+/***/ "./src/helpers/positionHelpers.js":
+/*!****************************************!*\
+  !*** ./src/helpers/positionHelpers.js ***!
+  \****************************************/
+/***/ ((module) => {
+
+const getPositionDivFromCoors = function(coors, gameboardPositions) {
+  return gameboardPositions[((coors[0] - 1) * 10 + coors[1] - 1)];
+}
+
+const applyToPositions = function(coors, gameboardPositions, callback, callbackArgs) {
+  coors.forEach(coors => {
+    callback(getPositionDivFromCoors(coors, gameboardPositions), ...callbackArgs);
+  });
+}
+
+const applyArrayToPositions = function(coors, gameboardPositions, callback, array) {
+  coors.forEach((coors, idx) => {
+    callback(getPositionDivFromCoors(coors, gameboardPositions), array[idx]);
+  });
+}
+
+const addClassToPosition = (position, className) => position.classList.add(className);
+
+const addInitialToPosition = (position, initial) => position.textContent = initial;
+
+module.exports = {
+  applyToPositions, 
+  applyArrayToPositions, 
+  addClassToPosition, 
+  addInitialToPosition
+}
+
+/***/ }),
+
 /***/ "./src/interface/createCustomElement.js":
 /*!**********************************************!*\
   !*** ./src/interface/createCustomElement.js ***!
@@ -955,26 +990,13 @@ module.exports = function(type, className, text) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const createCustomElement = __webpack_require__(/*! ./createCustomElement.js */ "./src/interface/createCustomElement.js")
+const {
+  applyToPositions, 
+  applyArrayToPositions, 
+  addClassToPosition, 
+  addInitialToPosition
+} = __webpack_require__(/*! ../helpers/positionHelpers */ "./src/helpers/positionHelpers.js")
 
-const getPositionDivFromCoors = function(coors, gameboardPositions) {
-  return gameboardPositions[((coors[0] - 1) * 10 + coors[1] - 1)];
-}
-
-const applyToPositions = function(coors, gameboardPositions, callback, callbackArgs) {
-  coors.forEach(coors => {
-    callback(getPositionDivFromCoors(coors, gameboardPositions), ...callbackArgs);
-  });
-}
-
-const applyArrayToPositions = function(coors, gameboardPositions, callback, array) {
-  coors.forEach((coors, idx) => {
-    callback(getPositionDivFromCoors(coors, gameboardPositions), array[idx]);
-  });
-}
-
-const addClassToPosition = (position, className) => position.classList.add(className);
-
-const addInitialToHitPosition = (position, initial) => position.textContent = initial;
 
 
 
@@ -997,7 +1019,7 @@ const updateBoard = function(allShots, playerIsComputer) {
   const hitShipsInitials = allShots[offensiveName].hit.map(shots => shots.shipName[0]);
   console.log(hitShipsInitials)
   applyToPositions(hitCoors, gameboardPositions, addClassToPosition, ["hit"])
-  applyArrayToPositions(hitCoors, gameboardPositions, addInitialToHitPosition, hitShipsInitials)
+  applyArrayToPositions(hitCoors, gameboardPositions, addInitialToPosition, hitShipsInitials)
   
   //Add the appropriate class to "sunk" positions
   const sunkCoors = allShots[offensiveName].sunk.map(shot => shot.coorsSet).flat();
@@ -1060,90 +1082,9 @@ module.exports = {displayIllegalMessage, updateBoard, displayVictory, displayCom
 /*!*******************************************!*\
   !*** ./src/interface/initializeBoards.js ***!
   \*******************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ (() => {
 
-const createCustomElement = __webpack_require__(/*! ./createCustomElement.js */ "./src/interface/createCustomElement.js");
-
-const ROWINDICES = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-
-const wipeBoard = function(board) {
-  board.textContent = "";
-}
-
-const createPositionEl = function(coordinates) {
-  const positionEl = createCustomElement("DIV", "position")
-  positionEl.dataset.xCoor = coordinates[0];
-  positionEl.dataset.yCoor = coordinates[1];
-  return positionEl
-}
-
-const createRowIndexDiv = function(index) {
-  return createCustomElement("DIV", "row-index", ROWINDICES[index]);
-}
-
-const createColumnIndex = function(index) {
-  return createCustomElement("DIV", "column-index", index + 1);
-}
-
-const createEmptyCorner = function() {
-  return createCustomElement("DIV", "empty-corner")
-}
-
-
-const fillGameboards = function() {
-  
-  const humanGameboard = document.getElementById("human-gameboard")
-  const computerGameboard = document.getElementById("computer-gameboard")
-
-
-  //Begin by wiping both boards
-  wipeBoard(humanGameboard);
-  wipeBoard(computerGameboard);
-
-  //Create the column index row
-  humanGameboard.appendChild(createEmptyCorner())
-  computerGameboard.appendChild(createEmptyCorner())
-  for (let i = 0; i < 10; i++) {
-    //Add the column index
-    humanGameboard.appendChild(createColumnIndex(i))
-    computerGameboard.appendChild(createColumnIndex(i))
-  }
-
-  //Create the main rows
-  for (let i = 0; i < 10; i++) {
-    // Add the row index to both gameboards
-    humanGameboard.appendChild(createRowIndexDiv(i))
-    computerGameboard.appendChild(createRowIndexDiv(i));
-    //Add a row of position divs to both gameboards
-    for (let j = 0; j < 10; j++ ) {
-      humanGameboard.appendChild(createPositionEl([i + 1, j + 1]))
-      computerGameboard.appendChild(createPositionEl([i + 1, j + 1]));
-    }
-  }
-
-  
-}
-
-
-
-const attachPositionListeners = function(takeRound) {
-  const positionEls = document.getElementById("computer-gameboard")
-                              .getElementsByClassName("position");
-  for (i = 0; i < positionEls.length; i++) {
-    //Attach the listener
-    positionEls[i].addEventListener("click", (e) => {
-      const xCoordinate = parseInt(e.target.dataset.xCoor);
-      const yCoordinate = parseInt(e.target.dataset.yCoor);
-      takeRound([xCoordinate, yCoordinate])
-    })
-
-    positionEls[i].classList.add("active")
-  }
-}
-
-
-
-module.exports = {fillGameboards, attachPositionListeners}
+throw new Error("Module parse failed: Identifier 'createCustomElement' has already been declared (2:6)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n| const createCustomElement = require(\"./createCustomElement.js\");\n> const createCustomElement = require(\"./createCustomElement.js\")\n| const {\n|   applyToPositions, ");
 
 /***/ })
 

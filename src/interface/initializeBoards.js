@@ -1,4 +1,10 @@
 const createCustomElement = require("./createCustomElement.js");
+const {
+  applyToPositions, 
+  applyArrayToPositions, 
+  addClassToPosition, 
+  addInitialToPosition
+} = require("../helpers/positionHelpers")
 
 const ROWINDICES = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
 
@@ -56,7 +62,6 @@ const fillGameboards = function() {
       computerGameboard.appendChild(createPositionEl([i + 1, j + 1]));
     }
   }
-
   
 }
 

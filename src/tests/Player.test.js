@@ -10,10 +10,10 @@ describe("Player", () => {
       const player = Player("Paul")
       player.receiveReport(AttackReport([1,2]))
       expect(player.shots.missed).toEqual(
-        expect.objectContaining([
-          {
+        expect.arrayContaining([
+          expect.objectContaining({
             coors: [1,2]
-          }
+          })
         ])
       )
     })
@@ -28,10 +28,10 @@ describe("Player", () => {
       player.receiveReport(AttackReport([1,2], mockHitShip))
       expect(player.shots.hit).toEqual(
         expect.arrayContaining([
-          {
+          expect.objectContaining({
             coors: [1,2],
             shipName: "Battleship"
-          }
+          })
         ])
       )
     })
@@ -54,10 +54,10 @@ describe("Player", () => {
       player.receiveReport(AttackReport([1,5], mockSunkShip))
       expect(player.shots.sunk).toEqual(
         expect.arrayContaining([
-          {
-            coorsSet: [[1,2],[1,3],[1,4],[1,5]],
+          expect.objectContaining({
+            shipCoors: [[1,2],[1,3],[1,4],[1,5]],
             shipName: "Battleship"
-          }
+          })
         ])
       )
     })

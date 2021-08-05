@@ -1,24 +1,11 @@
 const createCustomElement = require("./createCustomElement.js")
+const {
+  applyToPositions, 
+  applyArrayToPositions, 
+  addClassToPosition, 
+  addInitialToPosition
+} = require("../helpers/positionHelpers")
 
-const getPositionDivFromCoors = function(coors, gameboardPositions) {
-  return gameboardPositions[((coors[0] - 1) * 10 + coors[1] - 1)];
-}
-
-const applyToPositions = function(coors, gameboardPositions, callback, callbackArgs) {
-  coors.forEach(coors => {
-    callback(getPositionDivFromCoors(coors, gameboardPositions), ...callbackArgs);
-  });
-}
-
-const applyArrayToPositions = function(coors, gameboardPositions, callback, array) {
-  coors.forEach((coors, idx) => {
-    callback(getPositionDivFromCoors(coors, gameboardPositions), array[idx]);
-  });
-}
-
-const addClassToPosition = (position, className) => position.classList.add(className);
-
-const addInitialToHitPosition = (position, initial) => position.textContent = initial;
 
 
 
@@ -39,12 +26,12 @@ const updateBoard = function(allShots, playerIsComputer) {
   //Insert the initial of the hit ship into the "hit" positions
   const hitCoors = allShots[offensiveName].hit.map(shot => shot.coors);
   const hitShipsInitials = allShots[offensiveName].hit.map(shots => shots.shipName[0]);
-  console.log(hitShipsInitials)
   applyToPositions(hitCoors, gameboardPositions, addClassToPosition, ["hit"])
-  applyArrayToPositions(hitCoors, gameboardPositions, addInitialToHitPosition, hitShipsInitials)
+  applyArrayToPositions(hitCoors, gameboardPositions, addInitialToPosition, hitShipsInitials)
   
   //Add the appropriate class to "sunk" positions
-  const sunkCoors = allShots[offensiveName].sunk.map(shot => shot.coorsSet).flat();
+  console.log(allShots.human)
+  const sunkCoors = allShots[offensiveName].sunk.map(shot => shot.shipCoors).flat();
   applyToPositions(sunkCoors, gameboardPositions, addClassToPosition, ["sunk"])
 }
 

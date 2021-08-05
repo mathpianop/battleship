@@ -20,11 +20,11 @@ function Player(name, isComputer) {
   }
 
 
-  const includesCoordinates = function(array, coors) {
-    return !!array.map(shots => shots.coors).find(coordinates => {
+  const includesCoordinates = function(shotsArray, testCoors) {
+    return !!shotsArray.map(shot => shot.coors).find(coordinates => {
       return (
-        coors[0] === coordinates[0] &&
-        coors[1] === coordinates[1]
+        testCoors[0] === coordinates[0] &&
+        testCoors[1] === coordinates[1]
       )
     })
   }
@@ -43,38 +43,25 @@ function Player(name, isComputer) {
   }
 
   const getShipCoordinates = function(shipName) {
-    return shots.hit.filter(shots => {
-      return shots.shipName === shipName
-    }).map(shots => shots.coors)
+    return shots.hit.filter(shot => {
+      return shot.shipName === shipName
+    }).map(shot => shot.coors)
   }
 
   const receiveReport = function(attackReport) {
     //Add shot to either shots.hit or shots.missed
     if (attackReport.hit) {
-      shots.hit.push(
-        {
-          coors: attackReport.coors,
-          shipName: attackReport.shipName
-        } 
-      )
-    } else {
-      shots.missed.push(
-        {
-          coors: attackReport.coors
-        }
-      )
+      shots.hit.push(attackReport)
+    } else  {
+      shots.missed.push(attackReport)
     }
 
     //If the shot has sunk target, add shot to shots.sunk
     if(attackReport.sunk) {
-      shots.sunk.push(
-        {
-          coorsSet: getShipCoordinates(attackReport.shipName),
-          shipName: attackReport.shipName
-        }
-      )
+      //Add shipCoors property
+      attackReport.shipCoors = getShipCoordinates(attackReport.shipName)
+      shots.sunk.push(attackReport)
     }
-
   }
 
   

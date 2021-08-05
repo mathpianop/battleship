@@ -10,7 +10,7 @@
  const initializeBoards = require("../interface/initializeBoards")
  const Game = require("../factories/Game");
  const Player = require("../factories/Player");
-
+ const AttackReport = require("../factories/AttackReport")
  
  
 
@@ -24,8 +24,8 @@ describe("updateBoard", () => {
       human: {
         hit: [],
         missed: [
-          {coors: [1,2]},
-          {coors: [4,5]}
+          AttackReport([1,2]),
+          AttackReport([4,5])
         ],
         sunk: []
       }
@@ -46,8 +46,8 @@ describe("updateBoard", () => {
       computer: {
         hit: [],
         missed: [
-          {coors: [1,2]},
-          {coors: [4,5]}
+          AttackReport([1,2]),
+          AttackReport([4,5])
         ],
         sunk: []
       }
@@ -125,7 +125,7 @@ describe("updateBoard", () => {
         missed: [],
         sunk: [
             {
-              coorsSet: [[1,2],[1,3],[1,4],[1,5]],
+              shipCoors: [[1,2],[1,3],[1,4],[1,5]],
               shipName: "Battleship"
             }
           ]
