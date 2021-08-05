@@ -10,7 +10,10 @@
  const initializeBoards = require("../interface/initializeBoards")
  const Game = require("../factories/Game");
  const Player = require("../factories/Player");
- const AttackReport = require("../factories/AttackReport")
+ const AttackReport = require("../factories/AttackReport");
+ const Ship = require("../factories/Ship");
+
+ const getSampleShip = () => Ship(4, "Battleship");
  
  
 //The mockShots may need 
@@ -62,22 +65,12 @@ describe("updateBoard", () => {
   })
 
   it("assigns a class of 'hit' to the hit positions of the defensive gameboard", () => {
-    const game = Game();
-    const mockPlayer = {
-      shots: {
-        hit: [
-          {coors: [1,2], shipName: "Battleship"},
-          {coors: [4,5], shipName: "Battleship"}
-        ],
-        missed: [],
-        sunk: []
-      }
-    }
+    const ship = getSampleShip()
     const mockShots = {
       human: {
         hit: [
-          {coors: [1,2], shipName: "Battleship"},
-          {coors: [4,5], shipName: "Battleship"}
+          AttackReport([1,2], ship),
+          AttackReport([4,5], ship)
         ],
         missed: [],
         sunk: []
@@ -93,12 +86,12 @@ describe("updateBoard", () => {
   })
 
   it("inserts the initial of the hit ship into the position div of a hit position ", () => {
-    const game = Game();
+    const ship = getSampleShip()
     const mockShots = {
       human: {
         hit: [
-          {coors: [1,2], shipName: "Battleship"},
-          {coors: [4,5], shipName: "Battleship"}
+          AttackReport([1,2], ship),
+          AttackReport([4,5], ship)
         ],
         missed: [],
         sunk: []
@@ -113,21 +106,20 @@ describe("updateBoard", () => {
   })
 
   it("assigns a class of 'sunk' to all positions of a sunk ship", () => {
-    const game = Game();
+    const ship = getSampleShip();
+    const sunkReport = AttackReport([1,5], ship);
+    sunkReport.shipCoors = [[1,2],[1,3],[1,4],[1,5]];
     const mockShots = {
       human: {
         hit: [
-          {coors: [1,2], shipName: "Battleship"},
-          {coors: [1,3], shipName: "Battleship"},
-          {coors: [1,4], shipName: "Battleship"},
-          {coors: [1,5], shipName: "Battleship"}
+          AttackReport([1,2], ship),
+          AttackReport([1,3], ship),
+          AttackReport([1,4], ship),
+          sunkReport
         ],
         missed: [],
         sunk: [
-            {
-              shipCoors: [[1,2],[1,3],[1,4],[1,5]],
-              shipName: "Battleship"
-            }
+            sunkReport
           ]
       }
     }
