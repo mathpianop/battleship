@@ -5,7 +5,8 @@ const setupDisplay = require("../interface/setupDisplay")
 function Setup(setGameObjects) {
 
   const getHumanPlayerName = function() {
-    return setupDisplay.askForName()
+    setupDisplay.askForName()
+    return setupDisplay.getName()
   }
 
   const buildGameboards = function() {

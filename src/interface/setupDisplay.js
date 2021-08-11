@@ -23,15 +23,13 @@ const createNameForm = function() {
 }
 
 
-const insertNameForm = function() {
+const askForName = function() {
 	const nameFormWrapper = document.getElementById("name-form-wrapper");
 	const nameForm = createNameForm();
 	nameFormWrapper.appendChild(nameForm);
 }
 
-const askForName = function() {
-	insertNameForm();
-
+const getName = function() {
 	const playerName = document.getElementById("player-name")
 	const submitName = document.getElementById("submit-name");
 	return new Promise((resolve) => {
@@ -47,10 +45,11 @@ const askForName = function() {
 }
 
 const askForShipsPlacement = function() {
-	
+
 }
 
 module.exports = {
 	askForName,
+	getName,
 	askForShipsPlacement
 };

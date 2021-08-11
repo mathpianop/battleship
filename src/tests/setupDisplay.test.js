@@ -14,8 +14,18 @@ beforeEach(() => {
 })
 
 describe("askForName", () => {
+  it("Creates a name form", () => {
+    const nameFormWrapper = document.getElementById("name-form-wrapper");
+    expect(nameFormWrapper.firstChild).not.toBeTruthy()
+    setupDisplay.askForName();
+    expect(nameFormWrapper.firstChild.id).toBe("name-form")
+  })
+})
+
+describe("getName", () => {
   it("returns a Promise which resolves to the player's name", () => {
-    const namePromise = setupDisplay.askForName();
+    setupDisplay.askForName();
+    const namePromise = setupDisplay.getName();
     const submitName = document.getElementById("submit-name");
     const playerName = document.getElementById("player-name");
     playerName.value = "Paul";
@@ -26,7 +36,8 @@ describe("askForName", () => {
   })
 
   it("does nothing if the submit is clicked with an empty string", () => {
-    const namePromise = setupDisplay.askForName();
+    setupDisplay.askForName();
+    const namePromise = setupDisplay.getName();
     const submitName = document.getElementById("submit-name");
     const playerName = document.getElementById("player-name");
     submitName.click();
@@ -38,7 +49,8 @@ describe("askForName", () => {
   })
 
   it("does nothing if the submit is clicked with whitespace", () => {
-    const namePromise = setupDisplay.askForName();
+    setupDisplay.askForName();
+    const namePromise = setupDisplay.getName();
     const submitName = document.getElementById("submit-name");
     const playerName = document.getElementById("player-name");
     playerName.value = "  ";
