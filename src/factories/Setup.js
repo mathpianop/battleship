@@ -23,9 +23,15 @@ function Setup(setGameObjects) {
 
   const buildHumanGameboard = function() {
     setupDisplay.askForShipsPlacement();
-    //Create ships and place them in a shipsDetails object (under "ship" property)
-    //return getShipsDetails(ships)
-    //then shipsDetails => 
+    const shipsPositions = {
+      "Patrol Boat": [],
+      "Destroyer": [],
+      "Submarine": [],
+      "Battleship": [],
+      "Carrier": []
+    }
+    return getShipsPositions(shipsPositions)
+    //then shipsPositions => 
       //Create gameboard
       //place ships
       //return gameboard
@@ -33,19 +39,26 @@ function Setup(setGameObjects) {
 
 
 
-  const getShipsDetails = function(shipsDetails) {
+  const getShipsPositions = function(shipsPositions) {
 
-    const newShipsDetail = {...shipsDetails}
-    //return setupDisplay.askForShip(newShipsDetails)
-    //Then ship =>
-          //Remove ship's coordinates from newShipsDetails (to be safe)
-          //call setupDisplay.askForStartPosition(newShipsDetails)
-          //return getPositions(ship)
-
-    //then, Add coordinates to appropriate shipDetails
-
-    //if any ships lack coordinates, return getShipsDetails(newShipsDetails)
-    //else return newShipsDetails
+    const newShipsPositions = {...shipsPositions}
+    return setupDisplay.selectShipToPlace()
+    .then(shipName => {
+      //Remove ship's positions from newShipsPositions (to be safe)
+      newShipsPositions[shipName] = [];
+      return getPositions(shipName)
+    })
+    .then(shipInfo => {
+      //Add positions to the appropriate ship name in newShipsPositions
+      newShipsPositions[shipInfo.name] = shipsInfo.positions;
+      //if any ships lack positions, return getShipsDetails(newShipsPositions)
+      if (Object.values(newShipsPositions).some(positions => positions.length === 0)) {
+        return getPositions(newShipsPositions)
+      } else {
+        //If all ships have positions, return newShipsPositions
+        return newShipsPositions
+      }
+    })
   }
 
   const getPositions = function(ship) {

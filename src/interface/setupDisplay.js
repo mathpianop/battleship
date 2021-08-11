@@ -45,11 +45,54 @@ const getName = function() {
 }
 
 const askForShipsPlacement = function() {
+	//Create the parent element
+	const shipsPlacementDiv = document.createElement("DIV");
+	shipsPlacementDiv.id = "ships-placement";
 
+	//Add the instruction element
+	const shipsPlacementRequest = createCustomElement("SPAN", "", "Select a ship and click on your board to set the endpoints");
+	shipsPlacementDiv.appendChild(shipsPlacementRequest);
+
+	//Add the ship placement buttons
+	const ships = [
+		"Patrol Boat (2)",
+		"Submarine (3)",
+		"Destroyer (3)",
+		"Battleship (4)",
+		"Carrier (5)"
+	]
+
+
+	const shipPlacementBtns = ships.map(shipLabel => {
+		const btn = createCustomElement("BUTTON", "ship-placement-btn", shipLabel)
+		btn.dataset.shipName = shipLabel.slice(0, -4);
+		return btn;
+	})
+	shipPlacementBtns.forEach(btn => {
+		shipsPlacementDiv.appendChild(btn)
+	})
+
+	//Add the parent element to the wrapper element
+	const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
+	shipsPlacementWrapper.appendChild(shipsPlacementDiv);
 }
+
+const selectShipToPlace = function() {
+	const shipPlacementBtns = document.getElementsByClassName("ship-placement-btn");
+	return new Promise((resolve) => {
+		//resolve with the shipName of the first clicked btn
+		Array.from(shipPlacementBtns).forEach(btn => {
+			btn.addEventListener("click", (e) => {
+				resolve(e.target.dataset.shipName)
+			})
+		})
+	})
+}
+
 
 module.exports = {
 	askForName,
 	getName,
-	askForShipsPlacement
+	askForShipsPlacement,
+	selectShipToPlace
 };

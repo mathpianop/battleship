@@ -3,7 +3,8 @@
  */
 
 
- const fs = require("fs");
+ const { S_IFCHR } = require("constants");
+const fs = require("fs");
  window.document.body.innerHTML = fs.readFileSync("./dist/index.html");
 
 const setupDisplay = require("../interface/setupDisplay");
@@ -59,6 +60,40 @@ describe("getName", () => {
     submitName.click();
     namePromise.then(name => {
         expect(name).toBe("Paul")
+    })
+  })
+})
+
+describe("askForShipsPlacement", () => {
+  it("adds the ships-placement element to the dialogue div", () => {
+    const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
+    expect(shipsPlacementWrapper.firstChild).not.toBeTruthy();
+    setupDisplay.askForShipsPlacement();
+    expect(shipsPlacementWrapper.firstChild.id).toBe("ships-placement")
+  })
+
+  it("creates a ships-placement element with 5 ship buttons", () => {
+    setupDisplay.askForShipsPlacement();
+    const shipsPlacementElement = document.getElementById("ships-placement");
+    const shipPlacementBtns = shipsPlacementElement.getElementsByClassName("ship-placement-btn");
+    expect(shipPlacementBtns.length).toBe(5);
+  })
+
+  it("adds a data-shipName attribute with the ship name", () => {
+    setupDisplay.askForShipsPlacement();
+    const patrolBoatBtn = document.getElementsByClassName("ship-placement-btn")[0];
+    expect(patrolBoatBtn.dataset.shipName).toBe("Patrol Boat")
+  })
+})
+
+describe("selectShipToPlace", () => {
+  it("returns a Promise which resolves to the name of the ship", () => {
+    setupDisplay.askForShipsPlacement();
+    const shipNamePromise = setupDisplay.selectShipToPlace();
+    const patrolBoatBtn = document.getElementsByClassName("ship-placement-btn")[0];
+    patrolBoatBtn.click();
+    shipNamePromise.then(name => {
+      expect(name).toBe("Patrol Boat")
     })
   })
 })
