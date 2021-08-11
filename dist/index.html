@@ -9,10 +9,20 @@
   </head>
   <body>
     <div id="game-container">
-      <div id="name-form-wrapper"></div>
-      <div id="victory-display">
-        <div id="victory-message-wrapper"></div>
-      </div>
+      <section id="dialogue">
+        <div id="ships-placement">
+          <span id="ships-placement-request">Select a ship and click on your board to set the endpoints</span>
+          <button class="ships-placement-btn">Patrol Boat (2)</button>
+          <button class="ships-placement-btn">Submarine (3)</button>
+          <button class="ships-placement-btn">Destroyer (3)</button>
+          <button class="ships-placement-btn">Battleship (4)</button>
+          <button class="ships-placement-btn">Carrier (5)</butotn>
+        </div>
+        <div id="name-form-wrapper"></div>
+        <div id="victory-display">
+          <div id="victory-message-wrapper"></div>
+        </div>
+      </section>
       <section id="gameboards">
         <div class="gameboard-wrapper">
           <div id="human-gameboard" class="gameboard"></div>
@@ -25,7 +35,7 @@
         </div>
         </div>
       </section>
-      <div id="computer-response-wrapper">
+      <section id="computer-response-wrapper">
       </div>
     </div>
     <script src="main.js"></script>

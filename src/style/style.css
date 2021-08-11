@@ -19,6 +19,34 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+button {
+  cursor: pointer;
+}
+
+#dialogue {
+  height: 70px;
+  background-color: purple;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+#ships-placement {
+  display: flex;
+  align-items: center;
+}
+
+
+#ships-placement-request {
+  flex: 2;
+  padding: 10px;
+}
+
+.ships-placement-btn {
+  flex: 1;
+  height: 20px;
+  margin-right: 6px;
+}
+
 #game-container {
   width: 740px;
   margin: auto
