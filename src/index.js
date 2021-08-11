@@ -43,6 +43,7 @@ const takeRound = function(humanCoors) {
 
   //If human turn is decisive, short-circuit the round
   if (currentGame.victor) {
+    //Create new game and pass its setup method to displayVictory 
     nextGame = Game();
     return gameplayDisplay.displayVictory(currentGame.victor/*, nextGame.setup*/)
   }

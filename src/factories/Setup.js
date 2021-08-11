@@ -74,7 +74,6 @@ function Setup(setGameObjects) {
     .then(gameboards => {
       gameObjects.gameboards = gameboards
     })
-    //Get rid of this bad boy
     .then(() => {
       setGameObjects(gameObjects)
     })
