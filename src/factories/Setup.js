@@ -7,6 +7,10 @@ function Setup(setGameObjects) {
   const getHumanPlayerName = function() {
     setupDisplay.askForName()
     return setupDisplay.getName()
+    .then(() => {
+      //Clean up from askForName
+      setupDisplay.removeNameForm();
+    })
   }
 
   const buildGameboards = function() {
@@ -40,7 +44,6 @@ function Setup(setGameObjects) {
 
 
   const getShipsPositions = function(shipsPositions) {
-
     const newShipsPositions = {...shipsPositions}
     return setupDisplay.selectShipToPlace()
     .then(shipName => {
@@ -63,7 +66,8 @@ function Setup(setGameObjects) {
 
   const getPositions = function(ship) {
     //when position is clicked, calculate possible positions (all positions occupied)
-    //call setupDisplay.askForEndPosition
+
+    setupDisplay.askForEndPosition
     //If start position is clicked again, call getPositions(ship)
     //If one of the end positions is clicked, return the positions
   }
@@ -71,6 +75,7 @@ function Setup(setGameObjects) {
   const buildPlayers = function() {
     return getHumanPlayerName()
     .then(name => {
+      //
       return {
         human: Player(name),
         computer: Player("computer", true)
@@ -88,6 +93,7 @@ function Setup(setGameObjects) {
     .then(gameboards => {
       gameObjects.gameboards = gameboards
     })
+    //get rid of this?
     .then(() => {
       setGameObjects(gameObjects)
     })

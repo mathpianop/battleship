@@ -44,6 +44,12 @@ const getName = function() {
 	})
 }
 
+const removeNameForm = function() {
+	const nameFormWrapper = document.getElementById("name-form-wrapper");
+	nameFormWrapper.textContent = "";
+}
+
+
 const askForShipsPlacement = function() {
 	//Create the parent element
 	const shipsPlacementDiv = document.createElement("DIV");
@@ -90,9 +96,11 @@ const selectShipToPlace = function() {
 }
 
 
+
 module.exports = {
 	askForName,
 	getName,
+	removeNameForm,
 	askForShipsPlacement,
 	selectShipToPlace
 };

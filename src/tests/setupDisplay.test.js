@@ -64,6 +64,16 @@ describe("getName", () => {
   })
 })
 
+describe("removeNameForm", () => {
+  it("removes the name form", () => {
+    const nameFormWrapper = document.getElementById("name-form-wrapper");
+    setupDisplay.askForName();
+    expect(nameFormWrapper.firstChild.id).toBe("name-form");
+    setupDisplay.removeNameForm();
+    expect(nameFormWrapper.firstChild).not.toBeTruthy();
+  })
+})
+
 describe("askForShipsPlacement", () => {
   it("adds the ships-placement element to the dialogue div", () => {
     const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
@@ -97,4 +107,5 @@ describe("selectShipToPlace", () => {
     })
   })
 })
+
 
