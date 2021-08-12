@@ -13,7 +13,7 @@
  const AttackReport = require("../factories/AttackReport");
  const Ship = require("../factories/Ship");
 
- const getSampleShip = () => Ship(4, "Battleship");
+ const getSampleShip = () => Ship("Battleship");
  
  
 //The mockShots may need 

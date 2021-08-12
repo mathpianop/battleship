@@ -1,8 +1,11 @@
 const Player = require("./Player")
 const Gameboard = require("./Gameboard")
+const Ship = require("./Ship")
 const setupDisplay = require("../interface/setupDisplay")
+const ShipDetails = require("./ShipDetails")
 
 function Setup(setGameObjects) {
+  
 
   const getHumanPlayerName = function() {
     setupDisplay.askForName()
@@ -27,14 +30,9 @@ function Setup(setGameObjects) {
 
   const buildHumanGameboard = function() {
     setupDisplay.askForShipsPlacement();
-    const shipsPositions = {
-      "Patrol Boat": [],
-      "Destroyer": [],
-      "Submarine": [],
-      "Battleship": [],
-      "Carrier": []
-    }
-    return getShipsPositions(shipsPositions)
+    const shipsDetailsArray = {};
+
+    return buildShipsDetailsArray(shipsDetailsArray)
     //then shipsPositions => 
       //Create gameboard
       //place ships
@@ -43,39 +41,56 @@ function Setup(setGameObjects) {
 
 
 
-  const getShipsPositions = function(shipsPositions) {
-    const newShipsPositions = {...shipsPositions}
+  const buildShipsDetailsArray = function(shipDetailsArray) {
+    let newShipDetailsArray;
     return setupDisplay.selectShipToPlace()
     .then(shipName => {
-      //Remove ship's positions from newShipsPositions (to be safe)
-      newShipsPositions[shipName] = [];
-      return getPositions(shipName)
+      //Remove ship's positions from shipsDetailsArray (to be safe)
+      newShipDetailsArray = shipDetailsArray.filter(shipDetails => {
+        return shipDetails.ship.name = shipName
+      })
+
+      return getShipDetails(newShipDetailsArray, shipName)
     })
-    .then(shipInfo => {
+    .then(shipDetails => {
       //Add positions to the appropriate ship name in newShipsPositions
-      newShipsPositions[shipInfo.name] = shipsInfo.positions;
-      //if any ships lack positions, return getShipsDetails(newShipsPositions)
-      if (Object.values(newShipsPositions).some(positions => positions.length === 0)) {
-        return getPositions(newShipsPositions)
+      newShipDetailsArray.push(shipDetails);
+      //if not all ships have been given ShipDetails, return buildShipDetailsArray (recurse)
+      if (newShipDetailsArray.length < 5) {
+        return buildShipDetailsArray(newShipDetailsArray)
       } else {
         //If all ships have positions, return newShipsPositions
-        return newShipsPositions
+        return newShipDetailsArray
       }
     })
   }
 
-  const getPositions = function(ship) {
-    //when position is clicked, calculate possible positions (all positions occupied)
+  const getShipDetails = function(shipDetailsArray, shipName) {
+    //Fill Gameboard?????
 
-    setupDisplay.askForEndPosition
-    //If start position is clicked again, call getPositions(ship)
-    //If one of the end positions is clicked, return the positions
+
+     //calculate possible startingPositions
+    //Fill
+    setupDisplay.askForStartPosition();
+
+    return setupDisplay.getStartPosition(possibleStartPositions)
+    .then(startPosition => {
+      //when position is clicked, calculate possible positions (all positions occupied)
+      //Fill
+      setupDisplay.askForEndPosition();
+      setupDisplay.getEndPosition(startPosition, possibleEndPositions)
+      .then(endPosition => {
+        //get positions from end points
+        //Fill
+
+        return ShipDetails(positions, Ship(shipName))
+      })
+    })
   }
 
   const buildPlayers = function() {
     return getHumanPlayerName()
     .then(name => {
-      //
       return {
         human: Player(name),
         computer: Player("computer", true)

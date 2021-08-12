@@ -8,10 +8,18 @@ const fs = require("fs");
  window.document.body.innerHTML = fs.readFileSync("./dist/index.html");
 
 const setupDisplay = require("../interface/setupDisplay");
+const initializeBoards = require("../interface/initializeBoards")
 
 beforeEach(() => {
   const nameFormWrapper = document.getElementById("name-form-wrapper");
   nameFormWrapper.textContent = "";
+})
+
+beforeEach(() => {
+  const shipsPlacementElement = document.getElementById("ships-placement");
+  if (shipsPlacementElement) {
+    shipsPlacementElement.textContent = "";
+  }
 })
 
 describe("askForName", () => {
@@ -82,7 +90,7 @@ describe("askForShipsPlacement", () => {
     expect(shipsPlacementWrapper.firstChild.id).toBe("ships-placement")
   })
 
-  it("creates a ships-placement element with 5 ship buttons", () => {
+  xit("creates a ships-placement element with 5 ship buttons", () => {
     setupDisplay.askForShipsPlacement();
     const shipsPlacementElement = document.getElementById("ships-placement");
     const shipPlacementBtns = shipsPlacementElement.getElementsByClassName("ship-placement-btn");
@@ -108,4 +116,36 @@ describe("selectShipToPlace", () => {
   })
 })
 
+describe("askForStartPosition", () => {
+  it("updates placement message accordingly", () => {
+    setupDisplay.askForShipsPlacement();
+    setupDisplay.askForStartPosition();
+    const placementMessage = document.getElementById("placement-message");
+    expect(placementMessage.textContent).toBe("Click the board to select one endpoint");
+  })
+})
+
+describe("getStartPosition", () => {
+  it("returns a Promise which resolves to a selected position", () => {
+    
+  })
+
+  it("attaches a class of 'selectable' to all of the positions that it is passed", () => {
+    
+  })
+
+  it("removes the 'selectable' class from past stages", () => {
+    
+  })
+})
+
+
+describe("askForEndPosition", () => {
+  it("updates placement message accordingly", () => {
+    setupDisplay.askForShipsPlacement();
+    setupDisplay.askForEndPosition();
+    const placementMessage = document.getElementById("placement-message");
+    expect(placementMessage.textContent).toBe("Click one of the possible other endpoints")
+  })
+})
 

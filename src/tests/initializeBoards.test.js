@@ -54,7 +54,7 @@ describe("fillGameboard", () => {
     const shipDetailsArray = [
       ShipDetails(
         [[4,6], [4,7], [4,8]],
-        Ship(3, "Destroyer")
+        Ship("Destroyer")
       )
     ];
 
@@ -67,7 +67,7 @@ describe("fillGameboard", () => {
     const shipDetailsArray = [
       ShipDetails(
         [[4,6], [4,7], [4,8]],
-        Ship(3, "Destroyer")
+        Ship("Destroyer")
       )
     ];
 

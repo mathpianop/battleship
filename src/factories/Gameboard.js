@@ -57,7 +57,7 @@ function Gameboard() {
   const placeShip = function(positions, ship) {
     const error = illegalPlacementError(positions);
     if (!error) {
-      const newShip = Ship(positions.length, ship.name)
+      const newShip = Ship(ship.name)
       shipDetailsArray.push(ShipDetails(positions, newShip))
     } else {
       throw error

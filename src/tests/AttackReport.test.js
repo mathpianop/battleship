@@ -15,7 +15,7 @@ describe("AttackReport", () => {
   })
 
   it("returns a report object with hit details when passed a hitShip object", () => {
-    const hitShip = Ship(2, "Patrol Boat");
+    const hitShip = Ship("Patrol Boat");
     hitShip.hit(0);
     hitShip.hit(1);
     expect(AttackReport([1,2], hitShip)).toEqual(
@@ -27,7 +27,7 @@ describe("AttackReport", () => {
   })
 
   it("returns a report object with a true sunk property when passed a sunk hitShip object", () => {
-    const hitShip = Ship(2, "Patrol Boat");
+    const hitShip = Ship("Patrol Boat");
     hitShip.hit(0);
     hitShip.hit(1);
     expect(AttackReport([1,2], hitShip)).toEqual(
@@ -44,7 +44,7 @@ describe("AttackReport", () => {
   })
 
   it("returns a summary message for a hit", () => {
-    const hitShip = Ship(2, "Patrol Boat");
+    const hitShip = Ship("Patrol Boat");
     hitShip.hit(0);
     expect(AttackReport([1,2], hitShip)).toEqual(
       expect.objectContaining({
@@ -54,7 +54,7 @@ describe("AttackReport", () => {
   })
 
   it("returns a summary message for a sink", () => {
-    const hitShip = Ship(2, "Patrol Boat");
+    const hitShip = Ship("Patrol Boat");
     hitShip.hit(0);
     hitShip.hit(1); 
     expect(AttackReport([1,2], hitShip)).toEqual(

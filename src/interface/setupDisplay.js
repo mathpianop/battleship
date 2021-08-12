@@ -56,8 +56,9 @@ const askForShipsPlacement = function() {
 	shipsPlacementDiv.id = "ships-placement";
 
 	//Add the instruction element
-	const shipsPlacementRequest = createCustomElement("SPAN", "", "Select a ship and click on your board to set the endpoints");
-	shipsPlacementDiv.appendChild(shipsPlacementRequest);
+	const placementMessage = createCustomElement("SPAN", "", "Select a ship and click on your board to set the endpoints");
+	placementMessage.id = "placement-message"
+	shipsPlacementDiv.appendChild(placementMessage);
 
 	//Add the ship placement buttons
 	const ships = [
@@ -95,6 +96,16 @@ const selectShipToPlace = function() {
 	})
 }
 
+const askForStartPosition = function() {
+	const placementMessage = document.getElementById("placement-message");
+	placementMessage.textContent = "Click the board to select one endpoint"
+}
+
+const askForEndPosition = function() {
+	const placementMessage = document.getElementById("placement-message");
+	placementMessage.textContent = "Click one of the possible other endpoints"
+}
+
 
 
 module.exports = {
@@ -102,5 +113,7 @@ module.exports = {
 	getName,
 	removeNameForm,
 	askForShipsPlacement,
-	selectShipToPlace
+	selectShipToPlace,
+	askForStartPosition,
+	askForEndPosition
 };
