@@ -1,4 +1,3 @@
-
 const coordinatesExist = require("../helpers/coordinatesExist");
 
 

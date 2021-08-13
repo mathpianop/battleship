@@ -19,6 +19,7 @@ const addClassToPosition = (position, className) => position.classList.add(class
 const addInitialToPosition = (position, initial) => position.textContent = initial;
 
 module.exports = {
+  getPositionDivFromCoors,
   applyToPositions, 
   applyArrayToPositions, 
   addClassToPosition, 

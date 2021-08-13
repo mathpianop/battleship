@@ -3,6 +3,7 @@ const Gameboard = require("./Gameboard")
 const Ship = require("./Ship")
 const setupDisplay = require("../interface/setupDisplay")
 const ShipDetails = require("./ShipDetails")
+const initializeBoards = require("../interface/initializeBoards");
 
 function Setup(setGameObjects) {
   
@@ -66,8 +67,8 @@ function Setup(setGameObjects) {
   }
 
   const getShipDetails = function(shipDetailsArray, shipName) {
-    //Fill Gameboard?????
-
+    //update board
+    initializeBoards.fillGameboards(shipDetailsArray)
 
      //calculate possible startingPositions
     //Fill
@@ -78,7 +79,7 @@ function Setup(setGameObjects) {
       //when position is clicked, calculate possible positions (all positions occupied)
       //Fill
       setupDisplay.askForEndPosition();
-      setupDisplay.getEndPosition(startPosition, possibleEndPositions)
+      return setupDisplay.getEndPosition(startPosition, possibleEndPositions)
       .then(endPosition => {
         //get positions from end points
         //Fill

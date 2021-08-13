@@ -3,7 +3,6 @@
  */
 
 
- const { S_IFCHR } = require("constants");
 const fs = require("fs");
  window.document.body.innerHTML = fs.readFileSync("./dist/index.html");
 
@@ -127,15 +126,26 @@ describe("askForStartPosition", () => {
 
 describe("getStartPosition", () => {
   it("returns a Promise which resolves to a selected position", () => {
-    
+    initializeBoards.fillGameboards([])
+    setupDisplay.askForShipsPlacement();
+    const possibleStartPositions = [[4,8]]
+    const positionPromise = setupDisplay.getStartPosition(possibleStartPositions);
+    const samplePosition = document.getElementById("human-gameboard")
+                                    .getElementsByClassName("position")[37];
+    samplePosition.click();
+    positionPromise.then(position => {
+      expect(position).toMatchObject([4,8])
+    })
   })
 
   it("attaches a class of 'selectable' to all of the positions that it is passed", () => {
-    
-  })
-
-  it("removes the 'selectable' class from past stages", () => {
-    
+    initializeBoards.fillGameboards([])
+    setupDisplay.askForShipsPlacement();
+    const possibleStartPositions = [[4,8]]
+    const positionPromise = setupDisplay.getStartPosition(possibleStartPositions);
+    const samplePosition = document.getElementById("human-gameboard")
+                                    .getElementsByClassName("position")[37];
+    expect(samplePosition.classList.contains("selectable")).toBeTruthy();
   })
 })
 

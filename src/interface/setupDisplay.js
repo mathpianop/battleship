@@ -1,4 +1,5 @@
 const createCustomElement = require("./createCustomElement");
+const positionHelpers = require("../helpers/positionHelpers");
 
 
 const createNameForm = function() {
@@ -101,6 +102,31 @@ const askForStartPosition = function() {
 	placementMessage.textContent = "Click the board to select one endpoint"
 }
 
+const getStartPosition = function(possibleStartPositions) {
+
+	//Get the elements of the corresponding possibleStartPositions
+	const gameboardPositions = document.getElementById("human-gameboard")
+																			.getElementsByClassName("position");
+
+	const possiblePositionDivs = possibleStartPositions.map(position => {
+		return positionHelpers.getPositionDivFromCoors(position, gameboardPositions)
+	})
+
+	//Attach a 'selectable' class to each element
+	possiblePositionDivs.forEach(div => {
+		div.classList.add("selectable")
+	})
+
+	return new Promise((resolve) => {
+		possiblePositionDivs.forEach(div => {
+			div.addEventListener("click", (e) => {
+				//resolve with the coors of the first clicked position div
+				resolve([parseInt(e.target.dataset.xCoor), parseInt(e.target.dataset.yCoor)])
+			})
+		})
+	})
+}
+
 const askForEndPosition = function() {
 	const placementMessage = document.getElementById("placement-message");
 	placementMessage.textContent = "Click one of the possible other endpoints"
@@ -115,5 +141,6 @@ module.exports = {
 	askForShipsPlacement,
 	selectShipToPlace,
 	askForStartPosition,
+	getStartPosition,
 	askForEndPosition
 };
