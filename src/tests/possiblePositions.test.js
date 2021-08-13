@@ -88,3 +88,29 @@ describe("calculateEndPositions", () => {
     )
   })
 })
+
+describe("getPositionsFromEndpoints", () => {
+  it("works for up case", () => {
+    expect(possiblePositions.getPositionsFromEndpoints([1,2], [1,5])).toMatchObject(
+      [[1,2], [1,3], [1,4], [1,5]]
+    );
+  })
+
+  it("works for down case", () => {
+    expect(possiblePositions.getPositionsFromEndpoints([1,5], [1,2])).toMatchObject(
+      [[1,5], [1,4], [1,3], [1,2]]
+    );
+  })
+
+  it("works for right case", () => {
+    expect(possiblePositions.getPositionsFromEndpoints([1,2], [4,2])).toMatchObject(
+      [[1,2], [2,2], [3,2], [4,2]]
+    );
+  })
+
+  it("works for right case", () => {
+    expect(possiblePositions.getPositionsFromEndpoints([4,2], [1,2])).toMatchObject(
+      [[4,2], [3,2], [2,2], [1,2]]
+    );
+  })
+})

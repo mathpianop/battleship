@@ -72,9 +72,45 @@ const calculateStartPositions = function(occupiedPositions, shipLength) {
   return startPositions
 }
 
+const getPositionsFromEndpoints = function(startPos, endPos) {
+  const positions = [];
+  if (startPos[0] === endPos[0]) {
+    //Vertical cases
+    const xCoor = startPos[0]
+    if (startPos[1] < endPos[1]) {
+      //Up case
+      for (let yCoor = startPos[1]; yCoor <= endPos[1]; yCoor++) {
+        positions.push([xCoor, yCoor])
+      }
+    } else if (startPos[1] > endPos[1]) {
+      //Down case
+      for (let yCoor = startPos[1]; yCoor >= endPos[1]; yCoor--) {
+        positions.push([xCoor, yCoor])
+      }
+    }
+  } else if (startPos[1] === endPos[1]) {
+    //Horizontal cases
+    const yCoor = startPos[1]
+    if (startPos[0] < endPos[0]) {
+      //Right case
+      for (let xCoor = startPos[0]; xCoor <= endPos[0]; xCoor++) {
+        positions.push([xCoor, yCoor])
+      }
+    } else if (startPos[0] > endPos[0]) {
+      //Left case
+      for (let xCoor = startPos[0]; xCoor >= endPos[0]; xCoor--) {
+        positions.push([xCoor, yCoor])
+      }
+    }
+  }
+
+  return positions;
+}
+
 
 module.exports = {
   calculateStartPositions,
   calculateOrientations,
-  calculateEndPositions
+  calculateEndPositions,
+  getPositionsFromEndpoints
 }

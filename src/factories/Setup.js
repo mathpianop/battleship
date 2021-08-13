@@ -81,12 +81,13 @@ function Setup(setGameObjects) {
       possiblePositions.calculateStartPositions(occupiedPositions, newShip.length)
     );
     return setupDisplay.getPosition(possibleStartPositions)
-    .then(startPosition => {
-      //when position is clicked, calculate possible positions (all positions occupied)
-      //Fill
+    .then(startPos => {
+      const possibleEndPositions = (
+        possiblePositions.calculateStartPositions(occupiedPositions, newShip.length, startPos)
+      )
       setupDisplay.askForEndPosition();
       return setupDisplay.getPosition(possibleEndPositions)
-      .then(endPosition => {
+      .then(endPos => {
         //get positions from end points
         //Fill
 
