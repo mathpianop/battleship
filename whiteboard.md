@@ -1,7 +1,11 @@
-2. Remove the setGameObjects callback in the Setup object and replace it with a Promise in index.js
+move initializeBoards into Game
+Let game make use of createGameObjects
+
 
 3. Test the UI
 
 4. Convert to async/await
 
-5. Make the computer smart
+5. Rig up multiple games (start with index)
+
+6. Make the computer smart

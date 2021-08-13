@@ -1,11 +1,22 @@
 require("./style/style.css")
 const Game = require("./factories/Game");
+const createGameObjects = require(createGameObjects)
 const initializeBoards = require("./interface/initializeBoards")
-const gameplayDisplay = require("./interface/gameplayDisplay")
+const gameplayDisplay = require("./interface/gameplayDisplay");
+const createGameObjects = require("./helpers/createGameObjects");
 
 
-let currentGame = Game();
-let nextGame;
+let currentGame;
+
+const setupGame = function() {
+  createGameObjects()
+  .then(gameObjects => {
+    currentGame = Game(gameObjects);
+    //Set up DOM boards
+    initializeBoards.fillGameboards(currentGame.humanShipDetailsArray);
+    initializeBoards.attachPositionListeners(takeRound);
+  })
+}
 
 const takeTurn = function(coors, playerIsComputer) {
   //Record the shot in the game object
@@ -53,9 +64,5 @@ const takeRound = function(humanCoors) {
 }
 
 
-
-
-
-//Set up DOM boards
-initializeBoards.fillGameboards(currentGame.humanShipDetailsArray);
-initializeBoards.attachPositionListeners(takeRound);
+//Start first game
+setupGame();
