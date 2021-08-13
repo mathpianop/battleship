@@ -20,8 +20,4 @@ describe("coordinatesExist", () => {
   it("returns false if coordinates too far to the left", () => {
     expect(coordinatesExist([0,5])).toBe(false)
   })
-
-  it("returns false if coordinates are not integers", () => {
-    expect(coordinatesExist([2.3, 5])).toBe(false)
-  })
 })

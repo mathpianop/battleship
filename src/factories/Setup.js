@@ -4,6 +4,8 @@ const Ship = require("./Ship")
 const setupDisplay = require("../interface/setupDisplay")
 const ShipDetails = require("./ShipDetails")
 const initializeBoards = require("../interface/initializeBoards");
+const possiblePositions = require("../helpers/possiblePositions");
+const getOccupiedPositions = require("../helpers/getOccupiedPositions");
 
 function Setup(setGameObjects) {
   
@@ -48,7 +50,7 @@ function Setup(setGameObjects) {
     .then(shipName => {
       //Remove ship's positions from shipsDetailsArray (to be safe)
       newShipDetailsArray = shipDetailsArray.filter(shipDetails => {
-        return shipDetails.ship.name = shipName
+        return shipDetails.ship.name === shipName
       })
 
       return getShipDetails(newShipDetailsArray, shipName)
@@ -70,10 +72,14 @@ function Setup(setGameObjects) {
     //update board
     initializeBoards.fillGameboards(shipDetailsArray)
 
-     //calculate possible startingPositions
-    //Fill
-    setupDisplay.askForStartPosition();
+    const newShip = Ship(shipName);
 
+    
+    setupDisplay.askForStartPosition();
+    const occupiedPositions = getOccupiedPositions(shipDetailsArray);
+    const possibleStartPositions = (
+      possiblePositions.calculateStartPositions(occupiedPositions, newShip.length)
+    );
     return setupDisplay.getPosition(possibleStartPositions)
     .then(startPosition => {
       //when position is clicked, calculate possible positions (all positions occupied)

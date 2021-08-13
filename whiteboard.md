@@ -1,4 +1,6 @@
-4. Finish setupDisplay functions
+Modify calculateStartPositions to exclude problematic
+Using calculateEndPositions
+Using calculateOrientations
 
 5. Write the calculatePositions helper module
 
