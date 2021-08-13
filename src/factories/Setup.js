@@ -34,19 +34,21 @@ function Setup() {
   const buildHumanGameboard = function() {
     setupDisplay.askForShipsPlacement();
 
-    return buildShipsDetailsArray({})
-    .then(shipsDetailsArray => {
-      
-    })
-    //then shipsPositions => 
+    return buildShipDetailsArray({})
+    .then(shipDetailsArray => {
       //Create gameboard
-      //place ships
-      //return gameboard
+      const humanGameboard = Gameboard();
+      //Place ships
+      shipDetailsArray.forEach(shipDetails => {
+        humanGameboard.placeShip(shipDetails);
+      })
+      return humanGameboard
+    })
   }
 
 
 
-  const buildShipsDetailsArray = function(shipDetailsArray) {
+  const buildShipDetailsArray = function(shipDetailsArray) {
     let newShipDetailsArray;
     return setupDisplay.selectShipToPlace()
     .then(shipName => {
