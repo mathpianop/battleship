@@ -124,12 +124,12 @@ describe("askForStartPosition", () => {
   })
 })
 
-describe("getStartPosition", () => {
+describe("getPosition", () => {
   it("returns a Promise which resolves to a selected position", () => {
     initializeBoards.fillGameboards([])
     setupDisplay.askForShipsPlacement();
     const possibleStartPositions = [[4,8]]
-    const positionPromise = setupDisplay.getStartPosition(possibleStartPositions);
+    const positionPromise = setupDisplay.getPosition(possibleStartPositions);
     const samplePosition = document.getElementById("human-gameboard")
                                     .getElementsByClassName("position")[37];
     samplePosition.click();
@@ -142,10 +142,21 @@ describe("getStartPosition", () => {
     initializeBoards.fillGameboards([])
     setupDisplay.askForShipsPlacement();
     const possibleStartPositions = [[4,8]]
-    const positionPromise = setupDisplay.getStartPosition(possibleStartPositions);
+    setupDisplay.getPosition(possibleStartPositions);
     const samplePosition = document.getElementById("human-gameboard")
                                     .getElementsByClassName("position")[37];
     expect(samplePosition.classList.contains("selectable")).toBeTruthy();
+  })
+
+  it("removes the 'selectable' class once position has been clicked", () => {
+    initializeBoards.fillGameboards([])
+    setupDisplay.askForShipsPlacement();
+    setupDisplay.getPosition([[4,8]]);
+    const samplePosition = document.getElementById("human-gameboard")
+                                    .getElementsByClassName("position")[37];
+    expect(samplePosition.classList.contains("selectable")).toBeTruthy();
+    samplePosition.click();
+    expect(samplePosition.classList.contains("selectable")).not.toBeTruthy();
   })
 })
 

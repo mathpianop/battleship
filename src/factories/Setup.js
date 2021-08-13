@@ -74,12 +74,12 @@ function Setup(setGameObjects) {
     //Fill
     setupDisplay.askForStartPosition();
 
-    return setupDisplay.getStartPosition(possibleStartPositions)
+    return setupDisplay.getPosition(possibleStartPositions)
     .then(startPosition => {
       //when position is clicked, calculate possible positions (all positions occupied)
       //Fill
       setupDisplay.askForEndPosition();
-      return setupDisplay.getEndPosition(startPosition, possibleEndPositions)
+      return setupDisplay.getPosition(possibleEndPositions)
       .then(endPosition => {
         //get positions from end points
         //Fill

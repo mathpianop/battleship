@@ -102,13 +102,13 @@ const askForStartPosition = function() {
 	placementMessage.textContent = "Click the board to select one endpoint"
 }
 
-const getStartPosition = function(possibleStartPositions) {
+const getPosition = function(possiblePositions) {
 
 	//Get the elements of the corresponding possibleStartPositions
 	const gameboardPositions = document.getElementById("human-gameboard")
 																			.getElementsByClassName("position");
 
-	const possiblePositionDivs = possibleStartPositions.map(position => {
+	const possiblePositionDivs = possiblePositions.map(position => {
 		return positionHelpers.getPositionDivFromCoors(position, gameboardPositions)
 	})
 
@@ -120,6 +120,10 @@ const getStartPosition = function(possibleStartPositions) {
 	return new Promise((resolve) => {
 		possiblePositionDivs.forEach(div => {
 			div.addEventListener("click", (e) => {
+				//Remove the selectable class from all of the formerly selectable positions
+				possiblePositionDivs.forEach(div => {
+					div.classList.remove("selectable")
+				})
 				//resolve with the coors of the first clicked position div
 				resolve([parseInt(e.target.dataset.xCoor), parseInt(e.target.dataset.yCoor)])
 			})
@@ -141,6 +145,6 @@ module.exports = {
 	askForShipsPlacement,
 	selectShipToPlace,
 	askForStartPosition,
-	getStartPosition,
+	getPosition,
 	askForEndPosition
 };
