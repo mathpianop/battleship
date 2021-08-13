@@ -7,7 +7,7 @@ const initializeBoards = require("../interface/initializeBoards");
 const possiblePositions = require("../helpers/possiblePositions");
 const getOccupiedPositions = require("../helpers/getOccupiedPositions");
 
-function Setup(setGameObjects) {
+function Setup() {
   
 
   const getHumanPlayerName = function() {
@@ -33,9 +33,11 @@ function Setup(setGameObjects) {
 
   const buildHumanGameboard = function() {
     setupDisplay.askForShipsPlacement();
-    const shipsDetailsArray = {};
 
-    return buildShipsDetailsArray(shipsDetailsArray)
+    return buildShipsDetailsArray({})
+    .then(shipsDetailsArray => {
+      
+    })
     //then shipsPositions => 
       //Create gameboard
       //place ships
@@ -71,10 +73,9 @@ function Setup(setGameObjects) {
   const getShipDetails = function(shipDetailsArray, shipName) {
     //update board
     initializeBoards.fillGameboards(shipDetailsArray)
-
+    //Create the ship
     const newShip = Ship(shipName);
-
-    
+    //Get the start position
     setupDisplay.askForStartPosition();
     const occupiedPositions = getOccupiedPositions(shipDetailsArray);
     const possibleStartPositions = (
@@ -82,16 +83,16 @@ function Setup(setGameObjects) {
     );
     return setupDisplay.getPosition(possibleStartPositions)
     .then(startPos => {
+      //Get the end position
       const possibleEndPositions = (
         possiblePositions.calculateStartPositions(occupiedPositions, newShip.length, startPos)
       )
       setupDisplay.askForEndPosition();
       return setupDisplay.getPosition(possibleEndPositions)
       .then(endPos => {
-        //get positions from end points
-        //Fill
-
-        return ShipDetails(positions, Ship(shipName))
+        //Calculate the intervening positions
+        positions = possiblePositions.getPositionsFromEndpoints(startPos, endPos)
+        return ShipDetails(positions, newShip)
       })
     })
   }
@@ -108,17 +109,14 @@ function Setup(setGameObjects) {
 
   const createGameObjects = function() {
     const gameObjects = {};
-    buildPlayers()
+    return buildPlayers()
     .then(players => {
       gameObjects.players = players
     })
     .then(buildGameboards)
     .then(gameboards => {
-      gameObjects.gameboards = gameboards
-    })
-    //get rid of this?
-    .then(() => {
-      setGameObjects(gameObjects)
+      gameObjects.gameboards = gameboards;
+      return gameObjects;
     })
   }
 

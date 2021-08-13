@@ -1,32 +1,16 @@
 const Gameboard = require("../factories/Gameboard");
-const Ship = require("../factories/Ship")
+const Ship = require("../factories/Ship");
+const ShipDetails = require("../factories/ShipDetails");
 
 describe("Gameboard", () => {
-
-
-  
-  describe("placeShip", () => {
-    it("throws an error if given illegal position", () => {
-      const gameboard = Gameboard();
-      const ship = Ship("Patrol Boat")
-      expect(() => gameboard.placeShip([[1,2], [0,2]], ship)).toThrow()
-    }) 
-    
-    it("does not throw an error if given positions are in bounds", () => {
-      const gameboard = Gameboard();
-      const ship = Ship("Patrol Boat")
-      expect(() => gameboard.placeShip([[1,2], [2,2]], ship)).not.toThrow()
-    })
-  })
-
   describe("receiveAttack", () => {
     it("assigns a report object to attackReport", () => {
       const gameboard = Gameboard();
-      const ship = Ship("Patrol Boat")
-      gameboard.placeShip([[1,2], [2,2]], ship);
-      expect(gameboard.getAttackReport()).toEqual({});
+      const shipDetails = ShipDetails([[1,2], [2,2]], Ship("Patrol Boat"))
+      gameboard.placeShip(shipDetails);
+      expect(gameboard.attackReport).toEqual({});
       gameboard.receiveAttack([2,2]);
-      expect(gameboard.getAttackReport()).toEqual(
+      expect(gameboard.attackReport).toEqual(
         expect.objectContaining({
           hit: true,
           shipName: "Patrol Boat"
@@ -36,16 +20,16 @@ describe("Gameboard", () => {
 
     it("updates attackReport between attacks", () => {
       const gameboard = Gameboard();
-      const ship = Ship("Patrol Boat")
-      gameboard.placeShip([[1,2], [2,2]], ship);
+      const shipDetails = ShipDetails([[1,2], [2,2]], Ship("Patrol Boat"))
+      gameboard.placeShip(shipDetails);
       gameboard.receiveAttack([1,2])
-      expect(gameboard.getAttackReport()).toEqual(
+      expect(gameboard.attackReport).toEqual(
         expect.objectContaining({
           hit: true
         })
       )
       gameboard.receiveAttack([4,3])
-      expect(gameboard.getAttackReport()).toEqual(
+      expect(gameboard.attackReport).toEqual(
         expect.objectContaining({
           hit: false
         })
@@ -61,19 +45,19 @@ describe("Gameboard", () => {
 
     it("returns false if no ships are sunk", () => {
       const gameboard = Gameboard();
-      const ship1 = Ship("Patrol Boat")
-      gameboard.placeShip([[1,2], [2,2]], ship1);
-      const ship2 = Ship("Patrol Boat")
-      gameboard.placeShip([[5,4], [5,5]], ship2);
+      const shipDetails1 = ShipDetails([[1,2], [2,2]], Ship("Patrol Boat"))
+      gameboard.placeShip(shipDetails1);
+      const shipDetails2 = ShipDetails([[5,4], [5,5]], Ship("Patrol Boat"))
+      gameboard.placeShip(shipDetails2);
       expect(gameboard.allSunk()).toBe(false)
     })
 
     it("returns false if some ships are sunk and some are not", () => {
       const gameboard = Gameboard();
-      const ship1 = Ship("Patrol Boat")
-      gameboard.placeShip([[1,2], [2,2]], ship1);
-      const ship2 = Ship("Patrol Boat")
-      gameboard.placeShip([[5,4], [5,5]], ship2);
+      const shipDetails1 = ShipDetails([[1,2], [2,2]], Ship("Patrol Boat"))
+      gameboard.placeShip(shipDetails1);
+      const shipDetails2 = ShipDetails([[5,4], [5,5]], Ship("Patrol Boat"))
+      gameboard.placeShip(shipDetails2);
       gameboard.receiveAttack([1,2])
       gameboard.receiveAttack([2,2])
       expect(gameboard.allSunk()).toBe(false)
@@ -81,10 +65,10 @@ describe("Gameboard", () => {
 
     it("returns true if all the ships are sunk", () => {
       const gameboard = Gameboard();
-      const ship1 = Ship("Patrol Boat")
-      gameboard.placeShip([[1,2], [2,2]], ship1);
-      const ship2 = Ship("Patrol Boat")
-      gameboard.placeShip([[5,4], [5,5]], ship2);
+      const shipDetails1 = ShipDetails([[1,2], [2,2]], Ship("Patrol Boat"))
+      gameboard.placeShip(shipDetails1);
+      const shipDetails2 = ShipDetails([[5,4], [5,5]], Ship("Patrol Boat"))
+      gameboard.placeShip(shipDetails2);
       gameboard.receiveAttack([1,2])
       gameboard.receiveAttack([2,2])
       gameboard.receiveAttack([5,4])

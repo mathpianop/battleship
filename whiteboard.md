@@ -1,11 +1,9 @@
-Modify calculateStartPositions to exclude problematic
-Using calculateEndPositions
-Using calculateOrientations
+1. Finish Setup::buildHumanGameboard
 
-5. Write the calculatePositions helper module
+2. Remove the setGameObjects callback in the Setup object and replace it with a Promise in index.js
 
-7. Finish Setup::buildHumanGameboard
+3. Test the UI
 
-8. Remove the setGameObjects callback in the Setup object and replace it with a Promise in index.js?
+4. Convert to async/await
 
-9. Make the computer smart
+5. Make the computer smart

@@ -20,7 +20,9 @@ function Gameboard() {
   
 
   const getHitShipDetails = function(targetCoors) {
-    return shipDetailsArray.find(shipDetails => shipDetails.matches(targetCoors))
+    return shipDetailsArray.find(shipDetails => {
+      return shipDetails.matches(targetCoors)
+    })
   }
 
   
@@ -40,10 +42,6 @@ function Gameboard() {
     )
   }
 
-  const getAttackReport = function() {
-    return attackReport;
-  }
-
   const allSunk = function() {
     if (shipDetailsArray.length === 0) {
       return false
@@ -54,14 +52,8 @@ function Gameboard() {
 
   // Create new Ship object and add to ships unless
   // out of bounds
-  const placeShip = function(positions, ship) {
-    const error = illegalPlacementError(positions);
-    if (!error) {
-      const newShip = Ship(ship.name)
-      shipDetailsArray.push(ShipDetails(positions, newShip))
-    } else {
-      throw error
-    }
+  const placeShip = function(shipDetails) {
+    shipDetailsArray.push(shipDetails)
   }
 
   const placeComputerShips = function() {
@@ -72,9 +64,11 @@ function Gameboard() {
     get shipDetailsArray() {
       return shipDetailsArray;
     },
+    get attackReport() {
+      return attackReport;
+    },
     placeShip, 
-    receiveAttack, 
-    getAttackReport, /* Refactor */
+    receiveAttack,
     allSunk, 
     placeComputerShips
   }

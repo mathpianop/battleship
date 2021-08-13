@@ -31,7 +31,7 @@ function Game() {
     //call receiveAttack on defensive Gameboard
     defensiveGameboard.receiveAttack(coors);
     //call getAttackReport on defensive Gameboard
-    const attackReport = defensiveGameboard.getAttackReport();
+    const attackReport = defensiveGameboard.attackReport;
     //call receiveReport on offensive Player
     offensivePlayer.receiveReport(attackReport);
     //Set the current attackReportMessage
