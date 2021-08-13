@@ -49,15 +49,22 @@ const calculateEndPositions = function(occcupiedPositions, shipLength, startPos)
   return legalOrientations.map(orientation => orientation[orientation.length - 1]);
 }
 
+const isViableStartPosition = function(occupiedPositions, shipLength, startPos) {
+   //Check if start position is unoccupied and has at least one end viable end position
+  return (
+    !includesPosition(occupiedPositions, startPos) &&
+    (calculateEndPositions(occupiedPositions, shipLength, startPos).length > 0)
+  )
+}
 
 
-const calculateStartPositions = function(occupiedPositions) {
+
+const calculateStartPositions = function(occupiedPositions, shipLength) {
   const startPositions = [];
-
   for(let i = 1; i < 11; i++) {
     for(let j = 1; j < 11; j++) {
       const pos = [i, j]
-      if (!includesPosition(occupiedPositions, pos)) {
+      if (isViableStartPosition(occupiedPositions, shipLength, pos) ) {
         startPositions.push(pos)
       }
     }
