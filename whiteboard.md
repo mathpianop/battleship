@@ -1,5 +1,3 @@
-1. Finish Setup::buildHumanGameboard
-
 2. Remove the setGameObjects callback in the Setup object and replace it with a Promise in index.js
 
 3. Test the UI

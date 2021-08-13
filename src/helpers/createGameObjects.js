@@ -1,14 +1,12 @@
-const Player = require("./Player")
-const Gameboard = require("./Gameboard")
-const Ship = require("./Ship")
+const Player = require("../factories/Player")
+const Gameboard = require("../factories/Gameboard")
+const Ship = require("../factories/Ship")
 const setupDisplay = require("../interface/setupDisplay")
 const ShipDetails = require("./ShipDetails")
 const initializeBoards = require("../interface/initializeBoards");
-const possiblePositions = require("../helpers/possiblePositions");
-const getOccupiedPositions = require("../helpers/getOccupiedPositions");
+const possiblePositions = require("./possiblePositions");
+const getOccupiedPositions = require("./getOccupiedPositions");
 
-function Setup() {
-  
 
   const getHumanPlayerName = function() {
     setupDisplay.askForName()
@@ -123,10 +121,4 @@ function Setup() {
   }
 
 
-
-
-  return {createGameObjects}
-
-}
-
-module.exports = Setup;
+module.exports = createGameObjects;
