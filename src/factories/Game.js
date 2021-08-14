@@ -3,8 +3,11 @@ const Gameboard = require("./Gameboard");
 const initializeBoards = require("../interface/initializeBoards");
 
 function Game(gameObjects) {
-  const {humanPlayer, computerPlayer} = gameObjects.players
-  const  {humanGameboard, computerGameboard} = gameObjects.gameboards
+  console.log(gameObjects)
+  const humanGameboard = gameObjects.gameboards.human
+  const computerGameboard = gameObjects.gameboards.computer
+  const humanPlayer = gameObjects.players.human
+  const computerPlayer = gameObjects.players.computer
   let victor;
   let attackReportMessage;
 

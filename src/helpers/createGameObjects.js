@@ -52,14 +52,15 @@ const getOccupiedPositions = require("./getOccupiedPositions");
     .then(shipName => {
       //Remove ship's positions from shipsDetailsArray (to be safe)
       newShipDetailsArray = shipDetailsArray.filter(shipDetails => {
-        return shipDetails.ship.name === shipName
+        return shipDetails.ship.name !== shipName
       })
-
       return getShipDetails(newShipDetailsArray, shipName)
     })
     .then(shipDetails => {
       //Add positions to the appropriate ship name in newShipsPositions
       newShipDetailsArray.push(shipDetails);
+      //update board
+      initializeBoards.fillGameboards(newShipDetailsArray)
       //if not all ships have been given ShipDetails, return buildShipDetailsArray (recurse)
       if (newShipDetailsArray.length < 5) {
         return buildShipDetailsArray(newShipDetailsArray)
@@ -108,6 +109,8 @@ const getOccupiedPositions = require("./getOccupiedPositions");
   }
 
   const createGameObjects = function() {
+    //initialize board
+    initializeBoards.fillGameboards([])
     const gameObjects = {};
     return buildPlayers()
     .then(players => {

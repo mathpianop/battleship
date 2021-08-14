@@ -126,7 +126,6 @@ const getPosition = function(possiblePositions) {
 		const handleClick = function(e) {
 			//Remove the 'selectable' class from all of the formerly selectable positions
 			possiblePositionDivs.forEach(div => {
-				console.log("OH YEAH")
 				div.classList.remove("selectable")
 				div.removeEventListener("click", handleClick)
 			})
