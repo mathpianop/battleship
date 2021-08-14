@@ -158,6 +158,16 @@ describe("getPosition", () => {
     samplePosition.click();
     expect(samplePosition.classList.contains("selectable")).not.toBeTruthy();
   })
+
+  it("adds the 'selected' class once position has been clicked", () => {
+    initializeBoards.fillGameboards([])
+    setupDisplay.askForShipsPlacement();
+    setupDisplay.getPosition([[4,8]]);
+    const samplePosition = document.getElementById("human-gameboard")
+                                    .getElementsByClassName("position")[37];
+    samplePosition.click();
+    expect(samplePosition.classList.contains("selected")).toBeTruthy();
+  })
 })
 
 

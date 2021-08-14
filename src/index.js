@@ -1,9 +1,8 @@
 require("./style/style.css")
 const Game = require("./factories/Game");
-const createGameObjects = require(createGameObjects)
+const createGameObjects = require("./helpers/createGameObjects")
 const initializeBoards = require("./interface/initializeBoards")
 const gameplayDisplay = require("./interface/gameplayDisplay");
-const createGameObjects = require("./helpers/createGameObjects");
 
 
 let currentGame;
@@ -66,3 +65,8 @@ const takeRound = function(humanCoors) {
 
 //Start first game
 setupGame();
+
+const nameField = document.getElementById("player-name");
+nameField.value = "Paul"
+const submitName  = document.getElementById("submit-name");
+submitName.click();

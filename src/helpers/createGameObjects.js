@@ -2,7 +2,7 @@ const Player = require("../factories/Player")
 const Gameboard = require("../factories/Gameboard")
 const Ship = require("../factories/Ship")
 const setupDisplay = require("../interface/setupDisplay")
-const ShipDetails = require("./ShipDetails")
+const ShipDetails = require("../factories/ShipDetails")
 const initializeBoards = require("../interface/initializeBoards");
 const possiblePositions = require("./possiblePositions");
 const getOccupiedPositions = require("./getOccupiedPositions");
@@ -32,7 +32,7 @@ const getOccupiedPositions = require("./getOccupiedPositions");
   const buildHumanGameboard = function() {
     setupDisplay.askForShipsPlacement();
 
-    return buildShipDetailsArray({})
+    return buildShipDetailsArray([])
     .then(shipDetailsArray => {
       //Create gameboard
       const humanGameboard = Gameboard();
@@ -85,7 +85,7 @@ const getOccupiedPositions = require("./getOccupiedPositions");
     .then(startPos => {
       //Get the end position
       const possibleEndPositions = (
-        possiblePositions.calculateStartPositions(occupiedPositions, newShip.length, startPos)
+        possiblePositions.calculateEndPositions(occupiedPositions, newShip.length, startPos)
       )
       setupDisplay.askForEndPosition();
       return setupDisplay.getPosition(possibleEndPositions)

@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\nbutton {\n  cursor: pointer;\n}\n\n#dialogue {\n  height: 70px;\n  background-color: purple;\n  margin-top: 30px;\n  margin-bottom: 30px;\n}\n\n#ships-placement {\n  display: flex;\n  align-items: center;\n}\n\n\n#ships-placement-request {\n  flex: 2;\n  padding: 10px;\n}\n\n.ships-placement-btn {\n  flex: 1;\n  height: 20px;\n  margin-right: 6px;\n}\n\n#game-container {\n  width: 740px;\n  margin: auto\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed{\n  background-color: white;\n  background-image: none;\n}\n\n\n\n\n.sunk {\n  background-color: black;\n  color: white;\n}\n.active {\n  cursor: pointer;\n}\n\n.occupied {\n  background-image: none;\n  text-align: center;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n}\n\n\n", "",{"version":3,"sources":["webpack://./src/style/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;CAaC,SAAS;CACT,UAAU;CACV,SAAS;CACT,eAAe;CACf,aAAa;CACb,wBAAwB;AACzB;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,YAAY;EACZ,wBAAwB;EACxB,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,mBAAmB;AACrB;;;AAGA;EACE,OAAO;EACP,aAAa;AACf;;AAEA;EACE,OAAO;EACP,YAAY;EACZ,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ;AACF;;;;AAIA;EACE,aAAa;EACb,8BAA8B;EAC9B;AACF;;AAEA;EACE,YAAY;EACZ,aAAa;EACb,aAAa;EACb,aAAa;EACb,sCAAsC;AACxC;;;AAGA;EACE,6BAA6B;AAC/B;;;;AAIA;EACE,YAAY;EACZ,WAAW;EACX,uBAAuB;EACvB,0DAA0D;EAC1D,2BAA2B;AAC7B;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,WAAW;AACb;;AAEA;EACE,qBAAqB;EACrB,sBAAsB;EACtB,gDAAgD;EAChD,kBAAkB;AACpB;;AAEA;EACE,uBAAuB;EACvB,sBAAsB;AACxB;;;;;AAKA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,eAAe;AACjB;;AAEA;EACE,sBAAsB;EACtB,kBAAkB;EAClB,gDAAgD;AAClD","sourcesContent":["html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\nbutton {\n  cursor: pointer;\n}\n\n#dialogue {\n  height: 70px;\n  background-color: purple;\n  margin-top: 30px;\n  margin-bottom: 30px;\n}\n\n#ships-placement {\n  display: flex;\n  align-items: center;\n}\n\n\n#ships-placement-request {\n  flex: 2;\n  padding: 10px;\n}\n\n.ships-placement-btn {\n  flex: 1;\n  height: 20px;\n  margin-right: 6px;\n}\n\n#game-container {\n  width: 740px;\n  margin: auto\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed{\n  background-color: white;\n  background-image: none;\n}\n\n\n\n\n.sunk {\n  background-color: black;\n  color: white;\n}\n.active {\n  cursor: pointer;\n}\n\n.occupied {\n  background-image: none;\n  text-align: center;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n}\n\n\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\nbutton {\n  cursor: pointer;\n}\n\n#dialogue {\n  height: 70px;\n  background-color: purple;\n  margin-top: 30px;\n  margin-bottom: 30px;\n}\n\n#ships-placement {\n  display: flex;\n  align-items: center;\n}\n\n\n#ships-placement-request {\n  flex: 2;\n  padding: 10px;\n}\n\n.ships-placement-btn {\n  flex: 1;\n  height: 20px;\n  margin-right: 6px;\n}\n\n#game-container {\n  width: 740px;\n  margin: auto\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed{\n  background-color: white;\n  background-image: none;\n}\n\n\n\n\n.sunk {\n  background-color: black;\n  color: white;\n}\n.active {\n  cursor: pointer;\n}\n\n.occupied {\n  background-image: none;\n  text-align: center;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n}\n\n.selectable {\n  background-color: seagreen;\n  background-image: none;\n  cursor: pointer;\n}\n\n.selected {\n  background-color: steelblue;\n  background-image: none;\n}\n\n", "",{"version":3,"sources":["webpack://./src/style/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;CAaC,SAAS;CACT,UAAU;CACV,SAAS;CACT,eAAe;CACf,aAAa;CACb,wBAAwB;AACzB;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,YAAY;EACZ,wBAAwB;EACxB,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,mBAAmB;AACrB;;;AAGA;EACE,OAAO;EACP,aAAa;AACf;;AAEA;EACE,OAAO;EACP,YAAY;EACZ,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ;AACF;;;;AAIA;EACE,aAAa;EACb,8BAA8B;EAC9B;AACF;;AAEA;EACE,YAAY;EACZ,aAAa;EACb,aAAa;EACb,aAAa;EACb,sCAAsC;AACxC;;;AAGA;EACE,6BAA6B;AAC/B;;;;AAIA;EACE,YAAY;EACZ,WAAW;EACX,uBAAuB;EACvB,0DAA0D;EAC1D,2BAA2B;AAC7B;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,WAAW;AACb;;AAEA;EACE,qBAAqB;EACrB,sBAAsB;EACtB,gDAAgD;EAChD,kBAAkB;AACpB;;AAEA;EACE,uBAAuB;EACvB,sBAAsB;AACxB;;;;;AAKA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,eAAe;AACjB;;AAEA;EACE,sBAAsB;EACtB,kBAAkB;EAClB,gDAAgD;AAClD;;AAEA;EACE,0BAA0B;EAC1B,sBAAsB;EACtB,eAAe;AACjB;;AAEA;EACE,2BAA2B;EAC3B,sBAAsB;AACxB","sourcesContent":["html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\nbutton {\n  cursor: pointer;\n}\n\n#dialogue {\n  height: 70px;\n  background-color: purple;\n  margin-top: 30px;\n  margin-bottom: 30px;\n}\n\n#ships-placement {\n  display: flex;\n  align-items: center;\n}\n\n\n#ships-placement-request {\n  flex: 2;\n  padding: 10px;\n}\n\n.ships-placement-btn {\n  flex: 1;\n  height: 20px;\n  margin-right: 6px;\n}\n\n#game-container {\n  width: 740px;\n  margin: auto\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  height: 20px;\n  width: 20px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed{\n  background-color: white;\n  background-image: none;\n}\n\n\n\n\n.sunk {\n  background-color: black;\n  color: white;\n}\n.active {\n  cursor: pointer;\n}\n\n.occupied {\n  background-image: none;\n  text-align: center;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n}\n\n.selectable {\n  background-color: seagreen;\n  background-image: none;\n  cursor: pointer;\n}\n\n.selected {\n  background-color: steelblue;\n  background-image: none;\n}\n\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -535,15 +535,11 @@ module.exports = AttackReport;
 
 const Player = __webpack_require__(/*! ./Player */ "./src/factories/Player.js");
 const Gameboard = __webpack_require__(/*! ./Gameboard */ "./src/factories/Gameboard.js");
-const Ship = __webpack_require__(/*! ./Ship */ "./src/factories/Ship.js")
 const initializeBoards = __webpack_require__(/*! ../interface/initializeBoards */ "./src/interface/initializeBoards.js");
-const gameplayDisplay = __webpack_require__(/*! ../interface/gameplayDisplay */ "./src/interface/gameplayDisplay.js");
 
-function Game() {
-  const humanPlayer = Player("placeholder");
-  const computerPlayer = Player("computer", true);
-  const humanGameboard = Gameboard();
-  const computerGameboard = Gameboard();
+function Game(gameObjects) {
+  const {humanPlayer, computerPlayer} = gameObjects.players
+  const  {humanGameboard, computerGameboard} = gameObjects.gameboards
   let victor;
   let attackReportMessage;
 
@@ -566,7 +562,7 @@ function Game() {
     //call receiveAttack on defensive Gameboard
     defensiveGameboard.receiveAttack(coors);
     //call getAttackReport on defensive Gameboard
-    const attackReport = defensiveGameboard.getAttackReport();
+    const attackReport = defensiveGameboard.attackReport;
     //call receiveReport on offensive Player
     offensivePlayer.receiveReport(attackReport);
     //Set the current attackReportMessage
@@ -578,43 +574,6 @@ function Game() {
   }
 
  
-  
-
- 
-  
-
-  //Place ships arbitrarily for now
-
-  //Place Patrol Boats
-  const computerPatrol = Ship(2, "Patrol Boat")
-  const humanPatrol = Ship(2, "Patrol Boat")
-  computerGameboard.placeShip([[9,7], [9,6]], computerPatrol)
-  humanGameboard.placeShip([[1,2], [2,2]], humanPatrol)
-
-
-  //Place Destroyers
-  const computerDestroyer = Ship(3, "Destroyer")
-  const humanDestroyer = Ship(3, "Destroyer")
-  computerGameboard.placeShip([[1,2], [2,2], [3,2]], computerDestroyer)
-  humanGameboard.placeShip([[5,6], [4,6], [3,6]], humanDestroyer)
-
-  //Place Submarines
-  const computerSubmarine = Ship(3, "Submarine")
-  const humanSubmarine = Ship(3, "Submarine")
-  computerGameboard.placeShip([[4,5], [5,5], [5,6]], computerSubmarine)
-  humanGameboard.placeShip([[3,1], [3,2], [3,3]], humanSubmarine)
-
-  //Place Battleships
-  const computerBattleship = Ship(4, "Battleship")
-  const humanBattleship = Ship(4, "Battleship")
-  computerGameboard.placeShip([[8,3], [8,4], [8,5], [8,6]], computerBattleship)
-  humanGameboard.placeShip([[6,5], [6,6], [6,7], [6,8]], humanBattleship)
-
-  //Place Carriers
-  const computerCarrier = Ship(5, "Carrier")
-  const humanCarrier = Ship(5, "Carrier")
-  computerGameboard.placeShip([[2,10], [3,10], [4,10], [5,10], [6,10]], computerCarrier)
-  humanGameboard.placeShip([[10,9], [9,9], [8,9], [7,9], [6,9]], humanCarrier)
 
 
   return {
@@ -673,7 +632,9 @@ function Gameboard() {
   
 
   const getHitShipDetails = function(targetCoors) {
-    return shipDetailsArray.find(shipDetails => shipDetails.matches(targetCoors))
+    return shipDetailsArray.find(shipDetails => {
+      return shipDetails.matches(targetCoors)
+    })
   }
 
   
@@ -693,10 +654,6 @@ function Gameboard() {
     )
   }
 
-  const getAttackReport = function() {
-    return attackReport;
-  }
-
   const allSunk = function() {
     if (shipDetailsArray.length === 0) {
       return false
@@ -707,14 +664,8 @@ function Gameboard() {
 
   // Create new Ship object and add to ships unless
   // out of bounds
-  const placeShip = function(positions, ship) {
-    const error = illegalPlacementError(positions);
-    if (!error) {
-      const newShip = Ship(positions.length, ship.name)
-      shipDetailsArray.push(ShipDetails(positions, newShip))
-    } else {
-      throw error
-    }
+  const placeShip = function(shipDetails) {
+    shipDetailsArray.push(shipDetails)
   }
 
   const placeComputerShips = function() {
@@ -725,9 +676,11 @@ function Gameboard() {
     get shipDetailsArray() {
       return shipDetailsArray;
     },
+    get attackReport() {
+      return attackReport;
+    },
     placeShip, 
-    receiveAttack, 
-    getAttackReport, /* Refactor */
+    receiveAttack,
     allSunk, 
     placeComputerShips
   }
@@ -835,7 +788,16 @@ module.exports = Player;
   \*******************************/
 /***/ ((module) => {
 
-function Ship(length, name) {
+function Ship(name) {
+  const SHIPLENGTHS = {
+    "Patrol Boat": 2,
+    "Submarine": 3,
+    "Destroyer": 3,
+    "Battleship": 4,
+    "Carrier": 5
+  }
+
+  const length = SHIPLENGTHS[name]
   //Initialize an array as long as the ship, 
   //with each position starting out as false (not hit)
   const positionsHit = Array(length).fill(false)
@@ -846,7 +808,16 @@ function Ship(length, name) {
   //Check whether all positions are hit
   const isSunk = () => positionsHit.every(Boolean);
   
-  return {hit, isSunk, length, name}
+  return {
+    hit, 
+    isSunk, 
+    get length() {
+      return length
+    }, 
+    get name() {
+      return name
+    }
+  }
 }
 
 module.exports = Ship;
@@ -894,10 +865,153 @@ module.exports = function coordinatesExist(coors) {
     coors[0] <= 10 &&       
     coors[0] >= 1 &&
     coors[1] <= 10 &&
-    coors[1] >= 1 &&
-    Number.isInteger(coors[0]) &&
-    Number.isInteger(coors[1])
+    coors[1] >= 1
   )
+}
+
+/***/ }),
+
+/***/ "./src/helpers/createGameObjects.js":
+/*!******************************************!*\
+  !*** ./src/helpers/createGameObjects.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const Player = __webpack_require__(/*! ../factories/Player */ "./src/factories/Player.js")
+const Gameboard = __webpack_require__(/*! ../factories/Gameboard */ "./src/factories/Gameboard.js")
+const Ship = __webpack_require__(/*! ../factories/Ship */ "./src/factories/Ship.js")
+const setupDisplay = __webpack_require__(/*! ../interface/setupDisplay */ "./src/interface/setupDisplay.js")
+const ShipDetails = __webpack_require__(/*! ../factories/ShipDetails */ "./src/factories/ShipDetails.js")
+const initializeBoards = __webpack_require__(/*! ../interface/initializeBoards */ "./src/interface/initializeBoards.js");
+const possiblePositions = __webpack_require__(/*! ./possiblePositions */ "./src/helpers/possiblePositions.js");
+const getOccupiedPositions = __webpack_require__(/*! ./getOccupiedPositions */ "./src/helpers/getOccupiedPositions.js");
+
+
+  const getHumanPlayerName = function() {
+    setupDisplay.askForName()
+    return setupDisplay.getName()
+    .then(() => {
+      //Clean up from askForName
+      setupDisplay.removeNameForm();
+    })
+  }
+
+  const buildGameboards = function() {
+    return buildHumanGameboard()
+    .then(humanGameboard => {
+      const computerGameboard = Gameboard()
+      computerGameboard.placeComputerShips();
+      return {
+        human: humanGameboard,
+        computer: computerGameboard
+      }
+    })
+  }
+
+  const buildHumanGameboard = function() {
+    setupDisplay.askForShipsPlacement();
+
+    return buildShipDetailsArray([])
+    .then(shipDetailsArray => {
+      //Create gameboard
+      const humanGameboard = Gameboard();
+      //Place ships
+      shipDetailsArray.forEach(shipDetails => {
+        humanGameboard.placeShip(shipDetails);
+      })
+      return humanGameboard
+    })
+  }
+
+
+
+  const buildShipDetailsArray = function(shipDetailsArray) {
+    let newShipDetailsArray;
+    return setupDisplay.selectShipToPlace()
+    .then(shipName => {
+      //Remove ship's positions from shipsDetailsArray (to be safe)
+      newShipDetailsArray = shipDetailsArray.filter(shipDetails => {
+        return shipDetails.ship.name === shipName
+      })
+
+      return getShipDetails(newShipDetailsArray, shipName)
+    })
+    .then(shipDetails => {
+      //Add positions to the appropriate ship name in newShipsPositions
+      newShipDetailsArray.push(shipDetails);
+      //if not all ships have been given ShipDetails, return buildShipDetailsArray (recurse)
+      if (newShipDetailsArray.length < 5) {
+        return buildShipDetailsArray(newShipDetailsArray)
+      } else {
+        //If all ships have positions, return newShipsPositions
+        return newShipDetailsArray
+      }
+    })
+  }
+
+  const getShipDetails = function(shipDetailsArray, shipName) {
+    //update board
+    initializeBoards.fillGameboards(shipDetailsArray)
+    //Create the ship
+    const newShip = Ship(shipName);
+    //Get the start position
+    setupDisplay.askForStartPosition();
+    const occupiedPositions = getOccupiedPositions(shipDetailsArray);
+    const possibleStartPositions = (
+      possiblePositions.calculateStartPositions(occupiedPositions, newShip.length)
+    );
+    return setupDisplay.getPosition(possibleStartPositions)
+    .then(startPos => {
+      //Get the end position
+      const possibleEndPositions = (
+        possiblePositions.calculateEndPositions(occupiedPositions, newShip.length, startPos)
+      )
+      setupDisplay.askForEndPosition();
+      return setupDisplay.getPosition(possibleEndPositions)
+      .then(endPos => {
+        //Calculate the intervening positions
+        positions = possiblePositions.getPositionsFromEndpoints(startPos, endPos)
+        return ShipDetails(positions, newShip)
+      })
+    })
+  }
+
+  const buildPlayers = function() {
+    return getHumanPlayerName()
+    .then(name => {
+      return {
+        human: Player(name),
+        computer: Player("computer", true)
+      }
+    })
+  }
+
+  const createGameObjects = function() {
+    const gameObjects = {};
+    return buildPlayers()
+    .then(players => {
+      gameObjects.players = players
+    })
+    .then(buildGameboards)
+    .then(gameboards => {
+      gameObjects.gameboards = gameboards;
+      return gameObjects;
+    })
+  }
+
+
+module.exports = createGameObjects;
+
+/***/ }),
+
+/***/ "./src/helpers/getOccupiedPositions.js":
+/*!*********************************************!*\
+  !*** ./src/helpers/getOccupiedPositions.js ***!
+  \*********************************************/
+/***/ ((module) => {
+
+module.exports = function getOccupiedPositions(shipsDetailsArray) {
+  return shipsDetailsArray.map(shipDetails => shipDetails.positions).flat();
 }
 
 /***/ }),
@@ -907,7 +1021,6 @@ module.exports = function coordinatesExist(coors) {
   !*** ./src/helpers/legalPlacement.js ***!
   \***************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
 
 const coordinatesExist = __webpack_require__(/*! ../helpers/coordinatesExist */ "./src/helpers/coordinatesExist.js");
 
@@ -964,10 +1077,136 @@ const addClassToPosition = (position, className) => position.classList.add(class
 const addInitialToPosition = (position, initial) => position.textContent = initial;
 
 module.exports = {
+  getPositionDivFromCoors,
   applyToPositions, 
   applyArrayToPositions, 
   addClassToPosition, 
   addInitialToPosition
+}
+
+/***/ }),
+
+/***/ "./src/helpers/possiblePositions.js":
+/*!******************************************!*\
+  !*** ./src/helpers/possiblePositions.js ***!
+  \******************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const coordinatesExist = __webpack_require__(/*! ./coordinatesExist */ "./src/helpers/coordinatesExist.js");
+
+
+const includesPosition = function(positionsArray, testPosition) {
+  return !!positionsArray.some(position => {
+    return (
+      testPosition[0] === position[0] &&
+      testPosition[1] === position[1]
+    )
+  })
+}
+
+const calculateOrientations = function(shipLength, startPos) {
+  //Create the 'up' orientation
+  const upOrientation = []
+  for(let i = 0; i < shipLength; i++) {
+    upOrientation.push([startPos[0], startPos[1] + i])
+  }
+
+  //Create the 'down' orientation
+  const downOrientation = []
+  for(let i = 0; i < shipLength; i++) {
+    downOrientation.push([startPos[0], startPos[1] - i])
+  }
+
+  //Create the 'right' orientation
+  const rightOrientation = []
+  for(let i = 0; i < shipLength; i++) {
+    rightOrientation.push([startPos[0] + i, startPos[1]])
+  }
+
+  //Create the 'left' orientation
+  const leftOrientation = []
+  for(let i = 0; i < shipLength; i++) {
+    leftOrientation.push([startPos[0] - i, startPos[1]])
+  }
+
+  return [upOrientation, downOrientation, rightOrientation, leftOrientation]
+}
+
+const calculateEndPositions = function(occcupiedPositions, shipLength, startPos) {
+  const orientations = calculateOrientations(shipLength, startPos);
+  //eliminate orientations that overlap with occupiedPositions or which go off the board
+  const legalOrientations = orientations.filter(orientation => {
+    return !orientation.some(position => {
+      return includesPosition(occcupiedPositions, position) || !coordinatesExist(position)
+    })
+  })
+  return legalOrientations.map(orientation => orientation[orientation.length - 1]);
+}
+
+const isViableStartPosition = function(occupiedPositions, shipLength, startPos) {
+   //Check if start position is unoccupied and has at least one end viable end position
+  return (
+    !includesPosition(occupiedPositions, startPos) &&
+    (calculateEndPositions(occupiedPositions, shipLength, startPos).length > 0)
+  )
+}
+
+
+
+const calculateStartPositions = function(occupiedPositions, shipLength) {
+  const startPositions = [];
+  for(let i = 1; i < 11; i++) {
+    for(let j = 1; j < 11; j++) {
+      const pos = [i, j]
+      if (isViableStartPosition(occupiedPositions, shipLength, pos) ) {
+        startPositions.push(pos)
+      }
+    }
+  }
+  return startPositions
+}
+
+const getPositionsFromEndpoints = function(startPos, endPos) {
+  const positions = [];
+  if (startPos[0] === endPos[0]) {
+    //Vertical cases
+    const xCoor = startPos[0]
+    if (startPos[1] < endPos[1]) {
+      //Up case
+      for (let yCoor = startPos[1]; yCoor <= endPos[1]; yCoor++) {
+        positions.push([xCoor, yCoor])
+      }
+    } else if (startPos[1] > endPos[1]) {
+      //Down case
+      for (let yCoor = startPos[1]; yCoor >= endPos[1]; yCoor--) {
+        positions.push([xCoor, yCoor])
+      }
+    }
+  } else if (startPos[1] === endPos[1]) {
+    //Horizontal cases
+    const yCoor = startPos[1]
+    if (startPos[0] < endPos[0]) {
+      //Right case
+      for (let xCoor = startPos[0]; xCoor <= endPos[0]; xCoor++) {
+        positions.push([xCoor, yCoor])
+      }
+    } else if (startPos[0] > endPos[0]) {
+      //Left case
+      for (let xCoor = startPos[0]; xCoor >= endPos[0]; xCoor--) {
+        positions.push([xCoor, yCoor])
+      }
+    }
+  }
+
+  return positions;
+}
+
+
+module.exports = {
+  calculateStartPositions,
+  calculateOrientations,
+  calculateEndPositions,
+  getPositionsFromEndpoints
 }
 
 /***/ }),
@@ -1192,6 +1431,177 @@ const attachPositionListeners = function(takeRound) {
 
 module.exports = {fillGameboards, attachPositionListeners}
 
+/***/ }),
+
+/***/ "./src/interface/setupDisplay.js":
+/*!***************************************!*\
+  !*** ./src/interface/setupDisplay.js ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const createCustomElement = __webpack_require__(/*! ./createCustomElement */ "./src/interface/createCustomElement.js");
+const positionHelpers = __webpack_require__(/*! ../helpers/positionHelpers */ "./src/helpers/positionHelpers.js");
+
+
+const createNameForm = function() {
+	//Create form
+	const form = document.createElement("FORM");
+	form.id = "name-form";
+
+	//Create and append name request
+	const nameRequest = createCustomElement("SPAN", "name-request", "Please enter your name");
+	form.appendChild(nameRequest);
+
+	//Create and append field
+	const playerName = document.createElement("INPUT");
+	playerName.type = "text";
+	playerName.id = "player-name";
+	form.appendChild(playerName)
+
+	//Create and append submit button
+	const submitName = document.createElement("INPUT");
+	submitName.type = "button";
+	submitName.value = "Submit";
+	submitName.id = "submit-name"
+	form.appendChild(submitName)
+
+	return form
+}
+
+
+const askForName = function() {
+	const nameFormWrapper = document.getElementById("name-form-wrapper");
+	const nameForm = createNameForm();
+	nameFormWrapper.appendChild(nameForm);
+}
+
+const getName = function() {
+	const playerName = document.getElementById("player-name")
+	const submitName = document.getElementById("submit-name");
+	return new Promise((resolve) => {
+		submitName.addEventListener("click", () => {
+			//resolve promise only if user has entered 
+			//something other than a whitespace string
+			const enteredName = playerName.value
+			if (enteredName && (enteredName.trim() !== "")) {
+				resolve(playerName.value)
+			}
+		})
+	})
+}
+
+const removeNameForm = function() {
+	const nameFormWrapper = document.getElementById("name-form-wrapper");
+	nameFormWrapper.textContent = "";
+}
+
+
+const askForShipsPlacement = function() {
+	//Create the parent element
+	const shipsPlacementDiv = document.createElement("DIV");
+	shipsPlacementDiv.id = "ships-placement";
+
+	//Add the instruction element
+	const placementMessage = createCustomElement("SPAN", "", "Select a ship and click on your board to set the endpoints");
+	placementMessage.id = "placement-message"
+	shipsPlacementDiv.appendChild(placementMessage);
+
+	//Add the ship placement buttons
+	const ships = [
+		"Patrol Boat (2)",
+		"Submarine (3)",
+		"Destroyer (3)",
+		"Battleship (4)",
+		"Carrier (5)"
+	]
+
+
+	const shipPlacementBtns = ships.map(shipLabel => {
+		const btn = createCustomElement("BUTTON", "ship-placement-btn", shipLabel)
+		btn.dataset.shipName = shipLabel.slice(0, -4);
+		return btn;
+	})
+	shipPlacementBtns.forEach(btn => {
+		shipsPlacementDiv.appendChild(btn)
+	})
+
+	//Add the parent element to the wrapper element
+	const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
+	shipsPlacementWrapper.appendChild(shipsPlacementDiv);
+}
+
+const selectShipToPlace = function() {
+	const shipPlacementBtns = document.getElementsByClassName("ship-placement-btn");
+	return new Promise((resolve) => {
+		//resolve with the shipName of the first clicked btn
+		Array.from(shipPlacementBtns).forEach(btn => {
+			btn.addEventListener("click", (e) => {
+				resolve(e.target.dataset.shipName)
+			})
+		})
+	})
+}
+
+const askForStartPosition = function() {
+	const placementMessage = document.getElementById("placement-message");
+	placementMessage.textContent = "Click the board to select one endpoint"
+}
+
+const getPosition = function(possiblePositions) {
+
+	//Get the elements of the corresponding possibleStartPositions
+	const gameboardPositions = document.getElementById("human-gameboard")
+																			.getElementsByClassName("position");
+
+	const possiblePositionDivs = possiblePositions.map(position => {
+		return positionHelpers.getPositionDivFromCoors(position, gameboardPositions)
+	})
+
+	//Attach a 'selectable' class to each element
+	possiblePositionDivs.forEach(div => {
+		div.classList.add("selectable")
+	})
+
+	return new Promise((resolve) => {
+		//Define handler
+		const handleClick = function(e) {
+			//Remove the 'selectable' class from all of the formerly selectable positions
+			possiblePositionDivs.forEach(div => {
+				console.log("OH YEAH")
+				div.classList.remove("selectable")
+				div.removeEventListener("click", handleClick)
+			})
+			//Add the 'selected' class to the clicked element
+			e.target.classList.add("selected");
+			//resolve with the coors of the first clicked position div
+			resolve([parseInt(e.target.dataset.xCoor), parseInt(e.target.dataset.yCoor)])
+		}
+		//Attach handler
+		possiblePositionDivs.forEach(div => {
+			div.addEventListener("click", handleClick)
+		})
+	})
+}
+
+const askForEndPosition = function() {
+	const placementMessage = document.getElementById("placement-message");
+	placementMessage.textContent = "Click one of the possible other endpoints"
+}
+
+
+
+module.exports = {
+	askForName,
+	getName,
+	removeNameForm,
+	askForShipsPlacement,
+	selectShipToPlace,
+	askForStartPosition,
+	getPosition,
+	askForEndPosition
+};
+
+
 /***/ })
 
 /******/ 	});
@@ -1270,12 +1680,22 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__(/*! ./style/style.css */ "./src/style/style.css")
 const Game = __webpack_require__(/*! ./factories/Game */ "./src/factories/Game.js");
+const createGameObjects = __webpack_require__(/*! ./helpers/createGameObjects */ "./src/helpers/createGameObjects.js")
 const initializeBoards = __webpack_require__(/*! ./interface/initializeBoards */ "./src/interface/initializeBoards.js")
-const gameplayDisplay = __webpack_require__(/*! ./interface/gameplayDisplay */ "./src/interface/gameplayDisplay.js")
+const gameplayDisplay = __webpack_require__(/*! ./interface/gameplayDisplay */ "./src/interface/gameplayDisplay.js");
 
 
-let currentGame = Game();
-let nextGame;
+let currentGame;
+
+const setupGame = function() {
+  createGameObjects()
+  .then(gameObjects => {
+    currentGame = Game(gameObjects);
+    //Set up DOM boards
+    initializeBoards.fillGameboards(currentGame.humanShipDetailsArray);
+    initializeBoards.attachPositionListeners(takeRound);
+  })
+}
 
 const takeTurn = function(coors, playerIsComputer) {
   //Record the shot in the game object
@@ -1323,12 +1743,14 @@ const takeRound = function(humanCoors) {
 }
 
 
+//Start first game
+setupGame();
 
+const nameField = document.getElementById("player-name");
+nameField.value = "Paul"
+const submitName  = document.getElementById("submit-name");
+submitName.click();
 
-
-//Set up DOM boards
-initializeBoards.fillGameboards(currentGame.humanShipDetailsArray);
-initializeBoards.attachPositionListeners(takeRound);
 })();
 
 /******/ })()

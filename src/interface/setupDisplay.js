@@ -7,6 +7,10 @@ const createNameForm = function() {
 	const form = document.createElement("FORM");
 	form.id = "name-form";
 
+	//Create and append name request
+	const nameRequest = createCustomElement("SPAN", "name-request", "Please enter your name");
+	form.appendChild(nameRequest);
+
 	//Create and append field
 	const playerName = document.createElement("INPUT");
 	playerName.type = "text";
@@ -38,8 +42,8 @@ const getName = function() {
 			//resolve promise only if user has entered 
 			//something other than a whitespace string
 			const enteredName = playerName.value
-			if (enteredName.value & enteredName.trim() !== "") {
-							resolve(playerName.value)
+			if (enteredName && (enteredName.trim() !== "")) {
+				resolve(playerName.value)
 			}
 		})
 	})
@@ -118,15 +122,22 @@ const getPosition = function(possiblePositions) {
 	})
 
 	return new Promise((resolve) => {
-		possiblePositionDivs.forEach(div => {
-			div.addEventListener("click", (e) => {
-				//Remove the selectable class from all of the formerly selectable positions
-				possiblePositionDivs.forEach(div => {
-					div.classList.remove("selectable")
-				})
-				//resolve with the coors of the first clicked position div
-				resolve([parseInt(e.target.dataset.xCoor), parseInt(e.target.dataset.yCoor)])
+		//Define handler
+		const handleClick = function(e) {
+			//Remove the 'selectable' class from all of the formerly selectable positions
+			possiblePositionDivs.forEach(div => {
+				console.log("OH YEAH")
+				div.classList.remove("selectable")
+				div.removeEventListener("click", handleClick)
 			})
+			//Add the 'selected' class to the clicked element
+			e.target.classList.add("selected");
+			//resolve with the coors of the first clicked position div
+			resolve([parseInt(e.target.dataset.xCoor), parseInt(e.target.dataset.yCoor)])
+		}
+		//Attach handler
+		possiblePositionDivs.forEach(div => {
+			div.addEventListener("click", handleClick)
 		})
 	})
 }

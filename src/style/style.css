@@ -118,4 +118,14 @@ button {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.selectable {
+  background-color: seagreen;
+  background-image: none;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: steelblue;
+  background-image: none;
+}
 
