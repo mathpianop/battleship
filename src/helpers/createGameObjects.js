@@ -8,70 +8,59 @@ const possiblePositions = require("./possiblePositions");
 const getOccupiedPositions = require("./getOccupiedPositions");
 
 
-  const getHumanPlayerName = function() {
+  const getHumanPlayerName = async function() {
     setupDisplay.askForName()
-    return setupDisplay.getName()
-    .then(() => {
-      //Clean up from askForName
-      setupDisplay.removeNameForm();
-    })
+    const name = await setupDisplay.getName()
+    //Clean up from askForName
+    setupDisplay.removeNameForm();
+    return name
   }
 
-  const buildGameboards = function() {
-    return buildHumanGameboard()
-    .then(humanGameboard => {
-      const computerGameboard = Gameboard()
-      computerGameboard.placeComputerShips();
-      return {
-        human: humanGameboard,
-        computer: computerGameboard
-      }
-    })
+
+  const buildGameboards = async function() {
+    const humanGameboard = await buildHumanGameboard();
+    const computerGameboard = Gameboard()
+    computerGameboard.placeComputerShips();
+    return {
+      human: humanGameboard,
+      computer: computerGameboard
+    }
   }
 
-  const buildHumanGameboard = function() {
+  const buildHumanGameboard = async function() {
     setupDisplay.askForShipsPlacement();
-
-    return buildShipDetailsArray([])
-    .then(shipDetailsArray => {
-      //Create gameboard
-      const humanGameboard = Gameboard();
-      //Place ships
-      shipDetailsArray.forEach(shipDetails => {
-        humanGameboard.placeShip(shipDetails);
-      })
-      return humanGameboard
+    const shipDetailsArray = await buildShipDetailsArray([]);
+    //Create gameboard
+    const humanGameboard = Gameboard();
+    //Place ships
+    shipDetailsArray.forEach(shipDetails => {
+      humanGameboard.placeShip(shipDetails);
     })
+    return humanGameboard
   }
 
 
-
-  const buildShipDetailsArray = function(shipDetailsArray) {
-    let newShipDetailsArray;
-    return setupDisplay.selectShipToPlace()
-    .then(shipName => {
-      //Remove ship's positions from shipsDetailsArray (to be safe)
-      newShipDetailsArray = shipDetailsArray.filter(shipDetails => {
-        return shipDetails.ship.name !== shipName
-      })
-      return getShipDetails(newShipDetailsArray, shipName)
+  const buildShipDetailsArray = async function(shipDetailsArray) {
+    const shipName = await setupDisplay.selectShipToPlace();
+    //Remove ship's positions from shipsDetailsArray (to be safe)
+    const newShipDetailsArray = shipDetailsArray.filter(shipDetails => {
+      return shipDetails.ship.name !== shipName
     })
-    .then(shipDetails => {
-      //Add positions to the appropriate ship name in newShipsPositions
-      newShipDetailsArray.push(shipDetails);
-      //update board
-      initializeBoards.fillGameboards(newShipDetailsArray)
-      //if not all ships have been given ShipDetails, return buildShipDetailsArray (recurse)
-      if (newShipDetailsArray.length < 5) {
-        return buildShipDetailsArray(newShipDetailsArray)
-      } else {
-        //If all ships have positions, return newShipsPositions
-        return newShipDetailsArray
-      }
-    })
+    const shipDetails = await getShipDetails(newShipDetailsArray, shipName);
+    //Add positions to the appropriate ship name in newShipsPositions
+    newShipDetailsArray.push(shipDetails);
+    //update board
+    initializeBoards.fillGameboards(newShipDetailsArray)
+    //if not all ships have been given ShipDetails, return buildShipDetailsArray (recurse)
+    if (newShipDetailsArray.length < 5) {
+      return buildShipDetailsArray(newShipDetailsArray)
+    } else {
+      //If all ships have positions, return newShipsPositions
+      return newShipDetailsArray
+    }
   }
 
-  const getShipDetails = function(shipDetailsArray, shipName) {
+  const getShipDetails = async function(shipDetailsArray, shipName) {
     //update board
     initializeBoards.fillGameboards(shipDetailsArray)
     //Create the ship
@@ -82,45 +71,33 @@ const getOccupiedPositions = require("./getOccupiedPositions");
     const possibleStartPositions = (
       possiblePositions.calculateStartPositions(occupiedPositions, newShip.length)
     );
-    return setupDisplay.getPosition(possibleStartPositions)
-    .then(startPos => {
-      //Get the end position
-      const possibleEndPositions = (
-        possiblePositions.calculateEndPositions(occupiedPositions, newShip.length, startPos)
-      )
-      setupDisplay.askForEndPosition();
-      return setupDisplay.getPosition(possibleEndPositions)
-      .then(endPos => {
-        //Calculate the intervening positions
-        positions = possiblePositions.getPositionsFromEndpoints(startPos, endPos)
-        return ShipDetails(positions, newShip)
-      })
-    })
+    const startPos = await setupDisplay.getPosition(possibleStartPositions);
+    //Get the end position
+    const possibleEndPositions = (
+      possiblePositions.calculateEndPositions(occupiedPositions, newShip.length, startPos)
+    )
+    setupDisplay.askForEndPosition();
+    const endPos = await setupDisplay.getPosition(possibleEndPositions);
+    //Calculate the intervening positions
+    positions = possiblePositions.getPositionsFromEndpoints(startPos, endPos)
+    return ShipDetails(positions, newShip)
   }
 
-  const buildPlayers = function() {
-    return getHumanPlayerName()
-    .then(name => {
-      return {
-        human: Player(name),
-        computer: Player("computer", true)
-      }
-    })
+  const buildPlayers = async function() {
+    const name = await getHumanPlayerName();
+    return {
+      human: Player(name),
+      computer: Player("computer", true)
+    }
   }
 
-  const createGameObjects = function() {
+  const createGameObjects = async function() {
     //initialize board
     initializeBoards.fillGameboards([])
-    const gameObjects = {};
-    return buildPlayers()
-    .then(players => {
-      gameObjects.players = players
-    })
-    .then(buildGameboards)
-    .then(gameboards => {
-      gameObjects.gameboards = gameboards;
-      return gameObjects;
-    })
+    //Create game objects
+    const players = await buildPlayers();
+    const gameboards = await buildGameboards();
+    return {players, gameboards}
   }
 
 

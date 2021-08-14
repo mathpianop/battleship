@@ -7,14 +7,12 @@ const gameplayDisplay = require("./interface/gameplayDisplay");
 
 let currentGame;
 
-const setupGame = function() {
-  createGameObjects()
-  .then(gameObjects => {
-    currentGame = Game(gameObjects);
-    //Set up DOM boards
-    initializeBoards.fillGameboards(currentGame.humanShipDetailsArray);
-    initializeBoards.attachPositionListeners(takeRound);
-  })
+const setupGame = async function() {
+  const gameObjects = await createGameObjects();
+  currentGame = Game(gameObjects);
+  //Set up DOM boards
+  initializeBoards.fillGameboards(currentGame.humanShipDetailsArray);
+  initializeBoards.attachPositionListeners(takeRound);
 }
 
 const takeTurn = function(coors, playerIsComputer) {

@@ -1,10 +1,3 @@
-move initializeBoards into Game
-Let game make use of createGameObjects
-
-
-
-1. Convert to async/await
-
 2. Place computer ships
 
 3. Get rid of ships-placement div
