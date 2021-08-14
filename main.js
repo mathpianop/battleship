@@ -538,8 +538,11 @@ const Gameboard = __webpack_require__(/*! ./Gameboard */ "./src/factories/Gamebo
 const initializeBoards = __webpack_require__(/*! ../interface/initializeBoards */ "./src/interface/initializeBoards.js");
 
 function Game(gameObjects) {
-  const {humanPlayer, computerPlayer} = gameObjects.players
-  const  {humanGameboard, computerGameboard} = gameObjects.gameboards
+  console.log(gameObjects)
+  const humanGameboard = gameObjects.gameboards.human
+  const computerGameboard = gameObjects.gameboards.computer
+  const humanPlayer = gameObjects.players.human
+  const computerPlayer = gameObjects.players.computer
   let victor;
   let attackReportMessage;
 
@@ -931,14 +934,15 @@ const getOccupiedPositions = __webpack_require__(/*! ./getOccupiedPositions */ "
     .then(shipName => {
       //Remove ship's positions from shipsDetailsArray (to be safe)
       newShipDetailsArray = shipDetailsArray.filter(shipDetails => {
-        return shipDetails.ship.name === shipName
+        return shipDetails.ship.name !== shipName
       })
-
       return getShipDetails(newShipDetailsArray, shipName)
     })
     .then(shipDetails => {
       //Add positions to the appropriate ship name in newShipsPositions
       newShipDetailsArray.push(shipDetails);
+      //update board
+      initializeBoards.fillGameboards(newShipDetailsArray)
       //if not all ships have been given ShipDetails, return buildShipDetailsArray (recurse)
       if (newShipDetailsArray.length < 5) {
         return buildShipDetailsArray(newShipDetailsArray)
@@ -987,6 +991,8 @@ const getOccupiedPositions = __webpack_require__(/*! ./getOccupiedPositions */ "
   }
 
   const createGameObjects = function() {
+    //initialize board
+    initializeBoards.fillGameboards([])
     const gameObjects = {};
     return buildPlayers()
     .then(players => {
@@ -1567,7 +1573,6 @@ const getPosition = function(possiblePositions) {
 		const handleClick = function(e) {
 			//Remove the 'selectable' class from all of the formerly selectable positions
 			possiblePositionDivs.forEach(div => {
-				console.log("OH YEAH")
 				div.classList.remove("selectable")
 				div.removeEventListener("click", handleClick)
 			})
