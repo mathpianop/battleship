@@ -612,33 +612,17 @@ module.exports = Game;
   \************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-const Ship = __webpack_require__(/*! ./Ship */ "./src/factories/Ship.js");
-const ShipDetails = __webpack_require__(/*! ./ShipDetails */ "./src/factories/ShipDetails.js")
 const AttackReport = __webpack_require__(/*! ./AttackReport */ "./src/factories/AttackReport.js");
-const legalPlacement = __webpack_require__(/*! ../helpers/legalPlacement */ "./src/helpers/legalPlacement.js")
-
 
 function Gameboard() {
   const shipDetailsArray = [];
   let attackReport = {};
-
   
-
-  const illegalPlacementError = function(positions) {
-    const message = legalPlacement.illegalPlacementMessage(shipDetailsArray, positions);
-    if (message) {
-      throw new Error(message)
-    }
-  }
-
-  
-
   const getHitShipDetails = function(targetCoors) {
     return shipDetailsArray.find(shipDetails => {
       return shipDetails.matches(targetCoors)
     })
   }
-
   
   const receiveAttack = function(targetCoors) {
     const hitShipDetails = getHitShipDetails(targetCoors);
@@ -670,9 +654,6 @@ function Gameboard() {
     shipDetailsArray.push(shipDetails)
   }
 
-  const placeComputerShips = function() {
-
-  }
   
   return {
     get shipDetailsArray() {
@@ -683,8 +664,7 @@ function Gameboard() {
     },
     placeShip, 
     receiveAttack,
-    allSunk, 
-    placeComputerShips
+    allSunk
   }
 }
 
@@ -897,27 +877,12 @@ const getOccupiedPositions = __webpack_require__(/*! ./getOccupiedPositions */ "
     return name
   }
 
-
-  const buildGameboards = async function() {
-    const humanGameboard = await buildHumanGameboard();
-    const computerGameboard = Gameboard()
-    computerGameboard.placeComputerShips();
+  const buildPlayers = async function() {
+    const name = await getHumanPlayerName();
     return {
-      human: humanGameboard,
-      computer: computerGameboard
+      human: Player(name),
+      computer: Player("computer", true)
     }
-  }
-
-  const buildHumanGameboard = async function() {
-    setupDisplay.askForShipsPlacement();
-    const shipDetailsArray = await buildShipDetailsArray([]);
-    //Create gameboard
-    const humanGameboard = Gameboard();
-    //Place ships
-    shipDetailsArray.forEach(shipDetails => {
-      humanGameboard.placeShip(shipDetails);
-    })
-    return humanGameboard
   }
 
 
@@ -927,7 +892,7 @@ const getOccupiedPositions = __webpack_require__(/*! ./getOccupiedPositions */ "
     const newShipDetailsArray = shipDetailsArray.filter(shipDetails => {
       return shipDetails.ship.name !== shipName
     })
-    const shipDetails = await getShipDetails(newShipDetailsArray, shipName);
+    const shipDetails = await buildShipDetails(newShipDetailsArray, shipName);
     //Add positions to the appropriate ship name in newShipsPositions
     newShipDetailsArray.push(shipDetails);
     //update board
@@ -941,7 +906,7 @@ const getOccupiedPositions = __webpack_require__(/*! ./getOccupiedPositions */ "
     }
   }
 
-  const getShipDetails = async function(shipDetailsArray, shipName) {
+  const buildShipDetails = async function(shipDetailsArray, shipName) {
     //update board
     initializeBoards.fillGameboards(shipDetailsArray)
     //Create the ship
@@ -964,13 +929,62 @@ const getOccupiedPositions = __webpack_require__(/*! ./getOccupiedPositions */ "
     return ShipDetails(positions, newShip)
   }
 
-  const buildPlayers = async function() {
-    const name = await getHumanPlayerName();
+  
+
+  const buildHumanGameboard = async function() {
+    setupDisplay.askForShipsPlacement();
+    const shipDetailsArray = await buildShipDetailsArray([]);
+    //Create gameboard
+    const humanGameboard = Gameboard();
+    //Place ships
+    shipDetailsArray.forEach(shipDetails => {
+      humanGameboard.placeShip(shipDetails);
+    })
+    return humanGameboard
+  }
+
+  const buildComputerGameboard = function() {
+    //Create the gameboard
+    const gameboard = Gameboard();
+
+    //Create the ships
+    const ships = [
+      Ship("Patrol Boat"),
+      Ship("Submarine"),
+      Ship("Destroyer"),
+      Ship("Battleship"),
+      Ship("Carrier")
+    ]
+
+    //Get the positions of the ships
+    const shipDetailsArray = ships.reduce((shipDetailsArray, ship) => {
+      const occupiedPositions = (
+        shipDetailsArray.map(shipDetails => shipDetails.positions).flat()
+      );
+
+      const newPositions = (
+        possiblePositions.getComputerPlacement(occupiedPositions, ship.length)
+      );
+
+      return shipDetailsArray.concat(ShipDetails(newPositions, ship))
+    }, [])
+
+    //Place the ships
+    shipDetailsArray.forEach(shipDetails => gameboard.placeShip(shipDetails))
+    return gameboard
+  }
+
+  const buildGameboards = async function() {
+    const computerGameboard = buildComputerGameboard();
+    const humanGameboard = await buildHumanGameboard();
     return {
-      human: Player(name),
-      computer: Player("computer", true)
+      human: humanGameboard,
+      computer: computerGameboard
     }
   }
+
+
+
 
   const createGameObjects = async function() {
     //initialize board
@@ -995,40 +1009,6 @@ module.exports = createGameObjects;
 module.exports = function getOccupiedPositions(shipsDetailsArray) {
   return shipsDetailsArray.map(shipDetails => shipDetails.positions).flat();
 }
-
-/***/ }),
-
-/***/ "./src/helpers/legalPlacement.js":
-/*!***************************************!*\
-  !*** ./src/helpers/legalPlacement.js ***!
-  \***************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-const coordinatesExist = __webpack_require__(/*! ../helpers/coordinatesExist */ "./src/helpers/coordinatesExist.js");
-
-
-const overlapsWithPreviousPlacement = function(shipDetailsCollection, positions) {
-  return shipDetailsCollection.some(shipDetails => {
-    return positions.some(position => shipDetails.matches(position))
-  })
-}
-
-//Check that all positions fall within Gameboard boundaries
-const positionsAreLegal = function(positions) {
-  return positions.every(position => {
-    return coordinatesExist(position)
-  })
-}
-
-const illegalPlacementMessage = function(shipDetailsCollection, positions) {
-  if (!positionsAreLegal(positions)) {
-    return "One or more positions are out of bounds"
-  } else if (overlapsWithPreviousPlacement(shipDetailsCollection, positions)) {
-    return "A ship already occupies one or more of those coordinates"
-  }
-}
-
-module.exports = {illegalPlacementMessage}
 
 /***/ }),
 
@@ -1183,12 +1163,31 @@ const getPositionsFromEndpoints = function(startPos, endPos) {
   return positions;
 }
 
+const randomElementFromArray = function(array) {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex]
+}
+
+const getComputerPlacement = function(occupiedPositions, shipLength) {
+  console.log(shipLength)
+  //Calculate a random start position
+  const possibleStartPositions = calculateStartPositions(occupiedPositions, shipLength)
+  const startPos = randomElementFromArray(possibleStartPositions);
+
+  //Calculate a random end position
+  const possibleEndPositions = calculateEndPositions(occupiedPositions, shipLength, startPos)
+  const endPos = randomElementFromArray(possibleEndPositions);
+
+  return getPositionsFromEndpoints(startPos, endPos);
+}
+
 
 module.exports = {
   calculateStartPositions,
   calculateOrientations,
   calculateEndPositions,
-  getPositionsFromEndpoints
+  getPositionsFromEndpoints,
+  getComputerPlacement
 }
 
 /***/ }),
