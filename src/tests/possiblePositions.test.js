@@ -1,4 +1,6 @@
 const possiblePositions = require("../helpers/possiblePositions");
+const Ship = require("../factories/Ship");
+const ShipDetails = require("../factories/ShipDetails")
 
 describe("calculateStartPositions", () => {
   it("returns excludes the given currentOccupiedPositions", () => {
@@ -112,5 +114,12 @@ describe("getPositionsFromEndpoints", () => {
     expect(possiblePositions.getPositionsFromEndpoints([4,2], [1,2])).toMatchObject(
       [[4,2], [3,2], [2,2], [1,2]]
     );
+  })
+})
+
+describe("getComputerPlacement", () => {
+  it("testerish", () => {
+    
+    console.log(possiblePositions.getComputerPlacement([[1,2], [1,3], [4,2], [5,2], [6,2], [7,10], [6,10], [5,10], [4,10]], 5))
   })
 })

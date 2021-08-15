@@ -1,30 +1,14 @@
-const Ship = require("./Ship");
-const ShipDetails = require("./ShipDetails")
 const AttackReport = require("./AttackReport");
-const legalPlacement = require("../helpers/legalPlacement")
-
 
 function Gameboard() {
   const shipDetailsArray = [];
   let attackReport = {};
-
   
-
-  const illegalPlacementError = function(positions) {
-    const message = legalPlacement.illegalPlacementMessage(shipDetailsArray, positions);
-    if (message) {
-      throw new Error(message)
-    }
-  }
-
-  
-
   const getHitShipDetails = function(targetCoors) {
     return shipDetailsArray.find(shipDetails => {
       return shipDetails.matches(targetCoors)
     })
   }
-
   
   const receiveAttack = function(targetCoors) {
     const hitShipDetails = getHitShipDetails(targetCoors);
@@ -56,9 +40,6 @@ function Gameboard() {
     shipDetailsArray.push(shipDetails)
   }
 
-  const placeComputerShips = function() {
-
-  }
   
   return {
     get shipDetailsArray() {
@@ -69,8 +50,7 @@ function Gameboard() {
     },
     placeShip, 
     receiveAttack,
-    allSunk, 
-    placeComputerShips
+    allSunk
   }
 }
 

@@ -107,10 +107,29 @@ const getPositionsFromEndpoints = function(startPos, endPos) {
   return positions;
 }
 
+const randomElementFromArray = function(array) {
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex]
+}
+
+const getComputerPlacement = function(occupiedPositions, shipLength) {
+  console.log(shipLength)
+  //Calculate a random start position
+  const possibleStartPositions = calculateStartPositions(occupiedPositions, shipLength)
+  const startPos = randomElementFromArray(possibleStartPositions);
+
+  //Calculate a random end position
+  const possibleEndPositions = calculateEndPositions(occupiedPositions, shipLength, startPos)
+  const endPos = randomElementFromArray(possibleEndPositions);
+
+  return getPositionsFromEndpoints(startPos, endPos);
+}
+
 
 module.exports = {
   calculateStartPositions,
   calculateOrientations,
   calculateEndPositions,
-  getPositionsFromEndpoints
+  getPositionsFromEndpoints,
+  getComputerPlacement
 }
