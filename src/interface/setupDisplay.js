@@ -61,7 +61,7 @@ const askForShipsPlacement = function() {
 	shipsPlacementDiv.id = "ships-placement";
 
 	//Add the instruction element
-	const placementMessage = createCustomElement("SPAN", "", "Select a ship and click on your board to set the endpoints");
+	const placementMessage = createCustomElement("SPAN", "message", "Select a ship and click on your board to set the endpoints");
 	placementMessage.id = "placement-message"
 	shipsPlacementDiv.appendChild(placementMessage);
 

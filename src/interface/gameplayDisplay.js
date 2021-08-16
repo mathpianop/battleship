@@ -82,7 +82,7 @@ const displayVictory = function(victor/*, startNewGame*/) {
 
 const displayGameInstruction = function() {
   const gameInstructionWrapper = document.getElementById("game-instruction-wrapper");
-  const gameInstruction = createCustomElement("SPAN", "", "Click on positions in the computer gameboard to make shots");
+  const gameInstruction = createCustomElement("SPAN", "message", "Click on positions in the computer gameboard to make shots");
   gameInstruction.id = "game-instruction";
   gameInstructionWrapper.appendChild(gameInstruction);
 }

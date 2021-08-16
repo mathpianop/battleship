@@ -55,9 +55,9 @@ const takeRound = function(humanCoors) {
   if (currentGame.victor) {
     //Remove game instruction message
     gameplayDisplay.removeGameInstruction();
-    //Create new game and pass its setup method to displayVictory 
-    nextGame = Game();
-    return gameplayDisplay.displayVictory(currentGame.victor/*, nextGame.setup*/)
+    //Dispay the victory message
+    gameplayDisplay.displayVictory(currentGame.victor, setupGame)
+    return
   }
 
   //If the human turn is not decisive, let the computer go

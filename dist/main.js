@@ -1298,16 +1298,22 @@ const displayVictory = function(victor/*, startNewGame*/) {
 
 const displayGameInstruction = function() {
   const gameInstructionWrapper = document.getElementById("game-instruction-wrapper");
-  const gameInstruction = createCustomElement("SPAN", "", "Click on positions in the computer gameboard to make shots");
+  const gameInstruction = createCustomElement("SPAN", "message", "Click on positions in the computer gameboard to make shots");
   gameInstruction.id = "game-instruction";
   gameInstructionWrapper.appendChild(gameInstruction);
+}
+
+const removeGameInstruction = function() {
+  const gameInstructionWrapper = document.getElementById("game-instruction-wrapper");
+  gameInstructionWrapper.textContent = "";
 }
 
 module.exports = {
   updateBoard, 
   displayVictory, 
   displayComputerResponse,
-  displayGameInstruction
+  displayGameInstruction,
+  removeGameInstruction
 }
 
 /***/ }),
@@ -1496,7 +1502,7 @@ const askForShipsPlacement = function() {
 	shipsPlacementDiv.id = "ships-placement";
 
 	//Add the instruction element
-	const placementMessage = createCustomElement("SPAN", "", "Select a ship and click on your board to set the endpoints");
+	const placementMessage = createCustomElement("SPAN", "message", "Select a ship and click on your board to set the endpoints");
 	placementMessage.id = "placement-message"
 	shipsPlacementDiv.appendChild(placementMessage);
 
@@ -1732,9 +1738,11 @@ const takeRound = function(humanCoors) {
 
   //If human turn is decisive, short-circuit the round
   if (currentGame.victor) {
-    //Create new game and pass its setup method to displayVictory 
-    nextGame = Game();
-    return gameplayDisplay.displayVictory(currentGame.victor/*, nextGame.setup*/)
+    //Remove game instruction message
+    gameplayDisplay.removeGameInstruction();
+    //Dispay the victory message
+    gameplayDisplay.displayVictory(currentGame.victor, setupGame)
+    return
   }
 
   //If the human turn is not decisive, let the computer go
