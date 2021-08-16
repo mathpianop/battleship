@@ -91,9 +91,28 @@ const askForShipsPlacement = function() {
 	shipsPlacementWrapper.appendChild(shipsPlacementDiv);
 }
 
-const askForShipSelection = function() {
+const askForShipSelection = function(shipDetailsArray) {
+	//Update placement message
 	const placementMessage = document.getElementById("placement-message");
-	placementMessage.textContent = "Click one of the ships to place on the board"
+	placementMessage.textContent = "Click one of the ships to place on the board";
+
+	//Add 'placed' class to buttons of placed ships (remove it from a ship that is being 're-placed')
+	const shipPlacementBtns = document.getElementsByClassName("ship-placement-btn");
+	const placedShipNames = shipDetailsArray.map(shipDetails => shipDetails.ship.name)
+	Array.from(shipPlacementBtns).forEach(btn => {
+		if (placedShipNames.includes(btn.dataset.shipName)) {
+			btn.classList.add("placed")
+		}
+	})
+}
+
+const removePlacedClass = function(shipName) {
+	const shipPlacementBtns = document.getElementsByClassName("ship-placement-btn");
+	Array.from(shipPlacementBtns).forEach(btn => {
+		if (btn.dataset.shipName === shipName) {
+			btn.classList.remove("placed");
+		}
+	})
 }
 
 const selectShipToPlace = function() {
@@ -168,6 +187,7 @@ module.exports = {
 	removeNameForm,
 	askForShipsPlacement,
 	askForShipSelection,
+	removePlacedClass,
 	selectShipToPlace,
 	askForStartPosition,
 	getPosition,

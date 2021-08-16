@@ -26,12 +26,14 @@ const getOccupiedPositions = require("./getOccupiedPositions");
 
 
   const buildShipDetailsArray = async function(shipDetailsArray) {
-    setupDisplay.askForShipSelection();
+    setupDisplay.askForShipSelection(shipDetailsArray);
     const shipName = await setupDisplay.selectShipToPlace();
-    //Remove ship's positions from shipsDetailsArray (to be safe)
+    //In case of ship 're-placement, remove ship's positions from shipsDetailsArray
+    //and remove the 'placed' 
     const newShipDetailsArray = shipDetailsArray.filter(shipDetails => {
       return shipDetails.ship.name !== shipName
     })
+    setupDisplay.removePlacedClass(shipName);
     const shipDetails = await buildShipDetails(newShipDetailsArray, shipName);
     //Add positions to the appropriate ship name in newShipsPositions
     newShipDetailsArray.push(shipDetails);

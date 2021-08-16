@@ -129,3 +129,7 @@ button {
   background-image: none;
 }
 
+.placed {
+  background-color: red;
+}
+

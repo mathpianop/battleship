@@ -7,7 +7,9 @@ const fs = require("fs");
  window.document.body.innerHTML = fs.readFileSync("./dist/index.html");
 
 const setupDisplay = require("../interface/setupDisplay");
-const initializeBoards = require("../interface/initializeBoards")
+const initializeBoards = require("../interface/initializeBoards");
+const ShipDetails = require("../factories/ShipDetails");
+const Ship = require("../factories/Ship");
 
 beforeEach(() => {
   const nameFormWrapper = document.getElementById("name-form-wrapper");
@@ -93,6 +95,23 @@ describe("askForShipsPlacement", () => {
     setupDisplay.askForShipsPlacement();
     const patrolBoatBtn = document.getElementsByClassName("ship-placement-btn")[0];
     expect(patrolBoatBtn.dataset.shipName).toBe("Patrol Boat")
+  })
+})
+
+describe("askForShipSelection", () => {
+  it("updates the placement message accordingly", () => {
+    setupDisplay.askForShipsPlacement();
+    setupDisplay.askForShipSelection([]);
+    const placementMessage = document.getElementById("placement-message");
+    expect(placementMessage.textContent).toBe("Click one of the ships to place on the board");
+  })
+
+  it("adds the 'placed' class to the buttons of placed ships", () => {
+    setupDisplay.askForShipsPlacement();
+    const shipDetailsArray = [ShipDetails([[1,2], [1,3]], Ship("Patrol Boat"))];
+    setupDisplay.askForShipSelection(shipDetailsArray);
+    const patrolBoatBtn = document.getElementsByClassName("ship-placement-btn")[0];
+    expect(patrolBoatBtn.classList.contains("placed")).toBeTruthy();
   })
 })
 
