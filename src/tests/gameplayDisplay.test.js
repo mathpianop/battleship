@@ -181,9 +181,9 @@ describe("displayVictory", () => {
     expect(wrapperEl.firstChild.textContent).toBe("Congratulations, Paul, you win!");
   })
 
-  xit("adds a new game button", () => {
+  it("adds a new game button", () => {
     gameplayDisplay.displayVictory(humanVictor);
-    const newGameBtn = document.getElementById("new-game-btn")
+    const newGameBtn = document.getElementById("new-game-btn");
     expect(newGameBtn).toBeTruthy();
   })
 })
