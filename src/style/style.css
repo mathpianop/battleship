@@ -18,14 +18,15 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-
+body {
+ 
+}
 button {
   cursor: pointer;
 }
 
 #dialogue {
   height: 70px;
-  background-color: purple;
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -76,8 +77,9 @@ button {
 
 
 .position {
-  height: 20px;
-  width: 20px;
+  box-sizing: border-box;
+  height: 22px;
+  width: 22px;
   border: 1px solid black;
   background-image: radial-gradient(#000 0%, lightgray  20%);
   background-color: lightgray;
@@ -119,14 +121,14 @@ button {
 }
 
 .selectable {
-  background-color: seagreen;
-  background-image: none;
+  border-color: rgb(11, 190, 11);
+  border-width: 2px;
   cursor: pointer;
 }
 
 .selected {
-  background-color: steelblue;
-  background-image: none;
+  border-width: 2px;
+  border-color: rgb(0, 68, 255);
 }
 
 .placed {
