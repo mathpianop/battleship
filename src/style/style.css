@@ -160,3 +160,12 @@ button {
   border-color: rgb(223, 93, 93);
 }
 
+#new-game-btn {
+  display: block;
+  margin: auto;
+  background: none;
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 10px 5px;
+}
+
