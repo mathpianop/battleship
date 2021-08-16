@@ -940,6 +940,8 @@ const getOccupiedPositions = __webpack_require__(/*! ./getOccupiedPositions */ "
     shipDetailsArray.forEach(shipDetails => {
       humanGameboard.placeShip(shipDetails);
     })
+    //Clean up from ships placement request
+    setupDisplay.removeShipsPlacement();
     return humanGameboard
   }
 
@@ -1568,6 +1570,11 @@ const askForEndPosition = function() {
 	placementMessage.textContent = "Click one of the possible other endpoints"
 }
 
+const removeShipsPlacement = function() {
+	const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
+	shipsPlacementWrapper.textContent = "";
+}
+
 
 
 module.exports = {
@@ -1578,7 +1585,8 @@ module.exports = {
 	selectShipToPlace,
 	askForStartPosition,
 	getPosition,
-	askForEndPosition
+	askForEndPosition,
+	removeShipsPlacement
 };
 
 
