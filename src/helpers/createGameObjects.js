@@ -26,6 +26,7 @@ const getOccupiedPositions = require("./getOccupiedPositions");
 
 
   const buildShipDetailsArray = async function(shipDetailsArray) {
+    setupDisplay.askForShipSelection();
     const shipName = await setupDisplay.selectShipToPlace();
     //Remove ship's positions from shipsDetailsArray (to be safe)
     const newShipDetailsArray = shipDetailsArray.filter(shipDetails => {

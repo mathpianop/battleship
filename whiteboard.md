@@ -1,3 +1,6 @@
-5. Rig up multiple games (start with index)
+
+4. Style
+
+5. Make selected ship buttons glow
 
 6. Make the computer smart
