@@ -77,8 +77,6 @@ const displayVictory = function(victor, startNewGame) {
   let message;
   if (victor.isComputer) {
     message = "Rats! Computer wins..."
-  } else if (victor.name) {
-    message = `Congratulations, ${victor.name}, you win!`
   } else {
     message = "Congratulations, you win!"
   }

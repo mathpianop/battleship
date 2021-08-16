@@ -7,7 +7,7 @@ const AttackReport = require("../factories/AttackReport");
 describe("Player", () => {
   describe("receiveReport", () => {
     it("adds the position of a missed shot to missedShots", () => {
-      const player = Player("Paul")
+      const player = Player()
       player.receiveReport(AttackReport([1,2]))
       expect(player.shots.missed).toEqual(
         expect.arrayContaining([
@@ -19,7 +19,7 @@ describe("Player", () => {
     })
   
     it("adds the position of a hit shot to the hitShots", () => {
-      const player = Player("Paul")
+      const player = Player()
       const mockHitShip = {
         name: "Battleship",
         shipLength: 4,
@@ -37,7 +37,7 @@ describe("Player", () => {
     })
 
     it("adds the positions of a sunk ship to the sunkPositions", () => {
-      const player = Player("Paul")
+      const player = Player()
       const mockHitShip = {
         name: "Battleship",
         shipLength: 4,
@@ -65,12 +65,12 @@ describe("Player", () => {
 
   describe("illegalMoveMessage", () => {
     it("returns nothing if coordinates are in bounds", () => {
-      const player = Player("Paul");
+      const player = Player();
       expect(player.illegalMoveMessage([1,2])).toEqual(undefined)
     })
 
     it("returns a message if coordinates are of a previous hit shot", () =>  {
-      const player = Player("Paul")
+      const player = Player()
       const mockHitShip = {
         shipLength: 4,
         isSunk: () => false
@@ -82,7 +82,7 @@ describe("Player", () => {
     })
 
     it("returns a message if coordinates are of previous missed shot", () =>  {
-      const player = Player("Paul")
+      const player = Player()
       player.receiveReport(AttackReport([1,2]))
       expect(player.illegalMoveMessage([1,2])).toBe(
         "Those coordinates have already been shot at and missed"
@@ -93,19 +93,19 @@ describe("Player", () => {
   describe("getComputerMove", () => {
 
     it("returns a random legal coordinate if player is computer", () => {
-      const player = Player("computer", true)
+      const player = Player(true)
       expect(coordinatesExist(player.getComputerMove())).toBe(true);
     })
 
     it("returns a random legal coordinate if player is computer", () => {
-      const player = Player("computer", true)
+      const player = Player(true)
       expect(coordinatesExist(player.getComputerMove())).toBe(true);
     })
 
     it("doesn't return coordinates of previous hit shot if player is computer", () => {
       const mockRandom = jest.spyOn(Math, "random")
       mockRandom.mockReturnValueOnce(.01).mockReturnValueOnce(.1)
-      const player = Player("computer", true)
+      const player = Player(true)
       const mockHitShip = {
         shipLength: 4,
         isSunk: () => false
@@ -117,7 +117,7 @@ describe("Player", () => {
     it("doesn't return coordinates of previous missed shot if player is computer", () => {
       const mockRandom = jest.spyOn(Math, "random")
       mockRandom.mockReturnValueOnce(.01).mockReturnValueOnce(.1)
-      const player = Player("computer", true)
+      const player = Player(true)
       player.receiveReport(AttackReport([1,2]))
       expect(player.getComputerMove()).not.toEqual([1,2])
     })

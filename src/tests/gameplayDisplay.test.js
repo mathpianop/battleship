@@ -176,11 +176,6 @@ describe("displayVictory", () => {
     expect(wrapperEl.firstChild.textContent).toBe("Congratulations, you win!");
   })
 
-  it("inserts a custom message if a named human wins", () => {
-    gameplayDisplay.displayVictory(humanVictor);
-    expect(wrapperEl.firstChild.textContent).toBe("Congratulations, Paul, you win!");
-  })
-
   it("adds a new game button", () => {
     gameplayDisplay.displayVictory(humanVictor);
     const newGameBtn = document.getElementById("new-game-btn");

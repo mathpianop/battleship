@@ -8,19 +8,12 @@ const possiblePositions = require("./possiblePositions");
 const getOccupiedPositions = require("./getOccupiedPositions");
 
 
-  const getHumanPlayerName = async function() {
-    setupDisplay.askForName()
-    const name = await setupDisplay.getName()
-    //Clean up from askForName
-    setupDisplay.removeNameForm();
-    return name
-  }
 
-  const buildPlayers = async function() {
-    const name = await getHumanPlayerName();
+
+  const buildPlayers = function() {
     return {
-      human: Player(name),
-      computer: Player("computer", true)
+      human: Player(),
+      computer: Player(true)
     }
   }
 
@@ -134,7 +127,7 @@ const getOccupiedPositions = require("./getOccupiedPositions");
     //initialize board
     initializeBoards.fillGameboards([])
     //Create game objects
-    const players = await buildPlayers();
+    const players = buildPlayers();
     const gameboards = await buildGameboards();
     return {players, gameboards}
   }

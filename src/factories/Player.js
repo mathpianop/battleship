@@ -1,6 +1,6 @@
 const coordinatesExist = require("../helpers/coordinatesExist");
 
-function Player(name, isComputer) {
+function Player(isComputer) {
   const shots = {
     hit: [],
     missed: [],
@@ -73,8 +73,7 @@ function Player(name, isComputer) {
     get shots() {
       return shots
     }, 
-    isComputer, 
-    name
+    isComputer
   }
   
 }

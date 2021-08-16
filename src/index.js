@@ -68,7 +68,3 @@ const takeRound = function(humanCoors) {
 //Start first game
 setupGame();
 
-const nameField = document.getElementById("player-name");
-nameField.value = "Paul"
-const submitName  = document.getElementById("submit-name");
-submitName.click();
