@@ -1,6 +1,3 @@
-
-3. Get rid of ships-placement div
-
 4. rerig victory message
 
 5. Rig up multiple games (start with index)

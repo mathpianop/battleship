@@ -1171,7 +1171,6 @@ const randomElementFromArray = function(array) {
 }
 
 const getComputerPlacement = function(occupiedPositions, shipLength) {
-  console.log(shipLength)
   //Calculate a random start position
   const possibleStartPositions = calculateStartPositions(occupiedPositions, shipLength)
   const startPos = randomElementFromArray(possibleStartPositions);
@@ -1297,7 +1296,19 @@ const displayVictory = function(victor/*, startNewGame*/) {
   //addNewGameBtn(startNewGame);
 }
 
-module.exports = {updateBoard, displayVictory, displayComputerResponse}
+const displayGameInstruction = function() {
+  const gameInstructionWrapper = document.getElementById("game-instruction-wrapper");
+  const gameInstruction = createCustomElement("SPAN", "", "Click on positions in the computer gameboard to make shots");
+  gameInstruction.id = "game-instruction";
+  gameInstructionWrapper.appendChild(gameInstruction);
+}
+
+module.exports = {
+  updateBoard, 
+  displayVictory, 
+  displayComputerResponse,
+  displayGameInstruction
+}
 
 /***/ }),
 
@@ -1681,6 +1692,8 @@ const setupGame = async function() {
   //Set up DOM boards
   initializeBoards.fillGameboards(currentGame.humanShipDetailsArray);
   initializeBoards.attachPositionListeners(takeRound);
+  //Display basic game instruction
+  gameplayDisplay.displayGameInstruction();
 }
 
 const takeTurn = function(coors, playerIsComputer) {

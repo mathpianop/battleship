@@ -113,7 +113,6 @@ const randomElementFromArray = function(array) {
 }
 
 const getComputerPlacement = function(occupiedPositions, shipLength) {
-  console.log(shipLength)
   //Calculate a random start position
   const possibleStartPositions = calculateStartPositions(occupiedPositions, shipLength)
   const startPos = randomElementFromArray(possibleStartPositions);

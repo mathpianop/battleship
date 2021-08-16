@@ -8,7 +8,6 @@
 
  const gameplayDisplay = require("../interface/gameplayDisplay")
  const initializeBoards = require("../interface/initializeBoards")
- const Game = require("../factories/Game");
  const Player = require("../factories/Player");
  const AttackReport = require("../factories/AttackReport");
  const Ship = require("../factories/Ship");
@@ -16,8 +15,25 @@
  const getSampleShip = () => Ship("Battleship");
  
  
-//The mockShots may need 
+describe("displayGameInstruction", () => {
+  it("displays the basic game instruction", () => {
+    const gameInstructionWrapper = document.getElementById("game-instruction-wrapper");
+    expect(gameInstructionWrapper.textContent).toBe("");
+    gameplayDisplay.displayGameInstruction();
+    expect(gameInstructionWrapper.firstChild.id).toBe("game-instruction");
+  })
+})
 
+describe("removeGameInstruction", () => {
+  it("removes the basic game instruction", () => {
+    const gameInstructionWrapper = document.getElementById("game-instruction-wrapper");
+    gameplayDisplay.displayGameInstruction();
+    expect(gameInstructionWrapper.firstChild.id).toBe("game-instruction");
+    gameplayDisplay.removeGameInstruction();
+    expect(gameInstructionWrapper.textContent).toBe("");
+    
+  })
+})
 describe("updateBoard", () => {
   
   it("assigns a class of 'missed' to missed positions of the defensive gameboard", () => {

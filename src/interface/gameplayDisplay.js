@@ -80,4 +80,22 @@ const displayVictory = function(victor/*, startNewGame*/) {
   //addNewGameBtn(startNewGame);
 }
 
-module.exports = {updateBoard, displayVictory, displayComputerResponse}
+const displayGameInstruction = function() {
+  const gameInstructionWrapper = document.getElementById("game-instruction-wrapper");
+  const gameInstruction = createCustomElement("SPAN", "", "Click on positions in the computer gameboard to make shots");
+  gameInstruction.id = "game-instruction";
+  gameInstructionWrapper.appendChild(gameInstruction);
+}
+
+const removeGameInstruction = function() {
+  const gameInstructionWrapper = document.getElementById("game-instruction-wrapper");
+  gameInstructionWrapper.textContent = "";
+}
+
+module.exports = {
+  updateBoard, 
+  displayVictory, 
+  displayComputerResponse,
+  displayGameInstruction,
+  removeGameInstruction
+}
