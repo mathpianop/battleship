@@ -146,6 +146,11 @@ const askForEndPosition = function() {
 	placementMessage.textContent = "Click one of the possible other endpoints"
 }
 
+const removeShipsPlacement = function() {
+	const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
+	shipsPlacementWrapper.textContent = "";
+}
+
 
 
 module.exports = {
@@ -156,5 +161,6 @@ module.exports = {
 	selectShipToPlace,
 	askForStartPosition,
 	getPosition,
-	askForEndPosition
+	askForEndPosition,
+	removeShipsPlacement
 };

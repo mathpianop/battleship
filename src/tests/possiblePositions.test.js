@@ -116,10 +116,3 @@ describe("getPositionsFromEndpoints", () => {
     );
   })
 })
-
-describe("getComputerPlacement", () => {
-  it("testerish", () => {
-    
-    console.log(possiblePositions.getComputerPlacement([[1,2], [1,3], [4,2], [5,2], [6,2], [7,10], [6,10], [5,10], [4,10]], 5))
-  })
-})

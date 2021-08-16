@@ -89,13 +89,6 @@ describe("askForShipsPlacement", () => {
     expect(shipsPlacementWrapper.firstChild.id).toBe("ships-placement")
   })
 
-  xit("creates a ships-placement element with 5 ship buttons", () => {
-    setupDisplay.askForShipsPlacement();
-    const shipsPlacementElement = document.getElementById("ships-placement");
-    const shipPlacementBtns = shipsPlacementElement.getElementsByClassName("ship-placement-btn");
-    expect(shipPlacementBtns.length).toBe(5);
-  })
-
   it("adds a data-shipName attribute with the ship name", () => {
     setupDisplay.askForShipsPlacement();
     const patrolBoatBtn = document.getElementsByClassName("ship-placement-btn")[0];
@@ -180,3 +173,12 @@ describe("askForEndPosition", () => {
   })
 })
 
+describe("removeShipsPlacement", () => {
+  it("removes the ships placement div", () => {
+    const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
+    setupDisplay.askForShipsPlacement();
+    expect(shipsPlacementWrapper.firstChild.id).toBe("ships-placement")
+    setupDisplay.removeShipsPlacement();
+    expect(shipsPlacementWrapper.textContent).toBe("");
+  })
+})

@@ -79,6 +79,8 @@ const getOccupiedPositions = require("./getOccupiedPositions");
     shipDetailsArray.forEach(shipDetails => {
       humanGameboard.placeShip(shipDetails);
     })
+    //Clean up from ships placement request
+    setupDisplay.removeShipsPlacement();
     return humanGameboard
   }
 
