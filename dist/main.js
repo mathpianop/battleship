@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\nbody {\n \n}\nbutton {\n  cursor: pointer;\n}\n\n#dialogue {\n  height: 70px;\n  margin-top: 30px;\n  margin-bottom: 30px;\n}\n\n#ships-placement {\n  display: flex;\n  align-items: center;\n}\n\n\n#ships-placement-request {\n  flex: 2;\n  padding: 10px;\n}\n\n.ships-placement-btn {\n  flex: 1;\n  height: 20px;\n  margin-right: 6px;\n}\n\n#game-container {\n  width: 740px;\n  margin: auto\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  box-sizing: border-box;\n  height: 22px;\n  width: 22px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed{\n  background-color: white;\n  background-image: none;\n}\n\n\n\n\n.sunk {\n  background-color: black;\n  color: white;\n}\n.active {\n  cursor: pointer;\n}\n\n.occupied {\n  background-image: none;\n  text-align: center;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n}\n\n.selectable {\n  border-color: rgb(11, 190, 11);\n  border-width: 2px;\n  cursor: pointer;\n}\n\n.selected {\n  border-width: 2px;\n  border-color: rgb(0, 68, 255);\n}\n\n.placed {\n  background-color: red;\n}\n\n", "",{"version":3,"sources":["webpack://./src/style/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;CAaC,SAAS;CACT,UAAU;CACV,SAAS;CACT,eAAe;CACf,aAAa;CACb,wBAAwB;AACzB;AACA;;AAEA;AACA;EACE,eAAe;AACjB;;AAEA;EACE,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,mBAAmB;AACrB;;;AAGA;EACE,OAAO;EACP,aAAa;AACf;;AAEA;EACE,OAAO;EACP,YAAY;EACZ,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ;AACF;;;;AAIA;EACE,aAAa;EACb,8BAA8B;EAC9B;AACF;;AAEA;EACE,YAAY;EACZ,aAAa;EACb,aAAa;EACb,aAAa;EACb,sCAAsC;AACxC;;;AAGA;EACE,6BAA6B;AAC/B;;;;AAIA;EACE,sBAAsB;EACtB,YAAY;EACZ,WAAW;EACX,uBAAuB;EACvB,0DAA0D;EAC1D,2BAA2B;AAC7B;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,WAAW;AACb;;AAEA;EACE,qBAAqB;EACrB,sBAAsB;EACtB,gDAAgD;EAChD,kBAAkB;AACpB;;AAEA;EACE,uBAAuB;EACvB,sBAAsB;AACxB;;;;;AAKA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,eAAe;AACjB;;AAEA;EACE,sBAAsB;EACtB,kBAAkB;EAClB,gDAAgD;AAClD;;AAEA;EACE,8BAA8B;EAC9B,iBAAiB;EACjB,eAAe;AACjB;;AAEA;EACE,iBAAiB;EACjB,6BAA6B;AAC/B;;AAEA;EACE,qBAAqB;AACvB","sourcesContent":["html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\nbody {\n \n}\nbutton {\n  cursor: pointer;\n}\n\n#dialogue {\n  height: 70px;\n  margin-top: 30px;\n  margin-bottom: 30px;\n}\n\n#ships-placement {\n  display: flex;\n  align-items: center;\n}\n\n\n#ships-placement-request {\n  flex: 2;\n  padding: 10px;\n}\n\n.ships-placement-btn {\n  flex: 1;\n  height: 20px;\n  margin-right: 6px;\n}\n\n#game-container {\n  width: 740px;\n  margin: auto\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n\n\n.position {\n  box-sizing: border-box;\n  height: 22px;\n  width: 22px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  width: 100%;\n}\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed{\n  background-color: white;\n  background-image: none;\n}\n\n\n\n\n.sunk {\n  background-color: black;\n  color: white;\n}\n.active {\n  cursor: pointer;\n}\n\n.occupied {\n  background-image: none;\n  text-align: center;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n}\n\n.selectable {\n  border-color: rgb(11, 190, 11);\n  border-width: 2px;\n  cursor: pointer;\n}\n\n.selected {\n  border-width: 2px;\n  border-color: rgb(0, 68, 255);\n}\n\n.placed {\n  background-color: red;\n}\n\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\nbutton {\n  cursor: pointer;\n}\n\n#title {\n  margin-top: 20px;\n  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n  font-size: 50px;\n  font-weight: 700;\n  text-align: center;\n}\n\n#dialogue {\n  margin-top: 10px;\n  margin-bottom: 30px;\n}\n\n#ships-placement {\n  display: flex;\n  align-items: center;\n}\n\n\n.message {\n  display: block;\n  margin-bottom: 10px;\n  text-align: center;\n  white-space: nowrap;\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 20px;\n}\n.ship-placement-btn {\n  flex: 1;\n  margin-right: 8px;\n  padding: 2px;\n  border: 2px solid #000;\n  border-radius: 3px;\n  cursor: pointer;\n}\n\n.ship-placement-btn .name, .ship-placement-btn .length {\n  display: block;\n  text-align: center;\n}\n\n#game-container {\n  width: 740px;\n  margin: auto\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n.gameboard-header {\n  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n  font-size: 30px;\n  text-align: center;\n}\n\n\n\n.position {\n  box-sizing: border-box;\n  height: 22px;\n  width: 22px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  margin-top: 20px;\n  width: 100%;\n}\n\n\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed{\n  background-color: white;\n  background-image: none;\n}\n\n\n\n\n.sunk {\n  background-color: black;\n  color: white;\n}\n.active {\n  cursor: pointer;\n}\n\n.occupied {\n  background-image: none;\n  text-align: center;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n}\n\n.selectable {\n  border-color: rgb(11, 190, 11);\n  border-width: 2px;\n  cursor: pointer;\n}\n\n.selected {\n  border-width: 2px;\n  border-color: rgb(0, 119, 255);\n}\n\n.placed {\n  border-color: rgb(223, 93, 93);\n}\n\n", "",{"version":3,"sources":["webpack://./src/style/style.css"],"names":[],"mappings":"AAAA;;;;;;;;;;;;;CAaC,SAAS;CACT,UAAU;CACV,SAAS;CACT,eAAe;CACf,aAAa;CACb,wBAAwB;AACzB;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,gBAAgB;EAChB,6EAA6E;EAC7E,eAAe;EACf,gBAAgB;EAChB,kBAAkB;AACpB;;AAEA;EACE,gBAAgB;EAChB,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,mBAAmB;AACrB;;;AAGA;EACE,cAAc;EACd,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,yCAAyC;EACzC,eAAe;AACjB;AACA;EACE,OAAO;EACP,iBAAiB;EACjB,YAAY;EACZ,sBAAsB;EACtB,kBAAkB;EAClB,eAAe;AACjB;;AAEA;EACE,cAAc;EACd,kBAAkB;AACpB;;AAEA;EACE,YAAY;EACZ;AACF;;;;AAIA;EACE,aAAa;EACb,8BAA8B;EAC9B;AACF;;AAEA;EACE,YAAY;EACZ,aAAa;EACb,aAAa;EACb,aAAa;EACb,sCAAsC;AACxC;;;AAGA;EACE,6BAA6B;AAC/B;;AAEA;EACE,6EAA6E;EAC7E,eAAe;EACf,kBAAkB;AACpB;;;;AAIA;EACE,sBAAsB;EACtB,YAAY;EACZ,WAAW;EACX,uBAAuB;EACvB,0DAA0D;EAC1D,2BAA2B;AAC7B;;AAEA;EACE,aAAa;EACb,uBAAuB;EACvB,gBAAgB;EAChB,WAAW;AACb;;;;AAIA;EACE,qBAAqB;EACrB,sBAAsB;EACtB,gDAAgD;EAChD,kBAAkB;AACpB;;AAEA;EACE,uBAAuB;EACvB,sBAAsB;AACxB;;;;;AAKA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,eAAe;AACjB;;AAEA;EACE,sBAAsB;EACtB,kBAAkB;EAClB,gDAAgD;AAClD;;AAEA;EACE,8BAA8B;EAC9B,iBAAiB;EACjB,eAAe;AACjB;;AAEA;EACE,iBAAiB;EACjB,8BAA8B;AAChC;;AAEA;EACE,8BAA8B;AAChC","sourcesContent":["html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed, \nfigure, figcaption, footer, header, hgroup, \nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n\tmargin: 0;\n\tpadding: 0;\n\tborder: 0;\n\tfont-size: 100%;\n\tfont: inherit;\n\tvertical-align: baseline;\n}\n\nbutton {\n  cursor: pointer;\n}\n\n#title {\n  margin-top: 20px;\n  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n  font-size: 50px;\n  font-weight: 700;\n  text-align: center;\n}\n\n#dialogue {\n  margin-top: 10px;\n  margin-bottom: 30px;\n}\n\n#ships-placement {\n  display: flex;\n  align-items: center;\n}\n\n\n.message {\n  display: block;\n  margin-bottom: 10px;\n  text-align: center;\n  white-space: nowrap;\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 20px;\n}\n.ship-placement-btn {\n  flex: 1;\n  margin-right: 8px;\n  padding: 2px;\n  border: 2px solid #000;\n  border-radius: 3px;\n  cursor: pointer;\n}\n\n.ship-placement-btn .name, .ship-placement-btn .length {\n  display: block;\n  text-align: center;\n}\n\n#game-container {\n  width: 740px;\n  margin: auto\n}\n\n\n\n#gameboards {\n  display: flex;\n  justify-content: space-between;\n  width: 100%\n}\n\n.gameboard {\n  width: 300px;\n  height: 300px;\n  padding: 20px;\n  display: grid;\n  grid-template-columns: repeat(11, 1fr);\n}\n\n\n#board-divider {\n  border-right: 2px solid black;\n}\n\n.gameboard-header {\n  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n  font-size: 30px;\n  text-align: center;\n}\n\n\n\n.position {\n  box-sizing: border-box;\n  height: 22px;\n  width: 22px;\n  border: 1px solid black;\n  background-image: radial-gradient(#000 0%, lightgray  20%);\n  background-color: lightgray;\n}\n\n#computer-response-wrapper {\n  display: flex;\n  justify-content: center;\n  margin-top: 20px;\n  width: 100%;\n}\n\n\n\n.hit {\n  background-color: red;\n  background-image: none;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n  text-align: center;\n}\n\n.missed{\n  background-color: white;\n  background-image: none;\n}\n\n\n\n\n.sunk {\n  background-color: black;\n  color: white;\n}\n.active {\n  cursor: pointer;\n}\n\n.occupied {\n  background-image: none;\n  text-align: center;\n  font-family: Verdana, Geneva, Tahoma, sans-serif;\n}\n\n.selectable {\n  border-color: rgb(11, 190, 11);\n  border-width: 2px;\n  cursor: pointer;\n}\n\n.selected {\n  border-width: 2px;\n  border-color: rgb(0, 119, 255);\n}\n\n.placed {\n  border-color: rgb(223, 93, 93);\n}\n\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1304,7 +1304,7 @@ const removeVictoryMessage = function() {
 
 const displayGameInstruction = function() {
   const gameInstructionWrapper = document.getElementById("game-instruction-wrapper");
-  const gameInstruction = createCustomElement("SPAN", "message", "Click on positions in the computer gameboard to make shots");
+  const gameInstruction = createCustomElement("SPAN", "message", "Click on positions on the target board to make shots");
   gameInstruction.id = "game-instruction";
   gameInstructionWrapper.appendChild(gameInstruction);
 }
@@ -1450,6 +1450,8 @@ const positionHelpers = __webpack_require__(/*! ../helpers/positionHelpers */ ".
 
 
 const askForShipsPlacement = function() {
+	const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
+
 	//Create the parent element
 	const shipsPlacementDiv = document.createElement("DIV");
 	shipsPlacementDiv.id = "ships-placement";
@@ -1457,21 +1459,25 @@ const askForShipsPlacement = function() {
 	//Add the instruction element
 	const placementMessage = createCustomElement("SPAN", "message");
 	placementMessage.id = "placement-message"
-	shipsPlacementDiv.appendChild(placementMessage);
+	shipsPlacementWrapper.appendChild(placementMessage);
 
 	//Add the ship placement buttons
-	const ships = [
-		"Patrol Boat (2)",
-		"Submarine (3)",
-		"Destroyer (3)",
-		"Battleship (4)",
-		"Carrier (5)"
+	const shipLabels = [ 
+		{name: "Patrol Boat", length: "(2)"},
+		{name: "Submarine", length: "(3)"},
+		{name: "Destroyer", length: "(3)"},
+		{name: "Battleship", length: "(4)"},
+		{name: "Carrier", length: "(5)"}
 	]
 
 
-	const shipPlacementBtns = ships.map(shipLabel => {
-		const btn = createCustomElement("BUTTON", "ship-placement-btn", shipLabel)
-		btn.dataset.shipName = shipLabel.slice(0, -4);
+	const shipPlacementBtns = shipLabels.map(shipLabel => {
+		const btn = createCustomElement("DIV", "ship-placement-btn")
+		const nameEl = createCustomElement("SPAN", "name", shipLabel.name)
+		const lengthEl = createCustomElement("SPAN", "length", shipLabel.length)
+		btn.appendChild(nameEl);
+		btn.appendChild(lengthEl);
+		btn.dataset.shipName = shipLabel.name
 		return btn;
 	})
 	shipPlacementBtns.forEach(btn => {
@@ -1479,7 +1485,6 @@ const askForShipsPlacement = function() {
 	})
 
 	//Add the parent element to the wrapper element
-	const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
 	shipsPlacementWrapper.appendChild(shipsPlacementDiv);
 }
 
@@ -1513,7 +1518,8 @@ const selectShipToPlace = function() {
 		//resolve with the shipName of the first clicked btn
 		Array.from(shipPlacementBtns).forEach(btn => {
 			btn.addEventListener("click", (e) => {
-				resolve(e.target.dataset.shipName)
+				e.currentTarget.classList.add("selected")
+				resolve(e.currentTarget.dataset.shipName)
 			})
 		})
 	})

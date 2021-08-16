@@ -3,6 +3,8 @@ const positionHelpers = require("../helpers/positionHelpers");
 
 
 const askForShipsPlacement = function() {
+	const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
+
 	//Create the parent element
 	const shipsPlacementDiv = document.createElement("DIV");
 	shipsPlacementDiv.id = "ships-placement";
@@ -10,21 +12,25 @@ const askForShipsPlacement = function() {
 	//Add the instruction element
 	const placementMessage = createCustomElement("SPAN", "message");
 	placementMessage.id = "placement-message"
-	shipsPlacementDiv.appendChild(placementMessage);
+	shipsPlacementWrapper.appendChild(placementMessage);
 
 	//Add the ship placement buttons
-	const ships = [
-		"Patrol Boat (2)",
-		"Submarine (3)",
-		"Destroyer (3)",
-		"Battleship (4)",
-		"Carrier (5)"
+	const shipLabels = [ 
+		{name: "Patrol Boat", length: "(2)"},
+		{name: "Submarine", length: "(3)"},
+		{name: "Destroyer", length: "(3)"},
+		{name: "Battleship", length: "(4)"},
+		{name: "Carrier", length: "(5)"}
 	]
 
 
-	const shipPlacementBtns = ships.map(shipLabel => {
-		const btn = createCustomElement("BUTTON", "ship-placement-btn", shipLabel)
-		btn.dataset.shipName = shipLabel.slice(0, -4);
+	const shipPlacementBtns = shipLabels.map(shipLabel => {
+		const btn = createCustomElement("DIV", "ship-placement-btn")
+		const nameEl = createCustomElement("SPAN", "name", shipLabel.name)
+		const lengthEl = createCustomElement("SPAN", "length", shipLabel.length)
+		btn.appendChild(nameEl);
+		btn.appendChild(lengthEl);
+		btn.dataset.shipName = shipLabel.name
 		return btn;
 	})
 	shipPlacementBtns.forEach(btn => {
@@ -32,7 +38,6 @@ const askForShipsPlacement = function() {
 	})
 
 	//Add the parent element to the wrapper element
-	const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
 	shipsPlacementWrapper.appendChild(shipsPlacementDiv);
 }
 
@@ -66,7 +71,8 @@ const selectShipToPlace = function() {
 		//resolve with the shipName of the first clicked btn
 		Array.from(shipPlacementBtns).forEach(btn => {
 			btn.addEventListener("click", (e) => {
-				resolve(e.target.dataset.shipName)
+				e.currentTarget.classList.add("selected")
+				resolve(e.currentTarget.dataset.shipName)
 			})
 		})
 	})

@@ -93,7 +93,7 @@ const removeVictoryMessage = function() {
 
 const displayGameInstruction = function() {
   const gameInstructionWrapper = document.getElementById("game-instruction-wrapper");
-  const gameInstruction = createCustomElement("SPAN", "message", "Click on positions in the computer gameboard to make shots");
+  const gameInstruction = createCustomElement("SPAN", "message", "Click on positions on the target board to make shots");
   gameInstruction.id = "game-instruction";
   gameInstructionWrapper.appendChild(gameInstruction);
 }
