@@ -680,7 +680,7 @@ module.exports = Gameboard;
 
 const coordinatesExist = __webpack_require__(/*! ../helpers/coordinatesExist */ "./src/helpers/coordinatesExist.js");
 
-function Player(name, isComputer) {
+function Player(isComputer) {
   const shots = {
     hit: [],
     missed: [],
@@ -753,8 +753,7 @@ function Player(name, isComputer) {
     get shots() {
       return shots
     }, 
-    isComputer, 
-    name
+    isComputer
   }
   
 }
@@ -869,19 +868,12 @@ const possiblePositions = __webpack_require__(/*! ./possiblePositions */ "./src/
 const getOccupiedPositions = __webpack_require__(/*! ./getOccupiedPositions */ "./src/helpers/getOccupiedPositions.js");
 
 
-  const getHumanPlayerName = async function() {
-    setupDisplay.askForName()
-    const name = await setupDisplay.getName()
-    //Clean up from askForName
-    setupDisplay.removeNameForm();
-    return name
-  }
 
-  const buildPlayers = async function() {
-    const name = await getHumanPlayerName();
+
+  const buildPlayers = function() {
     return {
-      human: Player(name),
-      computer: Player("computer", true)
+      human: Player(),
+      computer: Player(true)
     }
   }
 
@@ -995,7 +987,7 @@ const getOccupiedPositions = __webpack_require__(/*! ./getOccupiedPositions */ "
     //initialize board
     initializeBoards.fillGameboards([])
     //Create game objects
-    const players = await buildPlayers();
+    const players = buildPlayers();
     const gameboards = await buildGameboards();
     return {players, gameboards}
   }
@@ -1296,8 +1288,6 @@ const displayVictory = function(victor, startNewGame) {
   let message;
   if (victor.isComputer) {
     message = "Rats! Computer wins..."
-  } else if (victor.name) {
-    message = `Congratulations, ${victor.name}, you win!`
   } else {
     message = "Congratulations, you win!"
   }
@@ -1459,61 +1449,6 @@ const createCustomElement = __webpack_require__(/*! ./createCustomElement */ "./
 const positionHelpers = __webpack_require__(/*! ../helpers/positionHelpers */ "./src/helpers/positionHelpers.js");
 
 
-const createNameForm = function() {
-	//Create form
-	const form = document.createElement("FORM");
-	form.id = "name-form";
-
-	//Create and append name request
-	const nameRequest = createCustomElement("SPAN", "name-request", "Please enter your name");
-	form.appendChild(nameRequest);
-
-	//Create and append field
-	const playerName = document.createElement("INPUT");
-	playerName.type = "text";
-	playerName.id = "player-name";
-	form.appendChild(playerName)
-
-	//Create and append submit button
-	const submitName = document.createElement("INPUT");
-	submitName.type = "button";
-	submitName.value = "Submit";
-	submitName.id = "submit-name"
-	form.appendChild(submitName)
-
-	return form
-}
-
-
-const askForName = function() {
-	const nameFormWrapper = document.getElementById("name-form-wrapper");
-	const nameForm = createNameForm();
-	nameFormWrapper.appendChild(nameForm);
-}
-
-const getName = function() {
-	const playerName = document.getElementById("player-name")
-	const submitName = document.getElementById("submit-name");
-	return new Promise((resolve) => {
-		submitName.addEventListener("click", () => {
-			//resolve promise only if user has entered 
-			//something other than a whitespace string
-			const enteredName = playerName.value
-			if (enteredName && (enteredName.trim() !== "")) {
-				resolve(playerName.value)
-			}
-		})
-	})
-}
-
-const removeNameForm = function() {
-	const nameFormWrapper = document.getElementById("name-form-wrapper");
-	nameFormWrapper.textContent = "";
-}
-
-
-
-
 const askForShipsPlacement = function() {
 	//Create the parent element
 	const shipsPlacementDiv = document.createElement("DIV");
@@ -1639,9 +1574,6 @@ const removeShipsPlacement = function() {
 
 
 module.exports = {
-	askForName,
-	getName,
-	removeNameForm,
 	askForShipsPlacement,
 	askForShipSelection,
 	removePlacedClass,
@@ -1799,10 +1731,6 @@ const takeRound = function(humanCoors) {
 //Start first game
 setupGame();
 
-const nameField = document.getElementById("player-name");
-nameField.value = "Paul"
-const submitName  = document.getElementById("submit-name");
-submitName.click();
 
 })();
 
