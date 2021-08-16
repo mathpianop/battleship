@@ -1273,15 +1273,23 @@ const displayComputerResponse = function(message) {
   displayMessage("computer-response-wrapper", "computer-response", message, true)
 }
 
-//Refactor
-const addNewGameBtn = function() {
-  const newGameBtn = createCustomElement("BTN", "", "New Game?");
+const addNewGameBtn = function(startNewGame) {
+  //Create button
+  const newGameBtn = createCustomElement("BUTTON", "", "New Game");
   newGameBtn.id = "new-game-btn";
+  //Attach listener
+  newGameBtn.addEventListener("click", () => {
+    //Remove button, clean out victory message, and start new game
+    newGameBtn.remove();
+    removeVictoryMessage();
+    startNewGame();
+  })
+  //Append button
   const victoryDisplay = document.getElementById("victory-display");
   victoryDisplay.appendChild(newGameBtn);
 }
 
-const displayVictory = function(victor/*, startNewGame*/) {
+const displayVictory = function(victor, startNewGame) {
   let message;
   if (victor.isComputer) {
     message = "Rats! Computer wins..."
@@ -1293,7 +1301,12 @@ const displayVictory = function(victor/*, startNewGame*/) {
   //Display the victory message
   displayMessage("victory-message-wrapper", "victory-message", message)
 
-  //addNewGameBtn(startNewGame);
+  addNewGameBtn(startNewGame);
+}
+
+const removeVictoryMessage = function() {
+  const victoryMessageWrapper = document.getElementById("victory-message-wrapper");
+  victoryMessageWrapper.textContent = "";
 }
 
 const displayGameInstruction = function() {
