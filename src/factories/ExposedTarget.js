@@ -55,10 +55,6 @@ const calculateHypotheticalPositions = function() {
   }
 }
 
-
-
-
-
 const addHitPosition = function(position) {
   hitPositions.push(position);
   //If this is the second hit position to be added, set the orientation if necessary

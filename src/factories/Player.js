@@ -1,4 +1,6 @@
 const coordinatesExist = require("../helpers/coordinatesExist");
+const ExposedTarget = require("../factories/ExposedTarget");
+const { validate } = require("webpack");
 
 function Player(isComputer) {
   const shots = {
@@ -7,37 +9,8 @@ function Player(isComputer) {
     sunk: []
   }
 
-  const ExposedTarget = [
-    //Each Target should have:
-    //1. A ship (simple getter)
-    //2. A set of hitPositions (private)
-    //3. A set of hypotheticalPositions (getter method)
-
-    //Initializing a Target requires:
-    //1. Ship
-    //2. orientation (optional)
-
-    //Target should have the following methods
-    //1. addHitPosition
-    //2. method for setting orientation if necessary (part of addHitPosition, private)
-
-    //initial methods:
-    //Given single hit, determine whether both vertical and horizontal are possible (Player)
-    //If so, initialize Target with ship
-    //If not, intialize with ship and orientation
-    //Add hit positions to hit positions array (Target)
-
-    //When 2nd hit recorded:
-    //Set orientation if not set already (Target, part of addHitPosition method)
-
-
-
-
-    
-  ]
-
-  
-
+  const exposedTargets = [];
+   
   const illegalMoveMessage = function(coors) {
     if (!coordinatesExist(coors)) {
       return "Those coordinates are nonexistant"
@@ -71,6 +44,73 @@ function Player(isComputer) {
     return computerMove;
   }
 
+  const determineOrientation = function(ship, initialHitPosition) {
+    const allShots = shots.hit.concat(shots.missed);
+    
+    //Start at the initialHitPosition, and go to the right until an attacked position is found
+    let firstRighthandAttackedPos = initialHitPosition;
+    while (!includesCoordinates(allShots, firstRighthandAttackedPos)) {
+      firstRighthandAttackedPos[0]++
+    }
+    //Start at the initialHitPosition, and go to the left until an attacked position is found
+    let firstLefthandAttackedPos = initialHitPosition;
+    while (!includesCoordinates(allShots, firstLefthandAttackedPos)) {
+      firstLefthandAttackedPos[0]--
+    }
+    //Start at the initialHitPosition, and go up until an attacked position is found
+    let firstUpwardAttackedPos = initialHitPosition;
+    while (!includesCoordinates(allShots, firstUpwardAttackedPos)) {
+      firstUpwardAttackedPos[0]++
+    }
+    //Start at the initialHitPosition, and go down until an attacked position is found
+    let firstDownwardAttackedPos = initialHitPosition;
+    while (!includesCoordinates(allShots, firstDownwardAttackedPos)) {
+      firstDownwardAttackedPos[0]--
+    }
+
+    const horizontalSpace = firstRighthandAttackedPos[0] - firstLefthandAttackedPos[0] - 1;
+    const verticalSpace = firstUpwardAttackedPos[1] - firstDownwardAttackedPos[0] - 1;
+
+    if (horizontalSpace < ship.length) {
+      //If there's not enough potential horizontal space, the orientation must be vertical
+      return "vertical";
+    } else if (verticalSpace < ship.length) {
+      //If there's not enough potential horizontal space, the orientation must be vertical
+      return "horizontal";
+    }
+  }
+
+
+  const createNewTarget = function(ship, initialHitPosition) {
+    const orientation = determineOrientation(ship, initialHitPosition);
+    return ExposedTarget(ship, orientation)
+  }
+
+  const addOrUpdateTarget = function(ship, hitPosition) {
+    const target = exposedTargets.find(tar => tar.ship.name === ship.name);
+    if (target) {
+      //If target exists, add the hit position
+      target.addHitPosition(hitPosition)
+    } else {
+      //If target does not exist, initialize it and add it to exposedTargets
+      exposedTargets.push(createNewTarget(ship, hitPosition))
+    }
+  }
+
+  const removeTarget = function(ship) {
+    exposedTargetNames = exposedTargets.map(target => target.ship.name)
+    const targetIndex = exposedTargets.indexOf(ship.name)
+    exposedTargets.splice(targetIndex, 1);
+  }
+
+  const updateComputerStrategy = function(attackReport) {
+    if (attackReport.hit) {
+      addOrUpdateTarget(attackReport.ship, attackReport.coors)
+    } else if (attackReport.sunk) {
+      removeTarget(attackReport.ship)
+    }
+  }
+
   // const getComputerMove = function() {
 
   // }
@@ -79,6 +119,14 @@ function Player(isComputer) {
     return shots.hit.filter(shot => {
       return shot.shipName === shipName
     }).map(shot => shot.coors)
+  }
+
+  const updateComputerStrategy = function(attackReport) {
+    if (attackReport.hit) {
+      addOrUpdateTarget(attackReport.ship, attackReport.coors)
+    } else if (attackReport.sunk) {
+      removeTarget(attackReport.ship)
+    }
   }
 
   const receiveReport = function(attackReport) {
@@ -95,9 +143,15 @@ function Player(isComputer) {
       attackReport.shipCoors = getShipCoordinates(attackReport.shipName)
       shots.sunk.push(attackReport)
     }
+
+    //If the player is the computer, record the necessary details for strategy
+    if (isComputer) {
+      updateComputerStrategy(attackReport);
+    }
   }
 
   
+
 
   return {
     illegalMoveMessage, 
