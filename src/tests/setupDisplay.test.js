@@ -21,12 +21,6 @@ beforeEach(() => {
 
 
 describe("askForShipsPlacement", () => {
-  it("adds the ships-placement element to the dialogue div", () => {
-    const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
-    expect(shipsPlacementWrapper.firstChild).not.toBeTruthy();
-    setupDisplay.askForShipsPlacement();
-    expect(shipsPlacementWrapper.firstChild.id).toBe("ships-placement")
-  })
 
   it("adds a data-shipName attribute with the ship name", () => {
     setupDisplay.askForShipsPlacement();
@@ -133,7 +127,7 @@ describe("removeShipsPlacement", () => {
   it("removes the ships placement div", () => {
     const shipsPlacementWrapper = document.getElementById("ships-placement-wrapper");
     setupDisplay.askForShipsPlacement();
-    expect(shipsPlacementWrapper.firstChild.id).toBe("ships-placement")
+    expect(shipsPlacementWrapper.firstChild).toBeTruthy();
     setupDisplay.removeShipsPlacement();
     expect(shipsPlacementWrapper.textContent).toBe("");
   })

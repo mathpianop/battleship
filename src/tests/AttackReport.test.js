@@ -39,7 +39,7 @@ describe("AttackReport", () => {
 
   it("returns a summary message for a miss", () => {
     expect(AttackReport([1,2])).toEqual(
-      expect.objectContaining({message: "Missed!"})
+      expect.objectContaining({message: "Missed"})
     )
   })
 
@@ -48,7 +48,7 @@ describe("AttackReport", () => {
     hitShip.hit(0);
     expect(AttackReport([1,2], hitShip)).toEqual(
       expect.objectContaining({
-        message: "Patrol Boat hit!"
+        message: "Patrol Boat hit"
       })
     )
   })
@@ -59,7 +59,7 @@ describe("AttackReport", () => {
     hitShip.hit(1); 
     expect(AttackReport([1,2], hitShip)).toEqual(
       expect.objectContaining({
-        message: "Patrol Boat hit and sunk!"
+        message: "Patrol Boat hit and sunk"
       })
     )
   })

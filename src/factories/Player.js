@@ -7,6 +7,35 @@ function Player(isComputer) {
     sunk: []
   }
 
+  const ExposedTarget = [
+    //Each Target should have:
+    //1. A ship (simple getter)
+    //2. A set of hitPositions (private)
+    //3. A set of hypotheticalPositions (getter method)
+
+    //Initializing a Target requires:
+    //1. Ship
+    //2. orientation (optional)
+
+    //Target should have the following methods
+    //1. addHitPosition
+    //2. method for setting orientation if necessary (part of addHitPosition, private)
+
+    //initial methods:
+    //Given single hit, determine whether both vertical and horizontal are possible (Player)
+    //If so, initialize Target with ship
+    //If not, intialize with ship and orientation
+    //Add hit positions to hit positions array (Target)
+
+    //When 2nd hit recorded:
+    //Set orientation if not set already (Target, part of addHitPosition method)
+
+
+
+
+    
+  ]
+
   
 
   const illegalMoveMessage = function(coors) {
@@ -41,6 +70,10 @@ function Player(isComputer) {
     } while (includesCoordinates(shots.hit.concat(shots.missed), computerMove))   
     return computerMove;
   }
+
+  // const getComputerMove = function() {
+
+  // }
 
   const getShipCoordinates = function(shipName) {
     return shots.hit.filter(shot => {
