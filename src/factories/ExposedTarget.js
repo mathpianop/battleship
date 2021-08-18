@@ -62,7 +62,6 @@ const addHitPosition = function(position) {
     orientation = determineOrientation();
   }
 }
-
   return {
     get ship() {
       return ship;

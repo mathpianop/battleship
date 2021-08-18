@@ -4,7 +4,7 @@ function AttackReport(coors, hitShip) {
     return {
       hit: true,
       sunk: true,
-      shipName: hitShip.name,
+      ship: hitShip,
       coors: coors,
       message: `${hitShip.name} hit and sunk`
     }
@@ -12,7 +12,7 @@ function AttackReport(coors, hitShip) {
     return {
       hit: true,
       sunk: false,
-      shipName: hitShip.name,
+      ship: hitShip,
       coors: coors,
       message: `${hitShip.name} hit`
     }

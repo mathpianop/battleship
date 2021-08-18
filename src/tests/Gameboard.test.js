@@ -6,14 +6,15 @@ describe("Gameboard", () => {
   describe("receiveAttack", () => {
     it("assigns a report object to attackReport", () => {
       const gameboard = Gameboard();
-      const shipDetails = ShipDetails([[1,2], [2,2]], Ship("Patrol Boat"))
+      const ship = Ship("Patrol Boat")
+      const shipDetails = ShipDetails([[1,2], [2,2]], ship)
       gameboard.placeShip(shipDetails);
       expect(gameboard.attackReport).toEqual({});
       gameboard.receiveAttack([2,2]);
       expect(gameboard.attackReport).toEqual(
         expect.objectContaining({
           hit: true,
-          shipName: "Patrol Boat"
+          ship: ship
         })
       )
     })

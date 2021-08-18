@@ -24,7 +24,7 @@ const updateBoard = function(allShots, playerIsComputer) {
   //Add the appropriate class to "hit" positions
   //Insert the initial of the hit ship into the "hit" positions
   const hitCoors = allShots[offensiveName].hit.map(shot => shot.coors);
-  const hitShipsInitials = allShots[offensiveName].hit.map(shots => shots.shipName[0]);
+  const hitShipsInitials = allShots[offensiveName].hit.map(shots => shots.ship.name[0]);
   applyToPositions(hitCoors, gameboardPositions, addClassToPosition, ["hit"])
   applyArrayToPositions(hitCoors, gameboardPositions, addInitialToPosition, hitShipsInitials)
   

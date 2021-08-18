@@ -30,7 +30,7 @@ describe("Player", () => {
         expect.arrayContaining([
           expect.objectContaining({
             coors: [1,2],
-            shipName: "Battleship"
+            ship: mockHitShip
           })
         ])
       )
@@ -56,7 +56,7 @@ describe("Player", () => {
         expect.arrayContaining([
           expect.objectContaining({
             shipCoors: [[1,2],[1,3],[1,4],[1,5]],
-            shipName: "Battleship"
+            ship: mockSunkShip
           })
         ])
       )
@@ -92,34 +92,88 @@ describe("Player", () => {
 
   describe("getComputerMove", () => {
 
-    it("returns a random legal coordinate if player is computer", () => {
+    it("returns a random legal coordinate if no shots have been made", () => {
       const player = Player(true)
       expect(coordinatesExist(player.getComputerMove())).toBe(true);
     })
 
-    it("returns a random legal coordinate if player is computer", () => {
-      const player = Player(true)
-      expect(coordinatesExist(player.getComputerMove())).toBe(true);
-    })
-
-    it("doesn't return coordinates of previous hit shot if player is computer", () => {
+    it("doesn't return coordinates of previous hit shot", () => {
       const mockRandom = jest.spyOn(Math, "random")
       mockRandom.mockReturnValueOnce(.01).mockReturnValueOnce(.1)
       const player = Player(true)
       const mockHitShip = {
-        shipLength: 4,
+        name: "Battleship",
+        length: 4,
         isSunk: () => false
       }
       player.receiveReport(AttackReport([1,2], mockHitShip))
       expect(player.getComputerMove()).not.toEqual([1,2])
     })
 
-    it("doesn't return coordinates of previous missed shot if player is computer", () => {
+    it("doesn't return coordinates of previous missed shot", () => {
       const mockRandom = jest.spyOn(Math, "random")
       mockRandom.mockReturnValueOnce(.01).mockReturnValueOnce(.1)
       const player = Player(true)
       player.receiveReport(AttackReport([1,2]))
       expect(player.getComputerMove()).not.toEqual([1,2])
+    })
+
+    it("returns an adjacent position to to previous shot if it was a hit", () => {
+      const player = Player(true)
+      const mockHitShip = {
+        name: "Battleship",
+        length: 4,
+        isSunk: () => false
+      }
+      player.receiveReport(AttackReport([3,4], mockHitShip))
+      expect([[3,3], [3,5], [2,4], [4,4]]).toEqual(
+        expect.arrayContaining([player.getComputerMove()])
+      )
+    })
+
+    it("returns an adjacent position to a pair of hit shots that is in the correct orientation", () => {
+      const player = Player(true)
+      const mockHitShip = {
+        name: "Battleship",
+        length: 4,
+        isSunk: () => false
+      }
+      player.receiveReport(AttackReport([3,4], mockHitShip))
+      player.receiveReport(AttackReport([3,5], mockHitShip))
+
+      expect([[3,3], [3,6]]).toEqual(
+        expect.arrayContaining([player.getComputerMove()])
+      )
+    })
+
+    it("returns an adjacent position to a hit in the correct orientation if orientation is known right away", () => {
+      const player = Player(true)
+      const mockHitShip = {
+        name: "Battleship",
+        length: 4,
+        isSunk: () => false
+      }
+      player.receiveReport(AttackReport([3,6]))
+      player.receiveReport(AttackReport([3,3]))
+      player.receiveReport(AttackReport([3,4], mockHitShip))
+      expect([[2,4], [4,4]]).toEqual(
+        expect.arrayContaining([player.getComputerMove()])
+      )
+    })
+
+    it("notes immediate orientation identification for vertical orientation", () => {
+      const player = Player(true)
+      const mockHitShip = {
+        name: "Battleship",
+        length: 4,
+        isSunk: () => false
+      }
+      player.receiveReport(AttackReport([1,4]))
+      player.receiveReport(AttackReport([5,4]))
+      player.receiveReport(AttackReport([3,4], mockHitShip))
+      expect([[3,3], [3,5]]).toEqual(
+        expect.arrayContaining([player.getComputerMove()])
+      )
     })
   })
 })

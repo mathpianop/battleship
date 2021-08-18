@@ -21,7 +21,7 @@ describe("AttackReport", () => {
     expect(AttackReport([1,2], hitShip)).toEqual(
       expect.objectContaining({
         hit: true,
-        shipName: "Patrol Boat"
+        ship: hitShip
       })
     )
   })
