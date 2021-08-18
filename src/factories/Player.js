@@ -107,11 +107,23 @@ function Player(isComputer) {
     exposedTargets.splice(targetIndex, 1);
   }
 
+  const updateOrientation = function(target) {
+    if (!target.hasOrientation) {
+      const ship = target.ship;
+      const initialHitPosition = target.initialHitPosition
+      target.orientation = determineOrientation(ship, initialHitPosition);
+    }
+  }
+
   const updateComputerStrategy = function(attackReport) {
     if (attackReport.sunk) {
       removeTarget(attackReport.ship)
     } else if (attackReport.hit) {
       addOrUpdateTarget(attackReport.ship, attackReport.coors)
+    } else if (!attackReport.hit && exposedTargets.length > 0) {
+      //If there is an existing target, but the attack is a miss,
+      //update the orientation for each target if possible
+      exposedTargets.forEach(target => updateOrientation(target))
     }
   }
 

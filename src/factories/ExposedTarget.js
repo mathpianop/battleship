@@ -69,6 +69,15 @@ const addHitPosition = function(position) {
     addHitPosition,
     get hypotheticalPositions() {
       return calculateHypotheticalPositions();
+    },
+    get initialHitPosition() {
+      return hitPositions[0]
+    },
+    get hasOrientation() {
+      return !!orientation
+    },
+    set orientation(or) {
+      orientation = or;
     }  
   }
 }

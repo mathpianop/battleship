@@ -175,5 +175,23 @@ describe("Player", () => {
         expect.arrayContaining([player.getComputerMove()])
       )
     })
+
+    it("updates orientation identification if a new miss changes the situation", () => {
+      const player = Player(true)
+      const mockHitShip = {
+        name: "Battleship",
+        length: 4,
+        isSunk: () => false
+      }
+      player.receiveReport(AttackReport([5,4]))
+      player.receiveReport(AttackReport([3,4], mockHitShip))
+      expect([[3,3], [3,5], [2,4], [4,4]]).toEqual(
+        expect.arrayContaining([player.getComputerMove()])
+      )
+      player.receiveReport(AttackReport([2,4]))
+      expect([[3,3], [3,5]]).toEqual(
+        expect.arrayContaining([player.getComputerMove()])
+      )
+    })
   })
 })
