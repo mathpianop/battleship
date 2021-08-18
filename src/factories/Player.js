@@ -108,10 +108,10 @@ function Player(isComputer) {
   }
 
   const updateComputerStrategy = function(attackReport) {
-    if (attackReport.hit) {
-      addOrUpdateTarget(attackReport.ship, attackReport.coors)
-    } else if (attackReport.sunk) {
+    if (attackReport.sunk) {
       removeTarget(attackReport.ship)
+    } else if (attackReport.hit) {
+      addOrUpdateTarget(attackReport.ship, attackReport.coors)
     }
   }
 

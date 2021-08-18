@@ -33,6 +33,16 @@ const takeTurn = function(coors, playerIsComputer) {
 const takeComputerTurn = function() {
   const computerCoors = currentGame.computerMove;
   takeTurn(computerCoors, true);
+  if (currentGame.victor) {
+    declareVictory();
+  }
+}
+
+const declareVictory = function() {
+  //Remove game instruction message
+  gameplayDisplay.removeGameInstruction();
+  //Dispay the victory message
+  gameplayDisplay.displayVictory(currentGame.victor, setupGame)
 }
 
 
@@ -53,10 +63,7 @@ const takeRound = function(humanCoors) {
 
   //If human turn is decisive, short-circuit the round
   if (currentGame.victor) {
-    //Remove game instruction message
-    gameplayDisplay.removeGameInstruction();
-    //Dispay the victory message
-    gameplayDisplay.displayVictory(currentGame.victor, setupGame)
+    declareVictory();
     return
   }
 
