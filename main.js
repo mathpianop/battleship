@@ -915,6 +915,17 @@ function Player(isComputer) {
     return computerMove;
   }
 
+  const shuffle = function(array) {
+    const newArray = [...array]
+    for (var i = newArray.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = newArray[i];
+        newArray[i] = newArray[j];
+        newArray[j] = temp;
+    }
+    return newArray
+  }
+
 
   const getComputerMove = function() {
     if (exposedTargets.length === 0) {
@@ -922,7 +933,7 @@ function Player(isComputer) {
     } else {
       const currentTarget = exposedTargets[0];
       //Return a hypothetical position that hasn't been attacked and is on the board
-      return currentTarget.hypotheticalPositions.find(position => {
+      return shuffle(currentTarget.hypotheticalPositions).find(position => {
         return (
           !includesCoordinates(shots.hit.concat(shots.missed), position) &&
           coordinatesExist(position)
