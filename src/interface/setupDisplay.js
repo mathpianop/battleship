@@ -44,7 +44,7 @@ const askForShipsPlacement = function() {
 const askForShipSelection = function(shipDetailsArray) {
 	//Update placement message
 	const placementMessage = document.getElementById("placement-message");
-	placementMessage.textContent = "Click one of the ships to place on the board";
+	placementMessage.textContent = "Choose one of the ships to place on the board";
 
 	//Add 'placed' class to buttons of placed ships (remove it from a ship that is being 're-placed')
 	const shipPlacementBtns = document.getElementsByClassName("ship-placement-btn");

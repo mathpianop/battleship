@@ -34,7 +34,7 @@ describe("askForShipSelection", () => {
     setupDisplay.askForShipsPlacement();
     setupDisplay.askForShipSelection([]);
     const placementMessage = document.getElementById("placement-message");
-    expect(placementMessage.textContent).toBe("Click one of the ships to place on the board");
+    expect(placementMessage.textContent).toBe("Choose one of the ships to place on the board");
   })
 
   it("adds the 'placed' class to the buttons of placed ships", () => {
